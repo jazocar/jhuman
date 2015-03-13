@@ -233,20 +233,28 @@
 								<f:param name="stackName" value="tipoParametroPanel" />
 							</ace:ajax>
 						</ace:menuItem>
-						<ace:menuItem value="Comuna"
-							actionListener="#{navigationBean.navigationStackChange}"
-							style="margin-left:0px; font-size:x-small;color:black; font-weight: bold;">
-							<ace:ajax event="activate" execute="@this">
-								<f:param name="stackName" value="tipoParametroPanel" />
-							</ace:ajax>
-						</ace:menuItem>
 						<ace:menuItem value="Regiones"
 							actionListener="#{navigationBean.navigationStackChange}"
 							style="margin-left:0px; font-size:x-small;color:black; font-weight: bold;">
 							<ace:ajax event="activate" execute="@this">
+								<f:param name="stackName" value="mantenedorRegionPanel" />
+							</ace:ajax>
+						</ace:menuItem>
+						<ace:menuItem value="Provincias"
+							actionListener="#{navigationBean.navigationStackChange}"
+							style="margin-left:0px; font-size:x-small;color:black; font-weight: bold;">
+							<ace:ajax event="activate" execute="@this">
 								<f:param name="stackName" value="tipoParametroPanel" />
 							</ace:ajax>
 						</ace:menuItem>
+						<ace:menuItem value="Comunas"
+							actionListener="#{navigationBean.navigationStackChange}"
+							style="margin-left:0px; font-size:x-small;color:black; font-weight: bold;">
+							<ace:ajax event="activate" execute="@this">
+								<f:param name="stackName" value="tipoParametroPanel" />
+							</ace:ajax>
+						</ace:menuItem>
+						
 						</ace:submenu>					
 						
 						<ace:menuItem id="tipoParametro" value="Tipo Parámetro"

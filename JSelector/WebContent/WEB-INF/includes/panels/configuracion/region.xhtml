@@ -47,7 +47,7 @@
 						<td><ice:inputText value="#{regionFrontBean.descripcion}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/></td>
 					</tr>
 				</table>
-				<div align="left">
+				<div align="right">
 					<table>
 						<tr>
 							<td><ace:pushButton value="Ingresar" rendered="#{!regionFrontBean.selected}"
@@ -64,12 +64,12 @@
 				<hr />
 				
 				<ace:dataTable id="idListado" value="#{regionFrontBean.listaRegion}" var="region" paginator="true"
-				selectionMode="single" paginatorPosition="top" rows="10"
+				selectionMode="single" paginatorPosition="top" rows="11"
 					rowSelectListener="#{regionFrontBean.objectSelectListener}">
-					<ace:column headerText="Nombre" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+					<ace:column sortBy="#{region.nombre}"  headerText="Nombre" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
 						<h:outputText value="#{region.nombre}" style="font-family: 'Times New Roman', Times, serif;"/>
 					</ace:column>
-					<ace:column headerText="Descripción" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+					<ace:column sortBy="#{region.descripcion}" headerText="Descripción" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
 						<h:outputText value="#{region.descripcion}" style="font-family: 'Times New Roman', Times, serif;"/>
 					</ace:column>
 				</ace:dataTable>
