@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <properties resource="properties/jselector.properties"/>
+  <!-- settings>
+  	<setting name="logImpl" value="org.apache.ibatis.logging.LogFactory.useLog4JLogging()"/>
+  </settings-->
+  <typeAliases>
+      
+      <typeAlias alias="menuJProcessModel"    type="cl.jazocar.jselector.sys.dto.MenuDTO"/>
+      <typeAlias alias="submenuJProcessModel" type="cl.jazocar.jselector.sys.dto.SubmenuDTO"/>
+      <typeAlias alias="panelJProcessModel"   type="cl.jazocar.jselector.sys.dto.PanelDTO"/>      
+      <typeAlias alias="rolJProcessModel"   type="cl.jazocar.jselector.sys.dto.RolDTO"/>
+      <typeAlias alias="rolProcesoModel"   type="cl.jazocar.jselector.sys.dto.RolProcesoDTO"/>     
+      
+      <typeAlias alias="tareaModel"               type="cl.jazocar.jselector.dto.TareaDTO"/>
+      <typeAlias alias="tareaConfiguracionModel"  type="cl.jazocar.jselector.dto.TareaConfiguracionDTO"/>
+      <typeAlias alias="creacionModel"            type="cl.jazocar.jselector.dto.CreacionDTO"/>
+      <typeAlias alias="aplicacionModel"          type="cl.jazocar.jselector.dto.AplicacionDTO"/>
+      <typeAlias alias="instanciaModel"           type="cl.jazocar.jselector.dto.InstanciaDTO"/>
+      <typeAlias alias="pendienteModel"           type="cl.jazocar.jselector.dto.PendienteDTO"/>
+      <typeAlias alias="solicitudModel"           type="cl.jazocar.jselector.dto.SolicitudDTO"/>
+      <typeAlias alias="solicitudFormularioModel" type="cl.jazocar.jselector.dto.SolicitudFormularioDTO"/>
+      <typeAlias alias="comentarioModel"          type="cl.jazocar.jselector.dto.CasoComentarioDTO"/>
+      <typeAlias alias="organizacionModel"        type="cl.jazocar.jselector.dto.OrganizacionDTO"/>
+      <typeAlias alias="areaModel"                type="cl.jazocar.jselector.dto.AreaDTO"/>
+      <typeAlias alias="subareaModel"             type="cl.jazocar.jselector.dto.SubareaDTO"/>
+      <typeAlias alias="usuarioJProcessModel"     type="cl.jazocar.jselector.dto.UsuarioDTO"/>
+      <typeAlias alias="empresaModel"             type="cl.jazocar.jselector.dto.EmpresaDTO"/>
+      <typeAlias alias="regionModel"              type="cl.jazocar.jselector.dto.RegionDTO"/>
+      <typeAlias alias="ciudadModel"              type="cl.jazocar.jselector.dto.CiudadDTO"/>
+      <typeAlias alias="comunaModel"             type="cl.jazocar.jselector.dto.ComunaDTO"/>
+      <typeAlias alias="tipoParametro"           type="cl.jazocar.jselector.dto.TipoParametroDTO"/>
+      <typeAlias alias="parametroModel"          type="cl.jazocar.jselector.dto.ParametroDTO"/>
+      <typeAlias alias="estructuraModel"         type="cl.jazocar.jselector.dto.EstructuraDTO"/>
+      <typeAlias alias="listaModel"             type="cl.jazocar.jselector.dto.ListaDTO"/>
+       
+      
+      <typeAlias alias="calendar"                type="java.util.Calendar"/>	 
+  </typeAliases>  
+ 
+  
+  <environments default="${enviroment}">
+    <environment id="localhost">
+      <transactionManager type="JDBC"/>
+	     <dataSource type="JNDI">
+        	 <property name="data_source" value="${cl.jazocar.jselector.jndi.local}"/>
+    	</dataSource>
+    </environment>  
+     <environment id="development">
+      <transactionManager type="JDBC"/>
+	     <dataSource type="JNDI">
+        	 <property name="data_source" value="${cl.jazocar.jselector.jndi.development}"/>
+    	</dataSource>
+    </environment> 
+  </environments>
+  
+  <mappers>
+   	<mapper resource="cl/jazocar/jselector/mybatis/jprocess_mapper.xml"/>
+  </mappers>
+
+</configuration>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.form">
+	    
+     <resultMap type="informeLegalModel" id="informeLegalModel">
+    	    <result property="id"                column="id" />
+			<result property="idSolicitud"       column="id_solicitud" />
+			<result property="tipoCliente"       column="tipo_cliente" />
+			<result property="idBanco"           column="id_banco" />
+			<result property="sucursal"          column="sucursal" />
+			<result property="telefono"          column="telefono" />
+			<result property="ejecutivo"         column="ejecutivo" />
+			<result property="email"             column="email" />
+			<result property="fecha"      	     column="fecha" />
+			<result property="autCargoCtaCte"    column="aut_cargo_cta_cte" />
+			<result property="sucursalProvision" column="sucursal_provision" />
+			<result property="fondosCtaN"        column="fondos_cta_n" />
+			<result property="monto"             column="monto" />
+			<result property="rut"               column="rut" />
+			<result property="numeroCliente"     column="numero_cliente" />
+			<result property="nombre"            column="nombre" />
+			<result property="apellidoPaterno"   column="apellido_paterno" />
+			<result property="apellidoMaterno"   column="apellido_materno" />
+			<result property="estadoCivil"       column="estado_civil" />
+			<result property="telefonoCliente"   column="telefono_cliente" />
+			<result property="emailCliente"      column="email_cliente" />
+			<result property="razonSocial"       column="razon_social" />
+    </resultMap>
+    
+    <resultMap type="hipotecaModel" id="hipotecaModel">
+    	 <result property="id"                 column="id" />
+    	 <result property="idInformeLegal"    column="id_informe_legal" />
+    	 <result property="datosOperacion"    column="datos_operacion" />
+    	 <result property="titulosEstudiados" column="titulos_estudiados" />
+    </resultMap>
+    
+    <resultMap type="vendedorGaranteModel" id="vendedorGaranteModel">
+    	<result property="id"                 column="id" />
+    	<result property="idHipoteca"         column="idHipoteca" />
+    	<result property="nombre"             column="nombre" />
+    	<result property="rut"                column="rut" />
+    </resultMap>
+    
+    <resultMap type="avalModel" id="avalModel">
+    	<result property="id"                 column="id" />
+    	<result property="idHipoteca"         column="id_hipoteca" />
+    	<result property="nombre"             column="nombre" />
+    	<result property="rut"                column="rut" />
+    </resultMap>
+    
+    <resultMap type="antecedentesPropiedadModel" id="antecedentesPropiedadModel">
+    	<result property="id"                     column="id" />
+    	<result property="idHipoteca"             column="id_informe_legal_hipoteca" />
+    	<result property="avCalle"                column="av_calle" />
+    	<result property="numero"                 column="numero" />
+    	<result property="deptoCasaNumero"        column="depto_cada_numero" />
+    	<result property="idRegion"               column="id_region" />
+    	<result property="idComuna"               column="id_comuna" />
+    	<result property="idCiudad"               column="id_ciudad" />
+    	<result property="propiedadHipotecada"    column="propiedad_hipotecada" />
+    	<result property="acreedorHipotecario"    column="acreedor_hipotecario" />
+    	<result property="rolAvaluo1"             column="rol_avaluo_1" />
+    	<result property="rolAvaluo2"             column="rol_avaluo_2" />
+    </resultMap>
+    
+    <resultMap type="bodegaModel" id="bodegaModel">
+    	<result property="id"                      column="id" />
+    	<result property="idAntecedentesPropiedad" column="id_informe_legal_hipoteca_ap" />
+    	<result property="numero"                  column="numero" />
+    	<result property="rolAvaluo1"              column="rol_avaluo_1" />
+    	<result property="rolAvaluo2"              column="rol_avaluo_2" />    	
+    </resultMap>
+    
+    <resultMap type="estacionamientoModel" id="estacionamientoModel">
+    	<result property="id"                      column="id" />
+    	<result property="idAntecedentesPropiedad" column="id_informe_legal_hipoteca_ap" />
+    	<result property="numero"                  column="numero" />
+    	<result property="rolAvaluo1"              column="rol_avaluo_1" />
+    	<result property="rolAvaluo2"              column="rol_avaluo_2" />    
+    </resultMap>    
+    
+    <resultMap type="hipotecaCheckModel" id="hipotecaCheckModel">
+    	<result property="id"                  column="id" />    	
+		<result property="idHipoteca"          column="id_hipoteca" />   
+		<result property="tasacion"            column="tasacion" />   
+		<result property="insDomVig"           column="ins_dom_vig" />   
+		<result property="certMatSol"          column="cert_mat_sol" />   
+		<result property="certHipGrav"         column="cert_hip_grav" />   
+		<result property="persEscPoder"        column="pers_esc_poder" />   
+		<result property="certAfecUtil"        column="cert_afec_util" />   
+		<result property="infExpServiu"        column="inf_exp_serviu" />   
+		<result property="escPropCli"          column="esc_prop_cli" />   
+		<result property="otrosDoc"            column="otros_doc" />   
+    </resultMap>   
+    
+    <resultMap type="hipotecaCheckAdjuntoModel" id="hipotecaCheckAdjuntoModel">
+    	<result property="id"                  column="id" />  
+    	<result property="idHipoteca"          column="id_hipoteca" />  
+    	<result property="nombre"              column="nombre" />  
+    	<result property="ruta"                column="ruta" />  
+    </resultMap>
+    
+    
+    <select id="SelectNextIdInformeLegal" resultType="integer" parameterType="integer">
+    	SELECT nextval('formularios."SEQ_INFORME_LEGAL_ID"') 
+    </select>
+    
+    <select id="SelectNextIdHipoteca" resultType="integer" parameterType="integer">
+    	SELECT nextval('formularios."SEQ_HIPOTECA_ID"') 
+    </select>
+    
+    <select id="SelectNextIdAntecedentesPropiedad"  resultType="integer" parameterType="integer">
+    	SELECT nextval('formularios."SEQ_ANTECEDENTES_PROPIEDAD_ID"') 
+    </select>
+    
+     <select id="SelectInformeLegal" resultType="informeLegalModel" resultMap="informeLegalModel">
+     			SELECT id, 
+     			       id_solicitud, 
+     			       tipo_cliente, 
+     			       id_banco, 
+     			       sucursal, 
+     			       telefono, 
+       				   ejecutivo, 
+       				   email, 
+       				   fecha, 
+       				   aut_cargo_cta_cte, 
+       				   sucursal_provision, 
+       				   fondos_cta_n, 
+       				   monto, 
+       				   rut, 
+       				   numero_cliente, 
+       				   nombre, 
+       				   apellido_paterno, 
+       				   apellido_materno, 
+       				   estado_civil, 
+       				   telefono_cliente, 
+       				   email_cliente, 
+       				   razon_social
+  				FROM formularios.informe_legal
+     </select>
+     
+      <select id="SelectInformeLegalById" resultType="informeLegalModel" resultMap="informeLegalModel" parameterType="integer">
+     			SELECT id, 
+     			       id_solicitud, 
+     			       tipo_cliente, 
+     			       id_banco, 
+     			       sucursal, 
+     			       telefono, 
+       				   ejecutivo, 
+       				   email, 
+       				   fecha, 
+       				   aut_cargo_cta_cte, 
+       				   sucursal_provision, 
+       				   fondos_cta_n, 
+       				   monto, 
+       				   rut, 
+       				   numero_cliente, 
+       				   nombre, 
+       				   apellido_paterno, 
+       				   apellido_materno, 
+       				   estado_civil, 
+       				   telefono_cliente, 
+       				   email_cliente, 
+       				   razon_social
+  				FROM formularios.informe_legal
+  				WHERE  id_solicitud = #{idInformeLegal}
+     </select>
+     
+     <select id="SelectHipotecaByInformeLegal" resultMap="hipotecaModel" resultType="hipotecaModel" parameterType="integer">
+     	SELECT id, 
+     	       id_informe_legal, 
+     	       datos_operacion, 
+     	       titulos_estudiados
+ 	    FROM formularios.informe_legal_hipoteca
+ 	    WHERE id_informe_legal = #{idInformeLegal}
+     </select>
+     
+     <insert id="InsertInformeLegal" parameterType="hashmap">
+     		INSERT INTO formularios.informe_legal(id, id_solicitud, tipo_cliente, id_banco, sucursal, telefono, 
+            									  ejecutivo, email, fecha, aut_cargo_cta_cte, sucursal_provision, 
+									              fondos_cta_n, monto, rut, numero_cliente, nombre, apellido_paterno, 
+									              apellido_materno, estado_civil, telefono_cliente, email_cliente, 
+									              razon_social)
+    		VALUES (#{id}, 
+    		       #{id_solicitud}, 
+    		       #{tipo_cliente}, 
+    		       #{id_banco}, 
+    		       #{sucursal}, 
+    		       #{telefono}, 
+    		       #{ejecutivo}, 
+    		       #{email},
+    		       #{fecha}, 
+    		       #{aut_cargo_cta_cte}, 
+    		       #{sucursal_provision}, 
+    		       #{fondos_cta_n}, 
+    		       #{monto}, 
+    		       #{rut},
+				   #{numero_cliente}, 
+				   #{nombre}, 
+				   #{apellido_paterno}, 
+	               #{apellido_materno}, 
+	               #{estado_civil}, 
+	               #{telefono_cliente}, 
+	               #{email_cliente}, 
+	               #{razon_social})
+     </insert>
+     
+     <!-- Aval -->
+     <select id="SelectAvalByHipoteca" resultMap="avalModel" resultType="avalModel" parameterType="integer">
+     	SELECT id, 
+     	       id_informe_legal_hipoteca, 
+     	       nombre, 
+     	       rut
+        FROM formularios.informe_legal_hipoteca_aval
+        WHERE  id_informe_legal_hipoteca = #{idHipoteca}
+     </select>
+     
+     
+     <insert id="InsertAval" parameterType="hashmap">
+     	INSERT INTO formularios.informe_legal_hipoteca_aval(
+            id, id_informe_legal_hipoteca, nombre, rut)
+    	VALUES (nextval('formularios."SEQ_AVAL_ID"'), #{id_hipoteca}, #{nombre}, #{rut})
+     </insert>
+     
+     <!-- Vendedor Garante -->
+     <select id="SelectVendedorGaranteByHipoteca" resultMap="vendedorGaranteModel" resultType="vendedorGaranteModel" parameterType="integer">
+     	SELECT id                             AS "id", 
+     	       id_informe_legal_hipoteca      AS "id_hipoteca", 
+     	       nombre                         AS "nombre", 
+     	       rut                            AS "rut"
+        FROM formularios.informe_legal_hipoteca_vendedor_garante
+        WHERE id_informe_legal_hipoteca = #{idHipoteca}
+     </select>
+     
+     
+     <insert id="InsertVendedorGarante" parameterType="hashmap">
+     	INSERT INTO formularios.informe_legal_hipoteca_vendedor_garante(
+            id, id_informe_legal_hipoteca, nombre, rut)
+    	VALUES (nextval('formularios."SEQ_VENDEDOR_GARANTE_ID"'), #{id_hipoteca}, #{nombre}, #{rut})
+     </insert>
+     
+     <insert id="InsertHipoteca" parameterType="hashmap">
+     	INSERT INTO formularios.informe_legal_hipoteca(
+            id, id_informe_legal, datos_operacion, titulos_estudiados)
+    	VALUES (#{id}, #{id_informe_legal}, #{datos_operacion}, #{titulos_estudiados})
+     </insert>
+    
+    <!-- Antecedentes de la Propiedad. -->
+    <select id="SelectAntecendentesPropiedadByHipoteca" resultMap="antecedentesPropiedadModel" resultType="antecedentesPropiedadModel" parameterType="integer">
+    	SELECT id, 
+    	       id_informe_legal_hipoteca,
+    	       av_calle, 
+    	       numero, 
+    	       dpto_casa_numero, 
+               id_region, 
+               id_ciudad, 
+               id_comuna, 
+               propiedad_hipotecada, 
+               acreedor_hipotecario, 
+               rol_avaluo_1, 
+               rol_avaluo_2
+  		FROM formularios.informe_legal_hipoteca_ap
+  		WHERE id_informe_legal_hipoteca = #{idHipoteca}
+    </select>
+    
+    
+    <insert id="InsertAntecedentesPropiedad" parameterType="hashmap">
+    	INSERT INTO formularios.informe_legal_hipoteca_ap(
+            id, id_informe_legal_hipoteca, av_calle, numero, dpto_casa_numero, 
+            id_region, id_ciudad, id_comuna, propiedad_hipotecada, acreedor_hipotecario, 
+            rol_avaluo_1, rol_avaluo_2)
+        VALUES (#{id}, #{id_hipoteca}, #{av_calle}, #{numero}, #{depto_casa_numero}, 
+        #{id_region}, #{id_ciudad}, #{id_comuna}, #{propiedad_hipotecada}, #{acreedor_hipotecario}, #{rol_avaluo1}, #{rol_avaluo2})
+    </insert>
+    
+    <!-- Estacionamientos. -->
+    <select id="SelectEstacionamientosByAntecedentesPropiedad" resultMap="estacionamientoModel" resultType="estacionamientoModel" parameterType="integer">
+    	SELECT id, 
+    	       id_informe_legal_hipoteca_ap, 
+    	       rol_avaluo_1, 
+    	       rol_avaluo_2, 
+               numero
+        FROM formularios.informe_legal_hipoteca_ap_est
+        WHERE id_informe_legal_hipoteca_ap = #{idAntecedentesPropiedad}
+    </select>
+    
+    <insert id="InsertEstacionamiento" parameterType="hashmap">
+    	INSERT INTO formularios.informe_legal_hipoteca_ap_est(
+            id, id_informe_legal_hipoteca_ap, rol_avaluo_1, rol_avaluo_2, 
+            numero)
+    VALUES (nextval('formularios."SEQ_ESTACIONAMIENTO_ID"'), #{id_hipoteca}, #{rol_avaluo1}, #{rol_avaluo2}, #{numero})
+    </insert>
+    
+    <!-- Bodegas. -->
+    <select id="SelectBodegasByAntecedentesPropiedad" resultMap="bodegaModel" resultType="bodegaModel" parameterType="integer">
+    	SELECT id, 
+    	       id_informe_legal_hipoteca_ap, 
+    	       rol_avaluo_1, 
+    	       rol_avaluo_2, 
+               numero
+        FROM formularios.informe_legal_hipoteca_ap_bod
+        WHERE id_informe_legal_hipoteca_ap = #{idAntecedentesPropiedad}
+    </select>
+    
+    <insert id="InsertBodega" parameterType="hashmap">
+    	INSERT INTO formularios.informe_legal_hipoteca_ap_bod(
+            id, id_informe_legal_hipoteca_ap, rol_avaluo_1, rol_avaluo_2, 
+            numero)
+    VALUES (nextval('formularios."SEQ_BODEGA_ID"'), #{id_hipoteca}, #{rol_avaluo1}, #{rol_avaluo2}, #{numero})
+    </insert>
+    
+    <!-- Check Hipoteca. -->
+    
+    <select id="SelectDocAdjuntosHipotecaByHipoteca" resultMap="hipotecaCheckModel" resultType="hipotecaCheckModel" parameterType="integer">
+    	SELECT id, id_hipoteca, tasacion, ins_dom_vig, cert_mat_sol, cert_hip_grav, 
+       		   pers_esc_poder, cert_afec_util, inf_exp_serviu, esc_prop_cli, 
+       		   otros_doc
+ 		FROM formularios.informe_legal_hipoteca_chk
+ 		WHERE id_hipoteca = #{idHipoteca}  
+    </select>
+    
+    <insert id="InsertCheckHipoteca" parameterType="hashmap">
+    	INSERT INTO formularios.informe_legal_hipoteca_chk(
+            id, id_hipoteca, tasacion, ins_dom_vig, cert_mat_sol, cert_hip_grav, 
+            pers_esc_poder, cert_afec_util, inf_exp_serviu, esc_prop_cli, 
+            otros_doc)
+    VALUES (nextval('formularios."SEQ_HIPOTECA_CHECK_ID"'), #{id_hipoteca}, #{1}, #{2}, #{3}, #{4}, #{5}, #{6}, #{7}, #{8}, #{9})
+    </insert>
+    
+    <!-- Hipoteca Check Adjuntos. -->
+    
+    <select id="SelectChkHipotecaAdjuntosByHipoteca" resultMap="hipotecaCheckAdjuntoModel" resultType="hipotecaCheckAdjuntoModel" parameterType="integer">
+    	SELECT id, id_hipoteca, nombre, ruta
+        FROM formularios.informe_legal_hipoteca_chk_adjuntos
+        WHERE id_hipoteca = #{idHipoteca}
+    </select>
+    
+    
+    <insert id="InsertChkHipotecaAdjuntos" parameterType="hashmap">
+    	INSERT INTO formularios.informe_legal_hipoteca_chk_adjuntos(
+            id, id_hipoteca, nombre, ruta)
+   	    VALUES (nextval('formularios."SEQ_HIPOTECA_CHECK_ADJUNTO_ID"'), #{id_hipoteca}, #{nombre}, replace(#{ruta}, ' ', '%20'))
+    </insert>
+    
+</mapper>

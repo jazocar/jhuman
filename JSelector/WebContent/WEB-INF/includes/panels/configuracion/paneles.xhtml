@@ -1,0 +1,123 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+   <ace:submitMonitor for="mantenedorPaneles"
+									   idleLabel="Idle"
+                                       activeLabel="Cargando..."
+                                       serverErrorLabel="Error de Servidor"
+                                       networkErrorLabel="Error de Red"
+                                       sessionExpiredLabel="Sesión expirada"
+                                        blockUI="@all" rendered="true" />
+	<h:form id="mantenedorPaneles">
+	<ice:panelGroup styleClass="iceDatTblColHdr">
+	<div align="left">
+	<ice:outputText value="Estas aquí : " style="padding-right: 10px;"/>   
+	 <ice:commandLink value="Inicio" style="padding-right:5px;" actionListener="#{navigationBean.navigationStackChange}" >
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="inicioPanel" />
+									</ace:ajax>
+		</ice:commandLink><ice:outputText value=">"/>
+		<ice:commandLink value="Mantenedor de Paneles" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorPanelesPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+	  </div>	
+	  </ice:panelGroup>
+	    <ice:panelGroup style="width: 1010px; background-color:white; padding-top: 5px;">
+                           <ice:panelGroup styleClass="iceDatTblColHdr">
+                           <div align="left">
+                               <ice:outputText value="::Mantenedor de Paneles" style="font-size:medium; color:black;"/>
+                           </div>
+               </ice:panelGroup>                 
+               <br/> 
+         <table style="width: 100%;">
+					<tr>
+						<td align="left"><ice:outputText value="Panel" style="font-family: 'Times New Roman', Times, serif;"/></td>
+						<td align="left"><ice:inputText
+								value="#{panelFrontBean.panelId}" immediate="true" size="20" style="font-family: 'Times New Roman', Times, serif;" /></td>
+						<td align="left"><ice:outputText value="Subview ID"  visible="false"/></td>
+						<td align="left"><ice:inputText
+								value="#{panelFrontBean.panelSubviewId}" immediate="true" size="30" visible="false"/></td>
+						<td align="left"><ice:outputText value="Include" style="font-family: 'Times New Roman', Times, serif;"/></td>
+						<td align="left"><ice:inputText
+								value="#{panelFrontBean.include}" immediate="true" size="40" style="font-family: 'Times New Roman', Times, serif;" /></td>
+					    <td align="left"><ice:outputText value="Es Formulario" style="font-family: 'Times New Roman', Times, serif;"/></td>
+						<td align="left"><ice:selectOneMenu value="#{panelFrontBean.esFormulario}" immediate="true" style="font-family: 'Times New Roman', Times, serif;">
+						`						<f:selectItem itemLabel="No" itemValue="N"/>
+												<f:selectItem itemLabel="Si" itemValue="S"/>
+						                  </ice:selectOneMenu> </td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td><ace:pushButton
+								actionListener="#{panelFrontBean.panelInsertListener}"
+								value="Ingresar" rendered="#{!panelFrontBean.selected}" /></td>
+						<td><ace:pushButton
+								actionListener="#{panelFrontBean.panelUpdateListener}"
+								value="Modificar" rendered="#{panelFrontBean.selected}" /></td>
+						<td><ace:pushButton
+								actionListener="#{panelFrontBean.panelDeleteListener}"
+								value="Dar de Baja" rendered="#{panelFrontBean.selected}" /></td>
+						<td><ace:pushButton
+								actionListener="#{panelFrontBean.panelResetListener}"
+								value="Limpiar" /></td>
+						<td align="left"></td>
+						<td align="left"></td>
+					</tr>
+				</table>
+				<br></br>
+					<hr />					
+					<ace:dataTable id="idListado"
+						value="#{panelFrontBean.listaPanel}" var="panel"
+						paginator="true" paginatorPosition="top" rows="10"
+						selectionMode="single" 
+					   rowSelectListener="#{panelFrontBean.panelSelectListener}">					
+						
+						<ace:column id="idPanelConfiguracion" headerText="Panel"	
+										sortBy="#{panel.idPanel}" style="font-family: 'Times New Roman', Times, serif; text-align:left;"
+										filterBy="#{panel.idPanel}"
+										filterMatchMode="contains">
+							<h:outputText id="idPanelConfiguracionCell" value="#{panel.idPanel}" style="float:left; font-size: small;font-family: 'Times New Roman', Times, serif;" />
+						</ace:column>
+
+						<ace:column id="includePanelConfiguracion" headerText="Include"
+						 			sortBy="#{panel.include}"
+										filterBy="#{panel.include}" style="font-family: 'Times New Roman', Times, serif; text-align:left;"
+										filterMatchMode="contains">
+							<h:outputText id="includePanelConfiguracionCell"
+								value="#{panel.include}" style="float:left; font-size: small;font-family: 'Times New Roman', Times, serif;" />
+						</ace:column>	
+						<ace:column  headerText="Es Formulario"
+						 			sortBy="#{panel.esFormulario}" style="font-family: 'Times New Roman', Times, serif; text-align:left;"
+										filterBy="#{panel.esFormulario}"
+										filterMatchMode="contains">
+							<h:outputText 
+								value="#{panel.esFormulario}" style="float:left; font-size: small;font-family: 'Times New Roman', Times, serif;" >
+									<f:converter converterId="esFormularioConverter"/>
+								</h:outputText>
+						</ace:column>						
+					</ace:dataTable>
+					<div align="right">
+					<table>
+						<tr>
+							<td><ace:dataExporter id="dataExporterXls" label="Excel"
+									type="xls" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterPdf" label="PDF"
+									type="pdf" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterCsv" label="CSV"
+									type="csv" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterXml" label="XML"
+									type="xml" target="idListado" fileName="output" /></td>
+						</tr>
+					</table>
+				</div>
+         </ice:panelGroup>	
+	</h:form>
+</ui:composition>

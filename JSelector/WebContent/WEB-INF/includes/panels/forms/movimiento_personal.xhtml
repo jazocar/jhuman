@@ -1,0 +1,401 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:form >
+		<ace:tooltip id="tooltip" global="true" />
+		<ace:submitMonitor for="movimientoFuncionarioInsert" idleLabel="Idle"
+			activeLabel="Ingresando Movimiento"
+			serverErrorLabel="Error de Servidor" networkErrorLabel="Error de Red"
+			sessionExpiredLabel="Sesión expirada" autoCenter="true"
+			blockUI="@source" rendered="true" />
+
+		<ice:panelGroup styleClass="iceDatTblColHdr">
+			<div align="left">
+				<ice:outputText value="Estas aquí : " style="padding-right: 10px;" />
+				<ice:commandLink value="Inicio" style="padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="pantallaInicio" />
+					</ace:ajax>
+				</ice:commandLink>
+				<ice:outputText value=">" />
+				<ice:commandLink value="Movimiento de Personal"
+					style="padding-left:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="movimientoPersonalPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+			</div>
+		</ice:panelGroup>
+		<ice:panelGroup id="movimientoPersonal"
+			style="width: 1010px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
+			<ice:panelGroup styleClass="iceDatTblColHdr">
+				<div align="left">
+					<ice:outputText value="::Movimiento de Personal"
+						style="font-size:medium; color:black;" />
+				</div>
+			</ice:panelGroup>
+			<br />
+			<table>
+			    <tr>
+					<td align="right"><ice:outputText value="Primer Nombre"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" title=""/></td>
+				
+					<td align="right" style="padding-left: 50px;"><ice:outputText
+							value="Apellido Paterno"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" title=""/></td>
+				</tr>
+				<tr>
+					<td align="right"><ice:outputText value="Segundo Nombre"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" title=""/></td>
+				
+					<td align="right" style="padding-left: 50px;"><ice:outputText
+							value="Apellido Materno"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" title=""/></td>
+				</tr>
+				<tr>					
+					<td align="right"><ice:outputText
+							value="N° Cédula de Identidad"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" title="Número de cédula de identidad del funcionario"/></td>
+					<td align="right" style="padding-left: 50px;"><ice:outputText value="Dirección Particular"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" /></td>				
+				</tr>
+				<tr>
+					<td align="right" style="padding-left: 50px;"><ice:outputText value="Teléfono Fijo"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" /></td>
+					<td align="right"><ice:outputText value="Teléfono Móvil"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" /></td>
+				</tr>				
+			</table>
+			<hr />
+			<table>
+				<tr>
+					<td align="right"><ice:outputText value="Categoría"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" /></td>
+				
+					<td align="right" style="padding-left: 50px;"><ice:outputText value="Jornada Laboral"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" /></td>
+				</tr>
+				<tr>
+					<td align="right"><ice:outputText value="Cargo"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" /></td>
+				<td align="right" style="padding-left: 50px;"><ice:outputText
+							value="Causa de la Contratación"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:inputText immediate="true" /></td>
+					
+				</tr>
+				<tr>
+				<td align="right"><ice:outputText value="Fecha de Inicio"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:selectInputDate renderAsPopup="true"
+							renderMonthAsDropdown="false" renderYearAsDropdown="false"
+							immediate="true">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</ice:selectInputDate></td>
+					<td align="right" style="padding-left: 50px;"><ice:outputText value="Fecha de Término"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:selectInputDate renderAsPopup="true"
+							renderMonthAsDropdown="false" renderYearAsDropdown="false"
+							immediate="true">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</ice:selectInputDate></td>
+				
+					
+				</tr>
+			</table>
+			<hr />
+			<div align="left">
+				<h2>Antecedentes</h2>
+			</div>
+			<table>
+				<tr>
+					<td align="right"><ice:selectBooleanCheckbox
+							id="curriculumVitae" partialSubmit="true" immediate="true" /></td>
+					<td align="left"><ice:outputLabel for="curriculumVitae"
+							value="Curriculum Vitae"
+							style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+				</tr>
+				<tr>
+					<td align="right"><ice:selectBooleanCheckbox
+							id="fotocopiaCarnet" partialSubmit="true" immediate="true" /></td>
+					<td align="left"><ice:outputLabel for="fotocopiaCarnet"
+							value="Fotocopia Cédula de Identidad por ambos lados"
+							style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+				</tr>
+				<tr>
+					<td align="right"><ice:selectBooleanCheckbox
+							id="situacionMilitar" partialSubmit="true" immediate="true" /></td>
+					<td align="left"><ice:outputLabel for="situacionMilitar"
+							value="Certificado Situación Militar al día"
+							style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+				</tr>
+				<tr>
+					<td align="right"><ice:selectBooleanCheckbox
+							id="certificadoMedicoEmitidoServSalud" partialSubmit="true"
+							immediate="true" /></td>
+					<td align="left"><ice:outputLabel
+							for="certificadoMedicoEmitidoServSalud"
+							value="Certificado Médico emitido por Servicio de Salud"
+							style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+				</tr>
+				<tr>
+					<td align="right"><ice:selectBooleanCheckbox
+							id="certificadoAntecedentes" partialSubmit="true"
+							immediate="true" /></td>
+					<td align="left"><ice:outputLabel
+							for="certificadoAntecedentes" value="Certificado de Antecedentes"
+							style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+				</tr>
+				<tr>
+					<td align="right"><ice:selectBooleanCheckbox
+							id="certificadoNacimiento" partialSubmit="true" immediate="true" /></td>
+					<td align="left"><ice:outputLabel for="certificadoNacimiento"
+							value="Certificado de Nacimiento"
+							style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+				</tr>
+				<tr>
+					<td align="right"><ice:selectBooleanCheckbox
+							id="certificadoAfiliacionAFP" partialSubmit="true"
+							immediate="true" /></td>
+					<td align="left"><ice:outputLabel
+							for="certificadoAfiliacionAFP"
+							value="Certificado de Afiliación AFP"
+							style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+				</tr>
+				<tr>
+					<td align="right"><ice:selectBooleanCheckbox
+							id="certificadoAfiliacionFonasaIsapre" partialSubmit="true"
+							immediate="true" /></td>
+					<td align="left"><ice:outputLabel
+							for="certificadoAfiliacionFonasaIsapre"
+							value="Certificado de Afiliación a FONASA o ISAPRE"
+							style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+				</tr>
+				<tr>
+					<td align="right"><ice:selectBooleanCheckbox
+							id="antecedentesContratacionesPreviasEnCormup"
+							partialSubmit="true" immediate="true" /></td>
+					<td align="left"><ice:outputLabel
+							for="antecedentesContratacionesPreviasEnCormup"
+							value="Antecedentes por contrataciones previas en CORMUP"
+							style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+				</tr>
+			</table>
+			<hr />
+			<div align="left">
+				<h2>Certificación de la Categoría Funcionaria</h2>
+			</div>
+			<table>
+				<tr>
+					<td align="right"><ice:outputText value="Categoría"
+							style="font-size:small; color:black;" /></td>
+					<td align="left"><ice:selectOneMenu immediate="true" partialSubmit="true" valueChangeListener="#{movimientoPersonalFrontClass.changeCategoriaListener}">
+							<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+							<f:selectItem itemLabel="Categoría A: Médicos y Odontólogos"
+								itemValue="A" />
+							<f:selectItem itemLabel="Categoría B: Otros Profesionales"
+								itemValue="B" />
+							<f:selectItem itemLabel="Categoría C: Auxiliares Paramédicos"
+								itemValue="C" />
+							<f:selectItem itemLabel="Categoría D: Auxiliares Paramédicos"
+								itemValue="D" />
+							<f:selectItem itemLabel="Categoría E: Administrativos"
+								itemValue="E" />
+							<f:selectItem
+								itemLabel="Categoría F: Servicios menores y Choferes"
+								itemValue="F" />
+						</ice:selectOneMenu></td>
+				</tr>
+			</table>
+			<ice:panelGroup id="categoriaA" rendered="#{movimientoPersonalFrontClass.categoriaA}">
+				<table>
+					<tr>
+						<td align="right"><ice:selectBooleanCheckbox
+								id="certTitProfUni" partialSubmit="true" immediate="true" /></td>
+						<td align="left"><ice:outputLabel for="certTitProfUni"
+								value="Certificado de Título profesional universitario"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+					
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Universidad"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText immediate="true" /></td>
+					</tr>
+				</table>
+			</ice:panelGroup>
+			<ice:panelGroup id="categoriaB" rendered="#{movimientoPersonalFrontClass.categoriaB}">
+				<table>
+					<tr>
+						<td align="right"><ice:selectBooleanCheckbox
+								id="certTitProfUniSemestres" partialSubmit="true" immediate="true" /></td>
+						<td align="left"><ice:outputLabel for="certTitProfUniSemestres"
+								value="Certificado de Título Profesional  perteneciente a  Carreras de al menos 8 semestres"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+					
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Universidad"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText immediate="true" /></td>
+					</tr>
+				</table>
+			</ice:panelGroup>
+			<ice:panelGroup id="categoriaC" rendered="#{movimientoPersonalFrontClass.categoriaC}">
+				<table>
+					<tr>
+						<td align="right"><ice:selectBooleanCheckbox
+								id="certTitCursosEscuelaEnfermeria" partialSubmit="true" immediate="true" /></td>
+						<td align="left"><ice:outputLabel for="certTitCursosEscuelaEnfermeria"
+								value="Certificado de Titulo cursos rendidos Escuela de Enfermería U de Chile"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+					
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Centro Formador"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText immediate="true" /></td>
+					</tr>
+				</table>
+			</ice:panelGroup>
+			<ice:panelGroup id="categoriaD" rendered="#{movimientoPersonalFrontClass.categoriaD}">
+				<table>
+					<tr>
+						<td align="right"><ice:selectBooleanCheckbox
+								id="certTitAuxiliarParamedico" partialSubmit="true" immediate="true" /></td>
+						<td align="left"><ice:outputLabel for="certTitAuxiliarParamedico"
+								value="Certificado de Titulo de Auxiliar paramédico de, al menos 1.500 hrs"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+					
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Centro Formador"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText immediate="true" /></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:selectBooleanCheckbox
+								id="fotocopiaLegalizadaEnseñanzaMedia" partialSubmit="true" immediate="true" /></td>
+						<td align="left"><ice:outputLabel for="fotocopiaLegalizadaEnseñanzaMedia"
+								value="Fotocopia legalizada Licencia de Enseñanza Media"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+					
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Colegio"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText immediate="true" /></td>
+					</tr>
+				</table>
+			</ice:panelGroup>
+			<ice:panelGroup id="categoriaE" rendered="#{movimientoPersonalFrontClass.categoriaE}">
+				<table>
+					<tr>
+						<td align="right"><ice:selectBooleanCheckbox
+								id="certLicenciaEnsenanzaMedia" partialSubmit="true" immediate="true" /></td>
+						<td align="left"><ice:outputLabel for="certLicenciaEnsenanzaMedia"
+								value="Fotocopia legalizada Licencia Enseñanza Media"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+					
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Colegio"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText immediate="true" /></td>
+					</tr>
+				</table>
+			</ice:panelGroup>
+			<ice:panelGroup id="categoriaF" rendered="#{movimientoPersonalFrontClass.categoriaF}">
+				<table>
+					<tr>
+						<td align="right"><ice:selectBooleanCheckbox
+								id="certEnsenanzaBasica" partialSubmit="true" immediate="true" /></td>
+						<td align="left"><ice:outputLabel for="certEnsenanzaBasica"
+								value="Certificado de Enseñanza Básica"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+					
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Centro Formador"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText immediate="true" /></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:selectBooleanCheckbox
+								id="fotocopiaLicenciaConducir" partialSubmit="true" immediate="true" /></td>
+						<td align="left"><ice:outputLabel for="fotocopiaLicenciaConducir"
+								value="Fotocopia de Licencia de conducir"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+					
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Municipalidad Emisora"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText immediate="true" /></td>
+					</tr>
+				</table>
+			</ice:panelGroup>			
+			<br />
+			<br />
+			<hr/>
+			
+			<ice:panelGroup>
+				<div align="left">
+					<h2>Certificación De Antecedentes Para Nivel De Carrera Funcionaria</h2>
+				</div>
+					<table>
+						<tr>
+							<td align="right"><ice:outputText value="N° Certificado (s) de antigüedad  del servicio publico de salud"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText immediate="true"
+									title="Número de certificado" /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="Certificados de Cursos de capacitación  relacionados con el cargo a desempeñar"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText immediate="true"/></td>
+						</tr>
+					</table>
+				
+			</ice:panelGroup>
+			 <br/><br/><br/><br/>
+		    <ice:panelGroup  style="padding-left: 100px; padding-right:100px;" rendered="#{movimientoPersonalFrontClass.mostrarFirmas}">
+		       <div align="center">
+		       <table>
+		       <tr align="center">
+		       		     <td>__________________________________________</td>		       		     
+		       		</tr>
+		       		<tr align="center">
+		       		     <td><ice:outputText value="CLAUDIA MURILLO LETELIER"/> </td>
+		       		</tr>
+		       		<tr align="center">
+		       		     <td><ice:outputText style="font-size:x-small;" value="CONTROL PRESUPUESTARIO Y GESTIÓN ADMINISTRATIVA"/> </td>
+		       		</tr>   
+		       		<tr align="center">
+		       		     <td ><ice:outputText style="font-size:x-small;" value="DIRECCIÓN DE SALUD"/> </td>
+		       		</tr>     
+		       </table>
+		      </div>
+		    </ice:panelGroup>
+		</ice:panelGroup>
+		<div align="right">
+			<table>
+				<tr>
+					<td><ace:pushButton id="movimientoFuncionarioInsert" value="Aceptar" rendered="true"
+							actionListener="#{movimientoPersonalFrontClass.insertObjectListener}" /></td>
+					<td><ace:pushButton value="Modificar" rendered="false"
+							actionListener="#{movimientoPersonalFrontClass.updateObjectListener}" /></td>
+					<td><ace:pushButton value="Dar de Baja" rendered="false"
+							actionListener="#{movimientoPersonalFrontClass.deleteObjectListener}" /></td>
+					<td><ace:pushButton value="Limpiar"
+							actionListener="#{movimientoPersonalFrontClass.resetObjectListener}" /></td>
+					<td><ace:pushButton value="Imprimir" rendered="#{movimientoPersonalFrontClass.mostrarFirmas}">
+							<ace:printer for="movimientoPersonal" />
+						</ace:pushButton></td>
+				</tr>
+			</table>
+		</div>
+	</h:form>
+</ui:composition>

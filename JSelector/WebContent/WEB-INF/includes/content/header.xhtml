@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:panelGroup>
+	<ace:submitMonitor for="headerForm"
+									   idleLabel="Idle"
+                                       activeLabel="Cerrando Sesión..."
+                                       serverErrorLabel="Error de Servidor"
+                                       networkErrorLabel="Error de Red"
+                                       sessionExpiredLabel="Sesión expirada"
+                                        blockUI="@source" rendered="true" />
+    </h:panelGroup>
+	<h:form id="headerForm">
+		<table style="width: 100%; padding-top: 0px;">
+			<tr>
+				<td><div>
+						<table>
+							<tr>
+								<td><ice:graphicImage url="./img/LOGO.png" height="55"/> </td>
+							</tr>
+						</table>
+					</div></td>
+
+				<td align="right" style="padding-right: 10px;">
+				<div>						
+						<ice:outputText value="Bienvenido:" style="color:black; font-size:large; padding-right:10px; font-family: 'Times New Roman', Times, serif;" />
+						<ice:outputText value="#{usuarioFrontBean.nombreUsuario}" style="color:black; font-size:large; padding-right:10px; font-family: 'Times New Roman', Times, serif;" />
+						<ace:menuButton id="menuButton" effect="SLIDE"  style="font-family: 'Times New Roman', Times, serif;"
+							effectDuration="200" value="Opciones de Usuario">					
+							<ace:menuItem id="logout" value="Cerrar Sesion" style="font-family: 'Times New Roman', Times, serif;"
+								actionListener="#{usuarioFrontBean.logoutUsuarioListener}">
+								<ace:ajax event="activate" execute="@this" />
+							</ace:menuItem>
+						</ace:menuButton>
+					</div>					
+				</td>
+			</tr>
+		</table>
+	</h:form>
+</ui:composition>

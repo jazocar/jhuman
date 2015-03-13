@@ -1,0 +1,438 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ace:submitMonitor for="mantenedorConstruccion" idleLabel="Idle"
+		activeLabel="Cargando..." serverErrorLabel="Error de Servidor"
+		networkErrorLabel="Error de Red" sessionExpiredLabel="Sesión expirada"
+		blockUI="@all" rendered="true" />
+	<h:form id="mantenedorConstruccion">
+		<ice:panelGroup styleClass="iceDatTblColHdr">
+			<div align="left">
+				<ice:outputText value="Estas aquí : " style="padding-right: 10px;" />
+				<ice:commandLink value="Inicio" style="padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="inicioPorHacerPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Creación de Flujos"
+					style="padding-left:5px; padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="construirFlujoPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+			</div>
+		</ice:panelGroup>
+		<ice:panelGroup
+			style="width: 1010px; background-color:white; padding-top: 5px;">
+			<ice:panelGroup styleClass="iceDatTblColHdr">
+				<div align="left">
+					<ice:outputText value="::Creación de Flujos"
+						style="font-size:medium; color:black;" />
+				</div>
+			</ice:panelGroup>
+			<br />
+			<ice:panelGroup style="padding-left:10px; padding-right:10px;">
+				<ice:panelGroup visible="#{construccionFrontBean.selectedFlujo}">
+					<div align="left">
+						<ice:outputText value="Seleccione un flujo para asociar tareas"
+							style="font-family: 'Times New Roman', Times, serif;" />
+					</div>
+					<hr />
+					<ace:dataTable value="#{construccionFrontBean.listaAplicacion}"
+						var="app" selectionMode="single" paginator="true"
+						paginatorPosition="top" rows="10"
+						rowSelectListener="#{construccionFrontBean.aplicacionSelectListener}">
+						<ace:column headerText="Aplicación"
+							style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+							<h:outputText value="#{app.aplicacion}"
+								style="font-family: 'Times New Roman', Times, serif;" />
+						</ace:column>
+						<ace:column headerText="Descripción"
+							style="font-family: 'Times New Roman', Times, serif;text-align:left;">
+							<h:outputText value="#{app.descripcion}"
+								style="font-family: 'Times New Roman', Times, serif;" />
+						</ace:column>
+						<ace:column headerText="Versión"
+							style="font-family: 'Times New Roman', Times, serif;text-align:left;">
+							<h:outputText value="#{app.version}"
+								style="font-family: 'Times New Roman', Times, serif;" />
+						</ace:column>
+					</ace:dataTable>
+				</ice:panelGroup>
+
+				<ice:panelGroup visible="#{construccionFrontBean.selectedInstancia}">
+					<table>
+						<tr>
+							<td align="left"><ice:outputText value="Flujo"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText
+									value="#{construccionFrontBean.aplicacion.aplicacion}"
+									immediate="true" readonly="true"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td align="left"><ice:outputText value="Instancia"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText
+									value="#{construccionFrontBean.nombreInstancia}"
+									immediate="true"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:outputText value="Asociación"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText
+									value="#{construccionFrontBean.tipoAsociacion}"
+									immediate="true" readonly="true"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+						</tr>
+						<tr>
+							<td align="left"><ice:outputText value="Organización"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:selectOneMenu
+									value="#{construccionFrontBean.organizacion}"
+									style="font-family: 'Times New Roman', Times, serif;"
+									immediate="true" partialSubmit="true"
+									valueChangeListener="#{construccionFrontBean.changeOrganizacionListener}">
+									<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+									<f:selectItems
+										value="#{construccionFrontBean.listaOrganizacion}" />
+								</ice:selectOneMenu></td>
+							<td align="left"><ice:outputText value="Empresa"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:selectOneMenu
+									value="#{construccionFrontBean.empresa}" immediate="true"
+									style="font-family: 'Times New Roman', Times, serif;">
+									<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+									<f:selectItems value="#{construccionFrontBean.listaEmpresas}" />
+								</ice:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td align="left"><ice:outputText value="Inicio"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:selectOneMenu
+									value="#{construccionFrontBean.tareaInicio}" immediate="true"
+									style="font-size:small; font-family: 'Times New Roman', Times, serif;">
+									<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+									<f:selectItems
+										value="#{construccionFrontBean.tareaInicioInstancia}" />
+								</ice:selectOneMenu></td>
+							<td align="left"><ice:outputText value="Fin"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:selectOneMenu
+									value="#{construccionFrontBean.tareaFin}" immediate="true"
+									style="font-size:small; font-family: 'Times New Roman', Times, serif;">
+									<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+									<f:selectItems
+										value="#{construccionFrontBean.tareaFinInstancia}" />
+								</ice:selectOneMenu></td>
+						</tr>
+					</table>
+					<br />
+					<div align="left">
+						<table>
+							<tr>
+								<td><ace:pushButton value="Crear"
+										rendered="#{!construccionFrontBean.selectedCrearInstancia}"
+										actionListener="#{construccionFrontBean.insertarInstanciaListener}" />
+								</td>
+								<td><ace:pushButton value="Modificar"
+										rendered="#{construccionFrontBean.selectedCrearInstancia}"
+										actionListener="#{construccionFrontBean.cerrarVentanaGeneracionListener}" />
+								</td>
+								<td><ace:pushButton value="Eliminar"
+										rendered="#{construccionFrontBean.selectedCrearInstancia}"
+										actionListener="#{construccionFrontBean.cerrarVentanaGeneracionListener}" />
+								</td>
+								<td><ace:pushButton value="Limpiar"
+										actionListener="#{construccionFrontBean.limpiarInstanciaListener}" />
+								</td>
+								<td><ace:pushButton value="Generar Flujo"
+										rendered="#{construccionFrontBean.selectedCrearInstancia}"
+										actionListener="#{construccionFrontBean.generarFlujoListener}" />
+								</td>
+								<td><ace:pushButton value="Duplicar"
+										rendered="#{construccionFrontBean.selectedCrearInstancia}"
+										actionListener="#{construccionFrontBean.abrirDuplicarFlujoListener}" />
+								</td>
+							</tr>
+						</table>
+					</div>
+					<br />
+					<div align="left">
+						<ace:dataTable value="#{construccionFrontBean.listaInstancia}"
+							var="app" selectionMode="single" paginator="true"
+							paginatorPosition="top" rows="10"
+							rowSelectListener="#{construccionFrontBean.instanciaSelectListener}">
+							<ace:column headerText="Instancia"
+								style="font-family: 'Times New Roman', Times, serif;text-align:left;">
+								<h:outputText value="#{app.nombreInstancia}"
+									style="font-family: 'Times New Roman', Times, serif;" />
+							</ace:column>
+							<ace:column headerText="Organización"
+								style="font-family: 'Times New Roman', Times, serif;text-align:left;">
+								<h:outputText value="#{app.idOrganizacion}"
+									style="font-family: 'Times New Roman', Times, serif;">
+									<f:converter converterId="organizationConverter" />
+								</h:outputText>
+							</ace:column>
+							<ace:column headerText="Empresa"
+								style="font-family: 'Times New Roman', Times, serif;text-align:left;">
+								<h:outputText value="#{app.idEmpresa}"
+									style="font-family: 'Times New Roman', Times, serif;">
+									<f:converter converterId="empresaConverter" />
+								</h:outputText>
+							</ace:column>
+
+							<ace:column headerText="Inicio"
+								style="font-family: 'Times New Roman', Times, serif;text-align:left;">
+								<h:outputText value="#{app.idTareaInicial}"
+									style="font-family: 'Times New Roman', Times, serif;">
+									<f:converter converterId="tareaConverter" />
+								</h:outputText>
+							</ace:column>
+							<ace:column headerText="Fin"
+								style="font-family: 'Times New Roman', Times, serif;text-align:left;">
+								<h:outputText value="#{app.idTareaFinal}"
+									style="font-family: 'Times New Roman', Times, serif;">
+									<f:converter converterId="tareaConverter" />
+								</h:outputText>
+							</ace:column>
+						</ace:dataTable>
+						<table>
+							<tr>
+								<td><ace:pushButton value="Volver"
+										actionListener="#{construccionFrontBean.cerrarVentanaInstanciaListener}" /></td>
+
+							</tr>
+						</table>
+
+					</div>
+				</ice:panelGroup>
+
+				<ice:panelGroup
+					visible="#{construccionFrontBean.selectedGeneracion}"
+					style="padding-left:10px;">
+					<div align="left">
+						<h:outputText
+							value="#{construccionFrontBean.aplicacion.aplicacion}"
+							style="font-size:x-large; font-family: 'Times New Roman', Times, serif;" />
+						<br />
+						<h:outputText
+							value="#{construccionFrontBean.aplicacion.descripcion}"
+							style="font-size:medium; font-family: 'Times New Roman', Times, serif;" />
+					</div>
+					<br />
+					<table>
+						<tr>
+							<td><ice:outputText value="Inicio"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td><ice:inputText readonly="true" immediate="true"
+									value="#{construccionFrontBean.tareaInicial}"
+									style="font-family: 'Times New Roman', Times, serif;">
+									<f:converter converterId="tareaConverter" />
+								</ice:inputText></td>
+							<td><ice:outputText value="Fin"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td><ice:inputText readonly="true" immediate="true"
+									value="#{construccionFrontBean.tareaFinal}"
+									style="font-family: 'Times New Roman', Times, serif;">
+									<f:converter converterId="tareaConverter" />
+								</ice:inputText></td>
+						</tr>
+					</table>
+
+					<hr />
+					<table>
+						<tr>
+							<td><ice:outputText value="Tarea Inicio"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:selectOneMenu
+									value="#{construccionFrontBean.selectedTareaInicio}"
+									immediate="true"
+									style="font-family: 'Times New Roman', Times, serif;">
+									<f:selectItem itemValue="-1" itemLabel="Seleccione.." />
+									<f:selectItems value="#{construccionFrontBean.tareasInicio}" />
+								</ice:selectOneMenu></td>
+							<td><ice:outputText value="Es Condicional"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:selectOneMenu
+									style="font-family: 'Times New Roman', Times, serif;"
+									value="#{construccionFrontBean.selectedEsCondicional}"
+									immediate="true">
+									<f:selectItem itemValue="-1" itemLabel="Seleccione.." />
+									<f:selectItem itemValue="S" itemLabel="Si" />
+									<f:selectItem itemValue="N" itemLabel="No" />
+								</ice:selectOneMenu></td>
+
+						</tr>
+						<tr>
+							<td><ice:outputText value="Tarea Exito"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:selectOneMenu
+									value="#{construccionFrontBean.selectedTareaDestino}"
+									immediate="true"
+									style="font-family: 'Times New Roman', Times, serif;">
+									<f:selectItem itemValue="-1" itemLabel="Seleccione.." />
+									<f:selectItems value="#{construccionFrontBean.tareasDestino}" />
+								</ice:selectOneMenu></td>
+							<td><ice:outputText value="Tarea Rechazo"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:selectOneMenu
+									style="font-family: 'Times New Roman', Times, serif;"
+									value="#{construccionFrontBean.selectedTareaRechazo}"
+									immediate="true">
+									<f:selectItem itemValue="-1" itemLabel="Seleccione.." />
+									<f:selectItems value="#{construccionFrontBean.tareasRechazo}" />
+								</ice:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td><ice:outputText value="Tipo Destino"
+									style="font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:selectOneMenu
+									style="font-family: 'Times New Roman', Times, serif;"
+									value="#{construccionFrontBean.selectedTipoDestino}"
+									immediate="true">
+									<f:selectItem itemValue="-1" itemLabel="Seleccione.." />
+									<f:selectItem itemValue="simple" itemLabel="Simple" />
+									<f:selectItem itemValue="paralela" itemLabel="Paralela" />
+								</ice:selectOneMenu></td>
+							<td />
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td><ace:pushButton
+									actionListener="#{construccionFrontBean.agregarEventoListener}"
+									value="Ingresar"
+									rendered="#{!construccionFrontBean.selectedCreacion}" /></td>
+							<td><ace:pushButton
+									actionListener="#{construccionFrontBean.updateEventoListener}"
+									value="Modificar"
+									rendered="#{construccionFrontBean.selectedCreacion}" /></td>
+							<td><ace:pushButton
+									actionListener="#{aplicacionFrontBean.deleteAplicacionListener}"
+									value="Dar de Baja"
+									rendered="#{construccionFrontBean.selectedCreacion}" /></td>
+							<td><ace:pushButton
+									actionListener="#{construccionFrontBean.resetEventoListener}"
+									value="Limpiar">
+									<ace:ajax event="activate" execute="@this" />
+								</ace:pushButton></td>
+						</tr>
+					</table>
+					<br />
+					<ace:dataTable value="#{construccionFrontBean.listaConstruccion}"
+						var="con" selectionMode="single" paginator="true"
+						paginatorPosition="top" rows="10"
+						rowSelectListener="#{construccionFrontBean.eventoSelectListener}">
+
+						<ace:column headerText="Tarea Inicial"
+							style="font-family: 'Times New Roman', Times, serif;">
+							<h:outputText value="#{con.idTareaInicio}"
+								style="color:black; font-size: small;font-family: 'Times New Roman', Times, serif;">
+								<f:converter converterId="tareaConverter" />
+							</h:outputText>
+						</ace:column>
+						<ace:column headerText="Tarea Éxito"
+							style="font-family: 'Times New Roman', Times, serif;">
+							<h:outputText value="#{con.idTareaExito}"
+								style="color:black; font-size: small;font-family: 'Times New Roman', Times, serif;">
+								<f:converter converterId="tareaConverter" />
+							</h:outputText>
+						</ace:column>
+						<ace:column headerText="Tiene Rechazo"
+							style="font-family: 'Times New Roman', Times, serif;">
+							<h:outputText value="#{con.esCondicional}"
+								style="color:black; font-size: small;font-family: 'Times New Roman', Times, serif;">
+								<f:converter converterId="rechazoConverter" />
+							</h:outputText>
+						</ace:column>
+						<ace:column headerText="Tarea Rechazo"
+							style="color:black; font-size: small;font-family: 'Times New Roman', Times, serif;">
+							<h:outputText value="#{con.idTareaRechazo}"
+								style="font-family: 'Times New Roman', Times, serif;">
+								<f:converter converterId="tareaConverter" />
+							</h:outputText>
+						</ace:column>
+						<ace:column headerText="Tipo Destino"
+							style="color:black; font-size: small;font-family: 'Times New Roman', Times, serif;">
+							<h:outputText value="#{con.tipoDestino}"
+								style="font-family: 'Times New Roman', Times, serif;" />
+						</ace:column>
+					</ace:dataTable>
+					<div align="left">
+						<br />
+						<br />
+						<ace:pushButton value="Cerrar"
+							actionListener="#{construccionFrontBean.cerrarVentanaGeneracionListener}" />
+					</div>
+				</ice:panelGroup>
+			</ice:panelGroup>
+		</ice:panelGroup>
+
+
+
+		<ice:panelPopup visible="#{construccionFrontBean.abrirDuplicarFlujo}"
+			rendered="#{construccionFrontBean.abrirDuplicarFlujo}" modal="true"
+			autoCentre="true" positionOnLoadOnly="false" draggable="true"
+			style="border-radius: 15px 15px 15px 15px;">
+
+			<f:facet name="body">
+				<ice:panelGroup>
+					<h2>Duplicar Flujo</h2>
+				</ice:panelGroup>
+				<br />
+				<table>
+					<tr>
+						<td align="left"><h3>Nombre de Instancia</h3></td>
+						<td align="left"><ice:inputText
+								value="#{construccionFrontBean.nombreInstanciaDup}"
+								immediate="true"></ice:inputText></td>
+					</tr>
+					<tr>
+						<td align="left"><h3>Organizacion</h3></td>
+						<td align="left"><ice:selectOneMenu
+								value="#{construccionFrontBean.selectedOrganizacionDup}"
+								immediate="true" partialSubmit="true"
+								valueChangeListener="#{construccionFrontBean.changeOrganizacionListener}">
+								<f:selectItems
+									value="#{construccionFrontBean.listaOrganizacion}" />
+							</ice:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td align="left"><h3>Empresa</h3></td>
+						<td align="left"><ice:selectOneMenu
+								value="#{construccionFrontBean.selectedEmpresaDup}"
+								immediate="true">
+								<f:selectItems value="#{construccionFrontBean.listaEmpresas}" />
+							</ice:selectOneMenu></td>
+					</tr>
+
+				</table>
+
+
+				<br />
+				<br />
+				<table style="float: right;">
+					<tr>
+						<td><ace:pushButton value="Duplicar"
+								actionListener="#{construccionFrontBean.duplicarFlujoListener}" /></td>
+						<td><ace:pushButton value="Cerrar"
+								actionListener="#{construccionFrontBean.cerrarDuplicarFlujoListener}" /></td>
+					</tr>
+				</table>
+
+			</f:facet>
+		</ice:panelPopup>
+	</h:form>
+</ui:composition>

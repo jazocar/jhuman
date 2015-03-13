@@ -1,0 +1,341 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:form>
+		<ace:tabSet clientSide="true" immediate="true" selectedIndex="0">
+			<ace:tabPane label="Solicitud de Informe Legal" cache="dynamic">
+				<table>
+					<tr>
+						<td align="left"><ice:outputText value="Cliente"
+								style="font-size:small; color:black;" /></td>
+						<td><ice:selectOneMenu
+								value="#{informeLegalFrontClass.selectedTipoPersona}"
+								valueChangeListener="#{informeLegalFrontClass.onChangeTipoCliente}"
+								immediate="true" style="color:black; font-size: small;"
+								partialSubmit="true">
+								<f:selectItem itemLabel="Persona Natural" itemValue="PN" />
+								<f:selectItem itemLabel="Persona Jurídica" itemValue="PJ" />
+							</ice:selectOneMenu></td>
+					</tr>
+				</table>
+				<h2 align="left">Datos del Cliente</h2>
+				<ice:panelGroup rendered="#{!informeLegalFrontClass.juridica}">
+					<table>
+						<tr>
+							<td align="left"><ice:outputText value="Rut"
+									style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText
+									value="N. de Cliente" style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText
+									value="Nombre" style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+						</tr>
+						<tr>
+
+							<td align="left"><ice:outputText value="Apellido Paterno"
+									style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText
+									value="Apellido Materno" style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText
+									value="Estado Civil" style="font-size:small; color:black;" /></td>
+							<td><ace:simpleSelectOneMenu
+									style="color:black; font-size: small;">
+									<f:selectItem itemLabel="Soltero" itemValue="S" />
+									<f:selectItem itemLabel="Casado Soc. Conyugal" itemValue="CSC" />
+									<f:selectItem itemLabel="Casado Sep. Bienes" itemValue="CSB" />
+									<f:selectItem itemLabel="Casado Par. Gananciales"
+										itemValue="CPG" />
+									<f:selectItem itemLabel="Viudo" itemValue="V" />
+									<f:selectItem itemLabel="Divorciado" itemValue="D" />
+								</ace:simpleSelectOneMenu></td>
+						</tr>
+						<tr>
+							<td align="left"><ice:outputText value="Teléfono"
+									style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText
+									value="Email" style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</ice:panelGroup>
+				<ice:panelGroup rendered="#{informeLegalFrontClass.juridica}">
+					<table>
+						<tr>
+							<td align="left"><ice:outputText value="Rut"
+									style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+
+							<td align="left"><ice:outputText value="N. de Cliente"
+									style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+
+							<td align="left"><ice:outputText value="Razon Social"
+									style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+						</tr>
+
+						<tr>
+							<td align="left"><ice:outputText value="Teléfono"
+									style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+
+							<td align="left"><ice:outputText value="Email"
+									style="font-size:small; color:black;" /></td>
+							<td><ice:inputText /></td>
+
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</ice:panelGroup>
+				<hr />
+				<h2 align="left">Cliente Solicitante</h2>
+				<table>
+					<tr>
+						<td align="left"><ice:outputText value="Cliente"
+								style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Sucursal" style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Teléfono Sucursal" style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+					</tr>
+					<tr>
+
+						<td align="left"><ice:outputText value="Ejecutivo"
+								style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Email Ejecutivo" style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Fecha" style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+					</tr>
+				</table>
+				<hr />
+				<h2 align="left">Provisión de Gastos</h2>
+				<table>
+					<tr>
+						<td align="left"><ice:outputText value="Aut. Cargo Cta.Cte."
+								style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Sucursal" style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Prov. Fondos Cta. N."
+								style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+					</tr>
+					<tr>
+
+						<td align="left"><ice:outputText value="Monto"
+								style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+
+						<td align="left"></td>
+						<td></td>
+
+						<td align="left"></td>
+						<td></td>
+					</tr>
+				</table>
+				<hr />
+
+				<ice:panelGroup id="panelHipoteca"
+					rendered="#{informeLegalFrontClass.hipoteca}">
+					<h2 align="left">Prenda</h2>
+					<div align="left">
+					<table>
+						<tr>
+							<td><ice:outputText value="Tipo de Prenda"
+								style="font-size:small; color:black;" /> </td>
+							<td><ace:simpleSelectOneMenu
+									style="color:black; font-size: small;">
+									<f:selectItem itemLabel="Automovil" itemValue="AUT" />
+									<f:selectItem itemLabel="Maquinarias" itemValue="MAQ" />
+									<f:selectItem itemLabel="Galpones/Casas Desmontables" itemValue="GAL" />
+									<f:selectItem itemLabel="Acciones" itemValue="ACC" />
+									<f:selectItem itemLabel="Contratos" itemValue="CON" />
+									<f:selectItem itemLabel="Fondos Mutuos" itemValue="FMT" />
+								</ace:simpleSelectOneMenu></td>
+						</tr>
+					</table>
+						
+					
+					</div>
+					
+					<br />
+					<table>
+						<tr>
+							<td valign="top"><h2 align="left">Documentos Adjuntos</h2>
+								<table>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctFactura"
+												partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel for="SlctFactura"
+												value="Factura" style="font-size:small; color:black;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctSolPrimIns"
+												partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel for="SlctSolPrimIns"
+												value="Solicitud de Primera inscripción en el Registro Civil"
+												style="font-size:small; color:black;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox
+												id="SlctInscripcionVehiculo" partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctInscripcionVehiculo"
+												value="Inscripción de Vehículo"
+												style="font-size:small; color:black;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctTasacion"
+												partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctTasacion"
+												value="Tasación"
+												style="font-size:small; color:black;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctAcciones"
+												partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctAcciones"
+												value="Acciones"
+												style="font-size:small; color:black;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctCertGravamenes"
+												partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctCertGravamenes"
+												value="Certificado de Gravamenes"
+												style="font-size:small; color:black;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctContrato"
+												partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctContrato"
+												value="Contrato"
+												style="font-size:small; color:black;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctCertFFAA"
+												partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctCertFFAA"
+												value="Certificado de FFMM"
+												style="font-size:small; color:black;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctInformesPoderes"
+												partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctInformesPoderes"
+												value="Informes de Sociedad y Poderes y/o Documentos"
+												style="font-size:small; color:black;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctCertMatrimonio"
+												partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctCertMatrimonio"
+												value="Certificado de Matrimonio"
+												style="font-size:small; color:black;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctAprobacionRiesgo"
+												partialSubmit="true" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctAprobacionRiesgo"
+												value="Aprobación de Riesgo"
+												style="font-size:small; color:black;" /></td>
+									</tr>	
+									
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctOtroDocumento"
+												partialSubmit="true"
+												valueChangeListener="#{informeLegalFrontClass.changeHipotecaAdjuntosListener}" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctOtroDocumento" value="Otro/s Documento"
+												style="font-size:small; color:black;" /></td>
+									</tr>
+								</table></td>
+							<td valign="top" style="padding-left: 200px;"><ice:panelGroup
+									rendered="#{informeLegalFrontClass.adjuntos}">
+									<h2 align="left">Ingrese los documentos adjuntos</h2>
+									<table>
+										<tr>
+											<td><ace:fileEntry id="file-entry"
+													relativePath="/files/" maxFileCount="10"
+													maxFileCountMessage="El limite es de 10 archivos."
+													fileEntryListener="#{toDoFrontBean.sampleListener}"
+													maxFileSize="6291456"
+													maxFileSizeMessage="Submitted file is too large."
+													maxTotalSize="18874368"
+													maxTotalSizeMessage="Total size of submitted files is too large."
+													useOriginalFilename="true" useSessionSubdir="true" /></td>
+											<td><h:commandButton type="submit"
+													value="Cargar Archivo" /></td>
+										</tr>
+									</table>
+									<br />
+									<ace:dataTable id="tbl" value="#{toDoFrontBean.fileData}"
+										var="fileDataVal">
+										<ace:column>
+											<f:facet name="header">
+												<h:outputText value="Archivos" />
+											</f:facet>
+											<h:outputText id="fileData" value="#{fileDataVal}" />
+										</ace:column>
+									</ace:dataTable>
+									<ace:messages id="msgs" for="tarea-form:file-entry" />
+								</ice:panelGroup></td>
+						</tr>
+					</table>
+				</ice:panelGroup>
+				<hr/>
+				<div align="left">
+					<table>
+						<tr>
+							<td><ace:pushButton value="Ingresar Solicitud" /></td>
+							<td><ace:pushButton value="Modificar Solicitud" /></td>
+							<td><ace:pushButton value="Limpiar" /></td>
+						</tr>
+					</table>
+				</div>
+			</ace:tabPane>
+		</ace:tabSet>
+	</h:form>
+</ui:composition>

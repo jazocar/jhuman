@@ -1,0 +1,179 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ace:submitMonitor for="mantenedorCreacionTareas"
+									   idleLabel="Idle"
+                                       activeLabel="Cargando..."
+                                       serverErrorLabel="Error de Servidor"
+                                       networkErrorLabel="Error de Red"
+                                       sessionExpiredLabel="Sesión expirada"
+                                        blockUI="@all" rendered="true" />
+	<h:form id="mantenedorCreacionTareas">
+	<ice:panelGroup styleClass="iceDatTblColHdr">
+			<div align="left">
+				<ice:outputText value="Estas aquí : " style="padding-right: 10px;" />
+				<ice:commandLink value="Inicio" style="padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="inicioPorHacerPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Mantenedor de Tareas"
+					style="padding-left:5px; padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="tareaWorkflowPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+			</div>
+		</ice:panelGroup>
+		 <ice:panelGroup style="width: 1010px; background-color:white; padding-top: 5px;">
+                           <ice:panelGroup styleClass="iceDatTblColHdr">
+                           <div align="left">
+                               <ice:outputText value="::Mantenedor de Tareas" style="font-size:medium; color:black;"/>
+                           </div>
+               </ice:panelGroup>                 
+               <br/>
+               <ice:panelGroup style="padding-left:10px; padding-right:10px;">  
+			<table>
+			<tr>
+			    <td align="left"><ice:outputText value="Nombre" style="color:black;font-family: 'Times New Roman', Times, serif;"/> </td>
+				<td align="left"><ice:inputText value="#{tareaBean.inputNombre}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/> </td>
+				<td align="left"><ice:outputText value="Descripción" style="color:black;font-family: 'Times New Roman', Times, serif;"/></td>				
+				<td align="left" colspan="3"><ice:inputTextarea cols="61" rows="1" value="#{tareaBean.inputDescripcion}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/> </td>	
+								
+			</tr>
+			<tr>				
+				<td align="left"><ice:outputText value="Proridad" style="color:black;font-family: 'Times New Roman', Times, serif;"/> </td>
+				<td align="left"><ice:selectOneMenu style="width:170px;font-family: 'Times New Roman', Times, serif;" value="#{tareaBean.selectedPrioridad}" immediate="true">
+						<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+						<f:selectItem itemValue="Baja" itemLabel="Baja" />
+						<f:selectItem itemValue="Normal" itemLabel="Normal" />
+						<f:selectItem itemValue="Alta" itemLabel="Alta" />
+					</ice:selectOneMenu>  </td>
+				<td align="left"><ice:outputText value="Tipo Tarea" style="color:black; font-family: 'Times New Roman', Times, serif;"/> </td>
+				<td align="left"><ace:simpleSelectOneMenu style="width:170px; font-family: 'Times New Roman', Times, serif;" value="#{tareaBean.selectedTipoTarea}"  immediate="true">
+						<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+						<f:selectItem itemValue="Manual" itemLabel="Manual" />
+						<f:selectItem itemValue="Semi-Automatica" itemLabel="Semi Automática" />
+					</ace:simpleSelectOneMenu>  </td>
+				<td align="left"><ice:outputText value="Organización" style="color:black; font-family: 'Times New Roman', Times, serif;"/> </td>
+				<td align="left"><ice:selectOneMenu style="width:170px; font-family: 'Times New Roman', Times, serif;" value="#{tareaBean.selectedOrganizacion}" immediate="true">
+						<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+						<f:selectItems value="#{tareaBean.listaOrg}"/>
+					</ice:selectOneMenu> </td>
+							
+			</tr>
+			<tr>	
+			<td align="left"><ice:outputText value="Tipo Duración" style="color:black; font-family: 'Times New Roman', Times, serif;"/> </td>
+			<td align="left"><ice:selectOneMenu style="width:170px; font-family: 'Times New Roman', Times, serif;" value="#{tareaBean.selectedTipoDuracion}" immediate="true">
+						<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+						<f:selectItem itemValue="D" itemLabel="Días" />
+						<f:selectItem itemValue="H" itemLabel="Horas" />
+						<f:selectItem itemValue="M" itemLabel="Minutos" />
+					</ice:selectOneMenu> </td>	
+					
+				<td align="left"><ice:outputText value="Duración" style="color:black; font-family: 'Times New Roman', Times, serif;"/> </td>					
+				<td align="left"><ice:inputText  value="#{tareaBean.inputDuracion}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/></td>				
+				<td align="left"><ice:outputText value="Asignación" style="color:black; font-family: 'Times New Roman', Times, serif;"/> </td>	
+				<td align="left"><ice:selectOneMenu style="width:170px; font-family: 'Times New Roman', Times, serif;" value="#{tareaBean.selectedTipoAsignacion}" immediate="true">
+						<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+						<f:selectItem itemValue="R" itemLabel="Rol" />
+						<f:selectItem itemValue="P" itemLabel="Persona" />						
+					</ice:selectOneMenu> </td>
+			</tr>
+			<tr>
+				<td align="left"><ice:outputText value="Rol Asignación" style="color:black; font-family: 'Times New Roman', Times, serif;"/> </td>
+				<td  align="left"><ice:selectOneMenu style="width:170px; font-family: 'Times New Roman', Times, serif;" value="#{tareaBean.selectedRolAsignacion}"  immediate="true">
+						<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+						<f:selectItems value="#{tareaBean.listaRol}" />
+					</ice:selectOneMenu></td>
+				<td></td>
+				<td></td>	
+				<td></td>
+				<td></td>				
+			</tr>
+		</table>
+		<table>
+					<tr>
+						<td><ace:pushButton
+								actionListener="#{tareaBean.insertTareaListener}"
+								value="Ingresar" rendered="#{!tareaBean.selected}" /></td>
+						<td><ace:pushButton
+								actionListener="#{tareaBean.updateTareaListener}"
+								value="Modificar" rendered="#{tareaBean.selected}" /></td>
+						<td><ace:pushButton
+								actionListener="#{tareaBean.deleteTareaListener}"
+								value="Dar de Baja" rendered="#{tareaBean.selected}" /></td>
+						<td><ace:pushButton
+								actionListener="#{navigationBean.navigationStackChange}"
+								value="Configuración" rendered="#{tareaBean.selected}" >
+								 <ace:ajax execute="@this" event="activate">
+									<f:param value="configuradorTareaPanel" name="stackName"></f:param>
+									</ace:ajax>
+								</ace:pushButton></td>
+						<td><ace:pushButton
+								actionListener="#{tareaBean.resetTareaListener}"
+								value="Limpiar" >
+								<ace:ajax event="activate" execute="@this"/>
+								</ace:pushButton></td>
+						
+					</tr>
+				</table>
+				<br/>
+			<ace:dataTable id="idListado" value="#{tareaBean.listaTareas}" var="tarea" paginator="true" paginatorPosition="top" rows="15" rowSelectListener="#{tareaBean.tareaSelectListener}" selectionMode="single">
+				<ace:column headerText="Nombre" sortBy="#{tarea.nombre}"
+					filterBy="#{tarea.nombre}" style="font-family: 'Times New Roman', Times, serif; text-align:left;"
+					filterMatchMode="contains">
+				    <h:outputText value="#{tarea.nombre}" style="font-family: 'Times New Roman', Times, serif;"/>
+				</ace:column>
+				<ace:column headerText="Tipo Tarea" sortBy="#{tarea.tipoTarea}"
+					filterBy="#{tarea.tipoTarea}" style="font-family: 'Times New Roman', Times, serif;text-align:left;"
+					filterMatchMode="contains">
+				    <h:outputText value="#{tarea.tipoTarea}" style="font-family: 'Times New Roman', Times, serif;"/>
+				</ace:column>
+				<ace:column headerText="Prioridad" sortBy="#{tarea.prioridad}"
+					filterBy="#{tarea.prioridad}" style="font-family: 'Times New Roman', Times, serif;text-align:left;"
+					filterMatchMode="contains">
+				    <h:outputText value="#{tarea.prioridad}"  style="font-family: 'Times New Roman', Times, serif;"/>
+				</ace:column>
+				<ace:column headerText="Organización" sortBy="#{tarea.idOrganizacion}"
+					filterBy="#{tarea.idOrganizacion}" style="font-family: 'Times New Roman', Times, serif;text-align:left;"
+					filterMatchMode="contains">					
+				    <h:outputText value="#{tarea.idOrganizacion}" style="font-family: 'Times New Roman', Times, serif;">
+				    	<f:converter converterId="organizationConverter" />
+				    </h:outputText>
+				</ace:column>
+				<ace:column headerText="Rol Asignado" sortBy="#{tarea.idRolAsignacion}"
+					filterBy="#{tarea.idRolAsignacion}" style="font-family: 'Times New Roman', Times, serif;text-align:left;"
+					filterMatchMode="contains">					
+				    <h:outputText value="#{tarea.idRolAsignacion}" style="font-family: 'Times New Roman', Times, serif;">
+				    	<f:converter converterId="rolConverter"/>
+				    </h:outputText>
+				</ace:column>
+			</ace:dataTable>
+			<div align="right">
+					<table>
+						<tr>
+							<td><ace:dataExporter id="dataExporterXls" label="Excel"
+									type="xls" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterPdf" label="PDF"
+									type="pdf" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterCsv" label="CSV"
+									type="csv" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterXml" label="XML"
+									type="xml" target="idListado" fileName="output" /></td>
+						</tr>
+					</table>
+				</div>
+			</ice:panelGroup>
+			</ice:panelGroup>
+	</h:form>
+</ui:composition>

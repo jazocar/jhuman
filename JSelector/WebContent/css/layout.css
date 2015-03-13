@@ -1,0 +1,278 @@
+.mainCol1 {
+	vertical-align: top;
+}
+
+.mainCol2 {
+	vertical-align: top;
+}
+
+.topCol1 {
+	vertical-align: middle;
+}
+
+.topCol2 {
+	vertical-align: middle;
+}
+
+.navigationContainer {
+	/*top:5px;*/
+	/*  float: left, top;
+   width:250px;*/
+	height: 100%;
+
+	/* border-bottom: 1px solid #d9d9d9;*/
+}
+
+.splashContainer {
+	height: 432px;
+	width: 100%;
+}
+
+.ReporteVentasLocalContainer {
+	width: 100%;
+}
+
+.ReporteMaestrosUsuariosContainer {
+	width: 100%;
+}
+
+.buttonsAndLinksContainer {
+	width: 500px;
+}
+
+.textEntryContainer {
+	width: 500px;
+}
+
+.selectionContainer {
+	width: 500px;
+}
+
+.selectInputTextContainer {
+	width: 500px;
+}
+
+.selectInputDateContainer {
+	width: 475px;
+}
+
+.chartsContainer {
+	width: 635px;
+}
+
+.gmapContainer {
+	width: 550px;
+}
+
+.outputConnectionStatusContainer {
+	width: 500px;
+}
+
+.dragDropContainer {
+	width: 500px;
+}
+
+.effectsContainer {
+	width: 500px;
+}
+
+.inputFileContainer {
+	width: 500px;
+}
+
+.outputMediaContainer {
+	width: 500px;
+}
+
+.outputProgressContainer {
+	width: 625px;
+}
+
+.menuBarContainer {
+	width: 500px;
+}
+
+.menuBarContainerSite {
+	width: 400px;
+}
+
+.menuPopupContainer {
+	width: 500px;
+}
+
+.inputRichTextContainer {
+	width: 600px;
+}
+
+.dataScrollingContainer {
+	width: 500px;
+}
+
+.commandSortHeaderContainer {
+	width: 500px;
+}
+
+.rowSelectorContainer {
+	width: 500px;
+}
+
+.columnsTableContainer {
+	width: 500px;
+}
+
+.expandableTableContainer {
+	width: 500px;
+}
+
+.groupingContainer {
+	width: 500px;
+}
+
+.resizableContainer {
+	width: 500px;
+}
+
+.panelBorderContainer {
+	width: 1200px;
+}
+
+.panelCollapsible {
+	width: 200px;
+	padding: 4px 4px 4px 0px;
+}
+
+.panelTabSetContainer {
+	width: 610px;
+}
+
+.panelPopupContainer {
+	width: 600px;
+}
+
+.panelPopupExampleContainer {
+	width: 250px;
+}
+
+.panelPositionedContainer {
+	width: 500px;
+}
+
+.panelDividerContainer {
+	width: 700px;
+}
+
+.panelSeriesContainer {
+	width: 600px;
+}
+
+.panelNavigationContainer {
+	width: 200px;
+	position: relative;
+	top: 0px;
+	left: auto;
+	/*padding-right: 300px;*/
+}
+
+.panelContainer {
+	border-style: double;
+	width: 700px;
+}
+
+.panelStackContainer {
+	width: 600px;
+}
+
+.panelToolTipContainer {
+	width: 500px;
+}
+
+.pnlBrdr {
+	margin: 0 0 0 0;
+	display: block;
+	float: left;
+	width: 100%;
+	padding: 0;
+}
+
+.pnlBrdrNorth {
+	background-color: white;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	height: 40px;
+}
+
+.pnlBrdrSouth {
+	background-color: #d7011d;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	height: 40px;
+	border-radius: 0 0 15px 15px;
+}
+
+.pnlBrdrEast {
+	border: 1px solid #CCCCCC;
+	background-color: transparent;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	width: 0px;
+	height: 450px;
+}
+
+.pnlBrdrCenter {
+	border: 1px solid #CCCCCC;
+	/*background-color: #EEEEEE;
+	padding: 5px;*/
+	padding: 0px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: top;
+	height: 350px;
+	width: 700px;
+}
+
+.pnlBrdrWest {
+	/*border: 1px solid #CCCCCC;
+	background-color: #EEEEEE;*/
+	background-color: transparent;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: top;
+	border-radius: 15px 15px 15px 15px;
+	height: 600px;
+	width: 200px;
+}
+
+.pnlBrdrNorth {
+	height: 30px;
+	border-radius: 15px 15px 0 0;
+}
+
+.pnlBrdrSouth {
+	width:250px;
+}
+
+.iceDatTblColHdr{
+	
+}
+
+ul.wijmo-wijmenu-list.ui-widget-content.ui-corner-all.ui-helper-clearfix.wijmo-wijmenu-child.wijmo-wijmenu-current{
+	left:100px;
+}
+
+.wijmo-wijmenu-ipod {
+	
+	width: 400px;
+	height: 500px;
+	font-family: 'Times New Roman', Times, serif;
+}
+
+
+.wijmo-wijmenu-ipod.element.style {
+display: block;
+width: 250px;
+left: 100px;
+height: auto;
+}

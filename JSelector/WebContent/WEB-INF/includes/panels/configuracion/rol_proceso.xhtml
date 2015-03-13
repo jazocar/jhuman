@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ace:submitMonitor for="mantenedorRolProcesos"
+									   idleLabel="Idle"
+                                       activeLabel="Cargando..."
+                                       serverErrorLabel="Error de Servidor"
+                                       networkErrorLabel="Error de Red"
+                                       sessionExpiredLabel="Sesión expirada"
+                                        blockUI="@all" rendered="true" />
+	<h:form id="mantenedorRolProcesos">
+	<ice:panelGroup styleClass="iceDatTblColHdr">
+	<div align="left">
+	<ice:outputText value="Estas aquí : " style="padding-right: 10px;"/>   
+	 <ice:commandLink value="Inicio" style="padding-right:5px;" actionListener="#{navigationBean.navigationStackChange}" >
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="inicioPorHacerPanel" />
+									</ace:ajax>
+		</ice:commandLink><ice:outputText value=">"/>
+		<ice:commandLink value="Mantenedor de Rol de Procesos" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorRolProceso" />
+									</ace:ajax>
+		</ice:commandLink>
+	  </div>	
+	  </ice:panelGroup>
+	    <ice:panelGroup style="width: 1010px; background-color:white; padding-top: 5px;">
+                           <ice:panelGroup styleClass="iceDatTblColHdr">
+                           <div align="left">
+                               <ice:outputText value="::Mantenedor de Rol de Procesos" style="font-size:medium; color:black;"/>
+                           </div>
+               </ice:panelGroup>                 
+               <br/> 
+            <table>
+					<tr>
+						<td><ice:outputText value="Nombre"
+								style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+						<td><ice:inputText value="#{rolProcesoFrontBean.nombre}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/></td>
+							<td><ice:outputText value="Descripción"
+								style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+						<td><ice:inputText value="#{rolProcesoFrontBean.descripcion}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/></td>
+					</tr>
+				</table>
+				<div align="left">
+					<table>
+						<tr>
+							<td><ace:pushButton value="Ingresar" rendered="#{!rolProcesoFrontBean.selected}"
+									actionListener="#{rolProcesoFrontBean.insertObjectListener}" /></td>
+							<td><ace:pushButton value="Modificar" rendered="#{rolProcesoFrontBean.selected}"
+									actionListener="#{rolProcesoFrontBean.updateObjectListener}" /></td>
+							<td><ace:pushButton value="Dar de Baja" rendered="#{rolProcesoFrontBean.selected}"
+									actionListener="#{rolProcesoFrontBean.deleteObjectListener}" /></td>
+							<td><ace:pushButton value="Limpiar"
+									actionListener="#{rolProcesoFrontBean.resetObjectListener}" /></td>
+						</tr>
+					</table>
+				</div>
+				<hr />
+				
+				<ace:dataTable id="idListado" value="#{rolProcesoFrontBean.listaRolProceso}" var="rol"
+				    paginator="true" paginatorPosition="top" rows="10" selectionMode="single"
+					rowSelectListener="#{rolProcesoFrontBean.objectSelectListener}">
+					<ace:column headerText="Nombre" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+						<h:outputText value="#{rol.nombre}" style="font-family: 'Times New Roman', Times, serif;"/>
+					</ace:column>
+					<ace:column headerText="Descripción" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+						<h:outputText value="#{rol.descripcion}" style="font-family: 'Times New Roman', Times, serif;"/>
+					</ace:column>
+				</ace:dataTable>
+				<div align="right">
+					<table>
+						<tr>
+							<td><ace:dataExporter id="dataExporterXls" label="Excel"
+									type="xls" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterPdf" label="PDF"
+									type="pdf" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterCsv" label="CSV"
+									type="csv" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterXml" label="XML"
+									type="xml" target="idListado" fileName="output" /></td>
+						</tr>
+					</table>
+				</div>
+        </ice:panelGroup>
+		
+	</h:form>
+</ui:composition>

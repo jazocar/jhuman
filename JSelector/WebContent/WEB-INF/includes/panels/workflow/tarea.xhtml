@@ -1,0 +1,354 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<style type="text/css">
+.ice-checkboxbutton button {
+	height: 24px;
+	width: 24px;
+}
+
+.ice-checkboxbutton button.ui-state-hover {
+	background: url('./css/images/checkGrey.png') no-repeat;
+	border: none;
+}
+
+.ice-checkboxbutton button.ui-state-active {
+	background: url('./css/images/check.png') no-repeat;
+	border: none;
+}
+
+.ice-checkboxbutton span.ui-state-default {
+	background: url('./css/images/uncheck.png') no-repeat;
+}
+
+.ice-checkboxbutton .ui-state-active .ui-icon {
+	background: transparent;
+}
+</style>
+
+	<h:panelGroup>
+		<ace:submitMonitor for="tareaForm" idleLabel="Idle9+"
+			activeLabel="Enviando Datos..." serverErrorLabel="Error de Servidor"
+			networkErrorLabel="Error de Red"
+			sessionExpiredLabel="Sesión expirada" blockUI="@all" rendered="true" />
+	</h:panelGroup>
+
+	<h:form id="tareaForm">
+		<ice:panelGroup styleClass="iceDatTblColHdr">
+			<div align="left">
+				<ice:outputText value="Estas aquí : " style="padding-right: 10px;" />
+				<ice:commandLink value="Inicio" style="padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="inicioPorHacerPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Tarea"
+					style="padding-left:5px; padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="tareaDetallePanel" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+			</div>
+		</ice:panelGroup>
+		<ice:panelGroup
+			style="width: 1010px; background-color:white; padding-top: 5px; padding-left:10px; padding-right:10px; padding-bottom:10px;">
+			<ice:panelGroup styleClass="iceDatTblColHdr">
+				<div align="left">
+					<ice:outputText value="::#{toDoFrontBean.outputNombreTarea}"
+						style="font-size:medium; color:black;" />
+				</div>
+			</ice:panelGroup>
+
+			<br />
+			<div align="left">
+				<ace:tooltip id="tooltip" global="true" />
+				<ice:outputText value="#{toDoFrontBean.outputDescripcionTarea}"
+					style="font-size: medium;" />
+				<br />
+				<br />
+				<table>
+					<tr>
+						<td align="left"><ice:outputText value="Caso:"
+								style="color:red;" /> <ice:outputText
+								value="#{toDoFrontBean.outputCaso}"
+								style="color:black; padding-left:5px;" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td align="left"><ice:outputText value="Aplicación:"
+								style="color:red;" /> <ice:outputText
+								value="#{toDoFrontBean.outputAplicacion}"
+								style="color:black; padding-left:5px;" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td align="left"><ice:outputText value="Vencimiento:"
+								style="color:red;" /> <ice:outputText
+								value="#{toDoFrontBean.outputVencimiento}"
+								style="color:black; padding-left:5px;">
+								<f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" />
+							</ice:outputText></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td align="left"><ice:outputText value="Prioridad:"
+								style="color:red;" /> <ice:outputText
+								value="#{toDoFrontBean.outputPrioridad}"
+								style="color:black; padding-left:5px;" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td align="left"><ice:outputText value="Estado:"
+								style="color:red;" /> <ice:outputText value="Pendiente"
+								style="color:black; padding-left:5px;" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td align="left"><ice:outputText value="Tipo de Tarea:"
+								style="color:red;" /> <ice:outputText value="Semi-Automática"
+								style="color:black; padding-left:5px;" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td align="left"><ice:outputText value="Asignado a:"
+								style="color:red;" /> <ice:outputText
+								value="#{toDoFrontBean.outputUsuario}"
+								style="color:black; padding-left:5px;">
+								<f:converter converterId="usuarioConverter" />
+							</ice:outputText></td>
+						<td></td>
+					</tr>
+				</table>
+				<br />
+				<div align="left">
+					<ice:commandLink
+						actionListener="#{toDoFrontBean.abrirPanelEmailListener}"
+						action="#{toDoFrontBean.fireEffect}">
+						<ice:graphicImage width="30" url="./img/mail.png"
+							title="Haga click en este botón para enviar un correo electrónico" />
+					</ice:commandLink>
+				</div>
+				<br />
+
+
+				<ice:panelGroup rendered="#{toDoFrontBean.tieneConfiguracion}">
+					<hr />
+					<ice:outputText value="Checklist"
+						style="font-size:x-large; color: black;" />
+					<br />
+					<ice:outputText
+						value="Indique cuales opciones se encuentran terminadas" />
+					<br />
+					<br />
+					<table>
+						<ice:panelSeries value="#{toDoFrontBean.listaConfiguracion}"
+							var="conf" rows="100">
+							<tr>
+								<td><ace:checkboxButton required="#{conf.requerido}"
+										value="#{conf.seleccionado}" immediate="true" /></td>
+								<td><ice:outputText value="#{conf.checkOption}"
+										style="color:black;" /></td>
+							</tr>
+						</ice:panelSeries>
+					</table>
+					<hr />
+				</ice:panelGroup>
+
+				<ice:panelGroup rendered="#{toDoFrontBean.esAutomatica}">
+
+					<ice:outputText value="Archivos Adjuntos"
+						style="color:black; font-size: x-large;" />
+					<br />
+					<ice:outputText
+						value="Adjunte los archivos necesarios para la tarea actual" />
+					<br />
+					<br />
+					<ice:panelGroup style="width:600px;">
+					<table>
+						<tr>
+							<td><ace:fileEntry tabindex="2"
+									relativePath="/tmp_#{toDoFrontBean.outputAplicacion}/#{toDoFrontBean.outputCaso}/"
+									maxFileCount="10"
+									maxFileCountMessage="El limite es de 10 archivos."
+									fileEntryListener="#{toDoFrontBean.sampleListener}"
+									maxFileSize="6291456"
+									maxFileSizeMessage="Submitted file is too large."
+									maxTotalSize="18874368"
+									maxTotalSizeMessage="Total size of submitted files is too large."
+									useOriginalFilename="true" useSessionSubdir="true" /></td>
+							<td><h:commandButton type="submit" value="Cargar Archivo" /></td>
+						</tr>
+					</table>
+					<br />
+					<ace:dataTable id="tbl" value="#{toDoFrontBean.fileData}"
+						var="fileDataVal">
+						<ace:column>
+							<f:facet name="header">
+								<h:outputText value="Archivos" />
+							</f:facet>
+							<h:outputText id="fileData" value="#{fileDataVal}" />
+						</ace:column>
+					</ace:dataTable>
+					</ice:panelGroup>
+					<!--   <ace:messages id="msgs" for="tarea-form:file-entry"/> -->
+				</ice:panelGroup>
+
+				<br />
+				<hr />
+				<ice:panelGroup style="width:1000px;">
+				<ice:outputText value="Comentarios"
+					style="font-size:x-large; color: black;" />
+				<br />
+				<ice:outputText
+					value="A continuación usted puede ingresar comentarios asociados a la solicitud" />
+				<br />
+				<br />
+
+				<table>
+					<tr>
+						<td><ace:textAreaEntry
+								value="#{toDoFrontBean.inputComentario}" rows="1" cols="50"
+								label="Ingrese un Comentario" labelPosition="left" /></td>
+						<td><ace:pushButton value="Ingresar Comentario"
+								actionListener="#{toDoFrontBean.insertComentarioListener}" /></td>
+					</tr>
+
+				</table>
+				<ace:dataTable value="#{toDoFrontBean.listaComentario}" var="com">
+					<ace:column headerText="Usuario">
+						<h:outputText value="#{com.usuario}" />
+					</ace:column>
+					<ace:column headerText="Fecha">
+						<h:outputText value="#{com.fechaPublicacion}">
+							<f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" />
+						</h:outputText>
+					</ace:column>
+					<ace:column headerText="Comentario">
+						<h:outputText value="#{com.comentario}" />
+					</ace:column>
+				</ace:dataTable>
+				</ice:panelGroup>
+				<br />
+				<br />
+				<div align="right">
+					<table>
+						<tr>
+							<!--<td><ace:pushButton value="Iniciar" rendered="#{toDoFrontBean.esAutomatica}"/></td> -->
+							<td><ace:pushButton value="Crear Formulario"
+									actionListener="#{toDoFrontBean.generarFormularioListener}"
+									rendered="#{toDoFrontBean.ingresaFormulario}" /></td>
+							<td><ace:pushButton value="Ver Formulario"
+									actionListener="#{toDoFrontBean.verFormularioListener}"
+									rendered="#{toDoFrontBean.modificarFormulario}" /></td>
+							<td><ace:pushButton value="Despachar"
+									actionListener="#{toDoFrontBean.despacharCreacionListener}" /></td>
+							<td><ace:pushButton value="Rechazo"
+									rendered="#{toDoFrontBean.esRechazo}"
+									actionListener="#{toDoFrontBean.rechazarTareaListener}" /></td>
+							<!-- <td><ace:pushButton value="Desistir" rendered="false"/></td> -->
+
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</ice:panelGroup>
+
+		<ice:panelPopup visible="#{toDoFrontBean.popUpError}"
+			rendered="#{toDoFrontBean.popUpError}" modal="true" autoCentre="true"
+			positionOnLoadOnly="false" draggable="true"
+			style="border-radius: 15px 15px 15px 15px;">
+			<f:facet name="body">
+				<ice:panelGroup>
+					<ice:graphicImage url="./img/mensaje.png" height="35" />
+				</ice:panelGroup>
+				<br />
+				<table>
+					<tr>
+						<td><ice:graphicImage url="#{toDoFrontBean.rutaImagen}"
+								width="30" /></td>
+						<td><ice:outputText style="font-size: medium;"
+								value="#{toDoFrontBean.mensaje}" /></td>
+					</tr>
+				</table>
+
+				<br />
+				<div align="center">
+					<table>
+						<tr>
+							<td><ace:pushButton value="Aceptar"
+									actionListener="#{toDoFrontBean.cerrarPopUpErrorListener}"
+									rendered="true" /></td>
+						</tr>
+					</table>
+				</div>
+			</f:facet>
+		</ice:panelPopup>
+
+		<ice:panelPopup visible="#{toDoFrontBean.popEmail}"
+			effect="#{toDoFrontBean.panelEffect}"
+			rendered="#{toDoFrontBean.popEmail}" modal="true" autoCentre="true"
+			positionOnLoadOnly="false" draggable="true"
+			style="border-radius: 15px 15px 15px 15px; width:400px;">
+			<f:facet name="body">
+				<div>
+					<h2>Envio de Correo</h2>
+					<table>
+						<tr>
+							<td align="left" valign="top"><h3>Destinatario</h3></td>
+							<td align="left" valign="top"><ice:inputText
+									immediate="true" value="#{toDoFrontBean.destinatario}"
+									style="width:250px;" /></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td align="left"><ice:outputText
+									value="El formato del correo es inválido" style="color:red;"
+									rendered="#{toDoFrontBean.errorEmail}" /></td>
+						</tr>
+						<tr>
+							<td align="left" valign="top"><h3>Asunto</h3></td>
+							<td align="left" valign="top"><ice:inputText
+									immediate="true" value="#{toDoFrontBean.asunto}"
+									style="width:250px;" /></td>
+						</tr>
+						<tr>
+							<td align="left" valign="top"><h3>Mensaje</h3></td>
+							<td align="left" valign="top"><ice:inputTextarea
+									immediate="true" value="#{toDoFrontBean.mensajeEmail}"
+									cols="48" /></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td align="left"><ice:outputText
+									value="El Asunto y el mensaje no pueden estar vacios"
+									style="color:red;"
+									rendered="#{toDoFrontBean.errorAsuntoMensaje}" /></td>
+						</tr>
+					</table>
+					<br />
+					<table>
+						<tr>
+							<td><ace:pushButton value="Enviar Correo"
+									actionListener="#{toDoFrontBean.enviarCorreoListener}"
+									rendered="true" /></td>
+							<td><ace:pushButton value="Cancelar"
+									actionListener="#{toDoFrontBean.cerrarPanelEmailListener}"
+									rendered="true" /></td>
+						</tr>
+					</table>
+				</div>
+			</f:facet>
+		</ice:panelPopup>
+	</h:form>
+</ui:composition>

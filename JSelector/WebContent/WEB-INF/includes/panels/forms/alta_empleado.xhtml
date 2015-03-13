@@ -1,0 +1,527 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+	<h:form>
+		<ace:submitMonitor for="fichaPersonalInsert" idleLabel="Idle"
+			activeLabel="Ingresando Ficha Personal"
+			serverErrorLabel="Error de Servidor" networkErrorLabel="Error de Red"
+			sessionExpiredLabel="Sesión expirada" autoCenter="true"
+			blockUI="@source" rendered="true" />
+		<ace:tooltip id="tooltip" global="true" />
+		<ice:panelGroup styleClass="iceDatTblColHdr">
+			<div align="left">
+				<ice:outputText value="Estas aquí : " style="padding-right: 10px;" />
+				<ice:commandLink value="Inicio" style="padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="pantallaInicio" />
+					</ace:ajax>
+				</ice:commandLink>
+				<ice:outputText value=">" />
+				<ice:commandLink value="Alta de Empleado" style="padding-left:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="saludAltaEmpleadoPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+			</div>
+		</ice:panelGroup>
+		<ice:panelGroup id="altaEmpleado">
+			<ice:panelGroup
+				style="width: 1010px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::Alta de Empleado"
+							style="font-size:medium; color:black;" />
+					</div>
+				</ice:panelGroup>
+				<br />
+				<table>
+					<tr>
+						<td align="right"><ice:outputText value="Documento"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu>
+								<f:selectItem itemLabel="Rut" itemValue="RUT" />
+								<f:selectItem itemLabel="Pasaporte" itemValue="PAS" />
+							</ice:selectOneMenu></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Nro. Documento" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+						<td colspan="2"></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Primer Nombre"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Apellido Paterno" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Segundo Nombre"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Apellido Materno" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+					</tr>
+					<tr>
+
+						<td align="right"><ice:outputText value="Código Interno"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Sexo" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu>
+								<f:selectItem itemLabel="Masculino" itemValue="M" />
+								<f:selectItem itemLabel="Femenino" itemValue="F">
+								</f:selectItem>
+							</ice:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Fecha Nacimiento"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectInputDate renderAsPopup="true"
+								renderMonthAsDropdown="false" renderYearAsDropdown="false"
+								immediate="true">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</ice:selectInputDate></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Estado Civil" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu immediate="true">
+								<f:selectItems
+									value="#{altaEmpleadoFrontClass.listaEstadoCivil}" />
+							</ice:selectOneMenu></td>
+
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="País de Nacimiento"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Nacionalidad" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Fec. Ingreso País"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectInputDate renderAsPopup="true"
+								renderMonthAsDropdown="false" renderYearAsDropdown="false"
+								immediate="true">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</ice:selectInputDate></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+
+			</ice:panelGroup>
+			<br />
+
+
+
+			<ice:panelGroup
+				style="width: 1010px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::Complemento"
+							style="font-size:medium; color:black;" />
+					</div>
+				</ice:panelGroup>
+				<br />
+				<table>
+					<tr>
+						<td align="right"><ice:outputText value="Fecha Ingreso"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectInputDate renderAsPopup="true"
+								renderMonthAsDropdown="false" renderYearAsDropdown="false"
+								immediate="true">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</ice:selectInputDate></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Asignaciones Familiares"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText
+								value="Fecha Cumple Bienios"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectInputDate renderAsPopup="true"
+								renderMonthAsDropdown="false" renderYearAsDropdown="false"
+								immediate="true">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</ice:selectInputDate></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Cantidad de Bienios"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Legajo"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText
+								title="Rut sin puntos ni guión. Ej: 11111111K" /></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Modelo de Organización"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu immediate="true"
+								partialSubmit="true"
+								valueChangeListener="#{altaEmpleadoFrontClass.changeModeloNegocio}">
+								<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+								<f:selectItem itemLabel="Administración" itemValue="A" />
+								<f:selectItem itemLabel="Educación" itemValue="E" />
+								<f:selectItem itemLabel="Salud" itemValue="S" />
+							</ice:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Reemplaza a"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Jefe Directo" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+					</tr>
+
+					<tr>
+						<td align="right"><ice:outputText value="Nivel de Estudio"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu immediate="true">
+								<f:selectItem itemLabel="Seleccione una opción" itemValue="-1" />
+								<f:selectItems
+									value="#{altaEmpleadoFrontClass.listaNivelEstudios}" />
+							</ice:selectOneMenu></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Email Personal" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText title="Email Personal" /></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="E-Mail Interno"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText
+								title="Email interno de CORMUP" /></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Teléfono Interno" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Resolución"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu>
+								<f:selectItem itemLabel="Seleccione una Resolución"
+									itemValue="-1" />
+							</ice:selectOneMenu></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td align="right" style="padding-top: 10px;"><ice:selectBooleanCheckbox
+								id="examenPreocup" partialSubmit="true" immediate="true" /></td>
+						<td align="left" style="padding-top: 10px;"><ice:outputLabel
+								for="examenPreocup" value="Exámen Preocup."
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td align="right" valign="middle"><ice:selectBooleanCheckbox
+								id="discapacitado" partialSubmit="true"
+								value="#{altaEmpleadoFrontClass.chkDiscapacitado}" /></td>
+						<td align="left" valign="top"><ice:outputLabel
+								for="discapacitado" value="Discapacitado"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+
+
+			</ice:panelGroup>
+			<br />
+
+
+
+			<ice:panelGroup
+				style="width: 1010px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::Datos del Empleado"
+							style="font-size:medium; color:black;" />
+					</div>
+				</ice:panelGroup>
+				<br />
+				<table>
+					<tr>
+						<td align="right"><ice:outputText value="Domicilio"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Teléfono Particular"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Familiares a cargo"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+
+
+			</ice:panelGroup>
+			<br />
+
+
+
+			<ice:panelGroup
+				style="width: 1010px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::Liquidación"
+							style="font-size:medium; color:black;" />
+					</div>
+				</ice:panelGroup>
+				<br />
+				<table>
+					<tr>
+						<td align="right"><ice:outputText value="Remuneración"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Banco" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu>
+								<f:selectItems value="#{altaEmpleadoFrontClass.listaBancos}" />
+							</ice:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Tipo de Cuenta"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Número de Cuenta" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText /></td>
+					</tr>
+				</table>
+				<hr />
+			</ice:panelGroup>
+			<ice:panelGroup
+				style="width: 1010px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
+
+				<ice:panelGroup id="administracionPanel"
+					rendered="#{altaEmpleadoFrontClass.abrirAdministracion}">
+					<table>
+						<tr>
+							<td align="right"><ice:outputText value="Empresa"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems value="#{altaEmpleadoFrontClass.listaEmpresa}" />
+								</ice:selectOneMenu></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Sindicato" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Categoría de Administración"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems value="#{altaEmpleadoFrontClass.listaCategoriaAdministracion}" />
+								</ice:selectOneMenu></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Sub-Categoría de Administración"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems value="#{altaEmpleadoFrontClass.listaSubCategoriaAdministracion}" />
+								</ice:selectOneMenu> </td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="Puesto"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Estamento" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems value="#{altaEmpleadoFrontClass.listaEstamento}" />
+								</ice:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Forma de Liquidación"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Contrato" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Motivo de Reemplazo"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Centro de Costo" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Centro de Administración"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Régimen Previsional"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Adm. Fondos de Pensión"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Institución de Salud"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+
+						<tr>
+							<td align="right"><ice:outputText
+									value="Caja de compensación"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems value="#{altaEmpleadoFrontClass.listaCajaCompensacion}" />
+								</ice:selectOneMenu></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Mutual" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems value="#{altaEmpleadoFrontClass.listaMutual}" />
+								</ice:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="Régimen Horario"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Tipo de Trabajador"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="Bienestar"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Cotizaciones Voluntarias"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="APV"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="APV1" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="APV2"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="right" style="padding-left: 50px;"><ice:outputText
+									value="Programas" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Nivel de Administración"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="right" style="padding-left: 50px;"></td>
+							<td align="left"></td>
+						</tr>
+					</table>
+				</ice:panelGroup>
+
+				<ice:panelGroup id="educacionPanel"
+					rendered="#{altaEmpleadoFrontClass.abrirEducacion}">
+		  Educacion
+		</ice:panelGroup>
+
+				<ice:panelGroup id="saludPanel"
+					rendered="#{altaEmpleadoFrontClass.abrirSalud}">
+			Salud
+		</ice:panelGroup>
+			</ice:panelGroup>
+			<br />
+			<br />
+			<br />
+			<br />
+			<ice:panelGroup style="padding-left: 100px; padding-right:100px;"
+				rendered="#{altaEmpleadoFrontClass.mostrarFirmas}">
+				<div align="center">
+					<table>
+						<tr>
+							<td style="padding-right: 30px;">_____________________</td>
+							<td style="padding-right: 30px;">_____________________</td>
+							<td style="padding-right: 30px;">_____________________</td>
+							<td>_____________________</td>
+						</tr>
+						<tr>
+							<td align="center" style="padding-right: 30px;"><ice:outputText
+									value="Firma de Gerente" /></td>
+
+							<td align="center" style="padding-right: 30px;"><ice:outputText
+									value="Firma de Gerente" /></td>
+
+							<td align="center" style="padding-right: 30px;"><ice:outputText
+									value="Firma de Gerente" /></td>
+
+							<td align="center"><ice:outputText value="Firma de Gerente" />
+							</td>
+						</tr>
+					</table>
+				</div>
+			</ice:panelGroup>
+		</ice:panelGroup>
+		<br />
+
+		<div align="right">
+			<table>
+				<tr>
+					<td><ace:pushButton id="fichaPersonalInsert" value="Aceptar"
+							rendered="true"
+							actionListener="#{altaEmpleadoFrontClass.insertObjectListener}" /></td>
+					<td><ace:pushButton value="Modificar" rendered="false"
+							actionListener="#{FrontBean.updateObjectListener}" /></td>
+					<td><ace:pushButton value="Dar de Baja" rendered="false"
+							actionListener="#{altaEmpleadoFrontClass.deleteObjectListener}" /></td>
+					<td><ace:pushButton value="Limpiar"
+							actionListener="#{altaEmpleadoFrontClass.resetObjectListener}" /></td>
+					<td><ace:pushButton value="Imprimir"
+							rendered="#{altaEmpleadoFrontClass.mostrarFirmas}">
+							<ace:printer for="altaEmpleado" />
+						</ace:pushButton></td>
+				</tr>
+			</table>
+		</div>
+	</h:form>
+</ui:composition>

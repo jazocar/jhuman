@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+   
+  <appender name="console" class="org.apache.log4j.ConsoleAppender" >
+    <layout class="org.apache.log4j.PatternLayout" >
+	    <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %C.%M(%F:%L) %-5p - %m%n" />
+	</layout>
+	</appender> 
+
+  <appender name="fileDebug" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="mtogen.log"/>
+    <param name="Append" value="true"/>
+    <param name="Threshold" value="INFO"/>
+    <param name="MaxFileSize" value="5000KB"/>
+    <param name="MaxBackupIndex" value="5"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %C.%M(%F:%L) %-5p - %m%n"/>
+    </layout>
+  </appender>
+  
+  <appender name="fileError" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="mtogen.log"/>
+    <param name="Append" value="true"/>
+    <param name="Threshold" value="INFO"/>
+    <param name="MaxFileSize" value="10000KB"/>
+    <param name="MaxBackupIndex" value="200"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %C.%M(%F:%L) %-5p - %m%n"/>
+    </layout>
+  </appender>
+  
+  
+     <logger name="org.apache.ibatis"> 
+     	<level value="debug"       /> 
+     	<appender-ref ref="console" /> 
+    </logger> 
+    
+     <logger name="mybatis"> 
+     	<level value="debug"       /> 
+     	<appender-ref ref="console" /> 
+    </logger>     
+     
+  
+  <root>   
+     <level value="INFO"></level>
+     <appender-ref ref="fileError"/> 
+	 <appender-ref ref="console"/>
+  </root>
+ </log4j:configuration>

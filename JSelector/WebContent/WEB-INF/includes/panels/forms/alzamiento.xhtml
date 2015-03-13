@@ -1,0 +1,406 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:panelGroup>
+	   <ace:submitMonitor for="alzamientoForm"
+									   idleLabel="Idle9+"
+                                       activeLabel="Enviando Datos..."
+                                       serverErrorLabel="Error de Servidor"
+                                       networkErrorLabel="Error de Red"
+                                       sessionExpiredLabel="Sesión expirada"
+                                        blockUI="@all" rendered="true" />
+        </h:panelGroup>  
+	<h:form id="alzamientoForm">
+	<div align="left">
+	    <ice:commandLink value="Inicio" style="padding-right:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="inicioPorHacerPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+			<ice:commandLink value="Tarea"
+				style="padding-left:5px; padding-right:5px;"
+				actionListener="#{navigationBean.navigationStackChange}">
+				<ace:ajax event="activate" execute="@this">
+					<f:param name="stackName" value="tareaDetallePanel" />
+				</ace:ajax>
+			</ice:commandLink>
+			>
+		<ice:commandLink value="Alzamiento" style="padding-left:5px; padding-right:5px;">
+			 <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="alzamientoPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+	    </div>
+		
+		<ace:tabSet clientSide="true" immediate="true" selectedIndex="0" style="font-family: 'Times New Roman', Times, serif;">
+			<ace:tabPane label="Solicitud de Alzamiento" cache="dynamic" id="panel">
+				<table>
+					<tr>
+						<td align="left"><ice:outputText value="Cliente"
+								style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+						<td><ice:selectOneMenu
+								value="#{hipotecaFrontClass.selectedTipoPersona}"
+								valueChangeListener="#{hipotecaFrontClass.onChangeTipoCliente}"
+								immediate="true" style="color:black; font-size: small; font-family: 'Times New Roman', Times, serif;"
+								partialSubmit="true">
+								<f:selectItem itemLabel="Persona Natural" itemValue="PN" />
+								<f:selectItem itemLabel="Persona Jurídica" itemValue="PJ" />
+							</ice:selectOneMenu></td>
+					</tr>
+				</table>
+				<h2 align="left" style="font-family: 'Times New Roman', Times, serif;">Datos del Cliente</h2>
+				<ice:panelGroup rendered="#{!hipotecaFrontClass.juridica}">
+					<table>
+						<tr>
+							<td align="left"><ice:outputText value="Rut"
+									style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText value="#{hipotecaFrontClass.rutPersona}" style="width:150px; border-color: #ff0000; font-family: 'Times New Roman', Times, serif;"
+									immediate="true" /></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText
+									value="N. de Cliente" style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText
+									value="#{hipotecaFrontClass.numeroClientePersona}"
+									immediate="true" style="width:150px; font-family: 'Times New Roman', Times, serif;"/></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText
+									value="Nombre" style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText value="#{hipotecaFrontClass.nombre}"
+									immediate="true" style="width:150px;  border-color: #ff0000; font-family: 'Times New Roman', Times, serif;"/></td>
+						</tr>
+						<tr>
+
+							<td align="left"><ice:outputText value="Apellido Paterno"
+									style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText
+									value="#{hipotecaFrontClass.apellidoPaterno}" immediate="true" style="width:150px; border-color: #ff0000; font-family: 'Times New Roman', Times, serif;"/></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText
+									value="Apellido Materno" style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText
+									value="#{hipotecaFrontClass.apellidoMaterno}" immediate="true" style="width:150px; border-color: #ff0000; font-family: 'Times New Roman', Times, serif;"/></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText
+									value="Estado Civil" style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ace:simpleSelectOneMenu
+									value="#{hipotecaFrontClass.estadoCivil}" immediate="true"
+									style="color:black; font-size: small;  border-color: #ff0000; font-family: 'Times New Roman', Times, serif;">
+									<f:selectItem itemLabel="Soltero" itemValue="S" />
+									<f:selectItem itemLabel="Casado Soc. Conyugal" itemValue="CSC" />
+									<f:selectItem itemLabel="Casado Sep. Bienes" itemValue="CSB" />
+									<f:selectItem itemLabel="Casado Par. Gananciales"
+										itemValue="CPG" />
+									<f:selectItem itemLabel="Viudo" itemValue="V" />
+									<f:selectItem itemLabel="Divorciado" itemValue="D" />
+								</ace:simpleSelectOneMenu></td>
+						</tr>
+						<tr>
+							<td align="left"><ice:outputText value="Teléfono"
+									style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText
+									value="#{hipotecaFrontClass.telefonoClientePersona}"
+									immediate="true"  style="width:150px; font-family: 'Times New Roman', Times, serif;"/></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText
+									value="Email" style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText
+									value="#{hipotecaFrontClass.emailClienteEmpresa}"
+									immediate="true"  style="width:150px; font-family: 'Times New Roman', Times, serif;"/></td>
+
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</ice:panelGroup>
+				<ice:panelGroup rendered="#{hipotecaFrontClass.juridica}">
+					<table>
+						<tr>
+							<td align="left"><ice:outputText value="Rut"
+									style="font-size:small; color:black; font-family: 'Times New Roman', Times, serif;" /></td>
+							<td><ice:inputText value="#{hipotecaFrontClass.rutEmpresa}"
+									immediate="true"  style="width:150px;  border-color: #ff0000; font-family: 'Times New Roman', Times, serif;"/></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText value="N. de Cliente"
+									style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+							<td><ice:inputText
+									value="#{hipotecaFrontClass.numeroClienteEmpresa}"
+									immediate="true"  style="width:150px;font-family: 'Times New Roman', Times, serif;"/></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText value="Razon Social"
+									style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+							<td><ice:inputText value="#{hipotecaFrontClass.razonSocial}"
+									immediate="true" style=" border-color: #ff0000;font-family: 'Times New Roman', Times, serif;" /></td>
+						</tr>
+
+						<tr>
+							<td align="left"><ice:outputText value="Teléfono"
+									style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText
+									value="#{hipotecaFrontClass.telefonoClienteEmpresa}"
+									immediate="true"  style="width:150px;font-family: 'Times New Roman', Times, serif;"/></td>
+
+							<td align="left" style="padding-left: 20px;"><ice:outputText value="Email"
+									style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ice:inputText
+									value="#{hipotecaFrontClass.emailClienteEmpresa}"
+									immediate="true"  style="width:150px;font-family: 'Times New Roman', Times, serif;"/></td>
+
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</ice:panelGroup>
+				<hr />
+				<h2 align="left" style="font-family: 'Times New Roman', Times, serif;">Cliente Solicitante</h2>
+				<table>
+					<tr>
+						<td align="left"><ice:outputText value="Cliente"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td align="left"><ice:inputText value="#{usuarioFrontBean.usuarioBean.idEmpresa}" readonly="true" style="font-family: 'Times New Roman', Times, serif;">
+							<f:converter converterId="empresaConverter"/>
+						</ice:inputText>
+						</td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Sucursal" style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td align="left"><ice:inputText value="#{hipotecaFrontClass.sucursal}"
+								immediate="true" style="width:150px;border-color: #ff0000;font-family: 'Times New Roman', Times, serif;"/></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Teléfono Sucursal" style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td align="left"><ice:inputText value="#{hipotecaFrontClass.telefono}"
+								immediate="true" style="width:150px;font-family: 'Times New Roman', Times, serif;"/></td>
+					</tr>
+					<tr>
+
+						<td align="left"><ice:outputText value="Ejecutivo"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td align="left"><ice:inputText value="#{hipotecaFrontClass.ejecutivo}"
+								immediate="true"  style="width:150px;border-color: #ff0000;font-family: 'Times New Roman', Times, serif;"/></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Email Ejecutivo" style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td align="left"><ice:inputText value="#{hipotecaFrontClass.email}"
+								immediate="true" style="width:150px;font-family: 'Times New Roman', Times, serif;" /></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Fecha" style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td align="left"><ice:selectInputDate value="#{hipotecaFrontClass.fecha}"
+								renderAsPopup="true" renderMonthAsDropdown="true"
+								renderYearAsDropdown="true" immediate="true" readonly="true" style="font-family: 'Times New Roman', Times, serif;">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</ice:selectInputDate></td>
+					</tr>
+				</table>
+				<hr />
+				<h2 align="left" style="font-family: 'Times New Roman', Times, serif;">Provisión de Gastos</h2>
+				<table>
+					<tr>
+						<td align="left"><ice:outputText value="Aut. Cargo Cta.Cte."
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td><ice:inputText
+								value="#{hipotecaFrontClass.autCargoCtaCte}" immediate="true" style="font-family: 'Times New Roman', Times, serif;" /></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Sucursal" style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td><ice:inputText
+								value="#{hipotecaFrontClass.sucursalProvision}" immediate="true" /></td>
+
+						<td align="left" style="padding-left: 20px;"><ice:outputText
+								value="Prov. Fondos Cta. N."
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td><ice:inputText value="#{hipotecaFrontClass.fondosCtaN}"
+								immediate="true" style="font-family: 'Times New Roman', Times, serif;" /></td>
+					</tr>
+					<tr>
+
+						<td align="left"><ice:outputText value="Monto"
+								style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+						<td><ice:inputText value="#{hipotecaFrontClass.monto}" style="font-family: 'Times New Roman', Times, serif;"
+								immediate="true" /></td>
+
+						<td align="left"></td>
+						<td></td>
+
+						<td align="left"></td>
+						<td></td>
+					</tr>
+				</table>
+				<hr />
+
+				<ice:panelGroup>
+					<h2 align="left" style="font-family: 'Times New Roman', Times, serif;">Alzamiento</h2>
+					<table>
+						<tr>
+							<td align="left"><ice:outputText
+									value="Tipo de Alzamiento"
+									style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+							<td align="left"><ace:simpleSelectOneMenu
+									style="color:black; font-size: small;font-family: 'Times New Roman', Times, serif;"
+									value="#{hipotecaFrontClass.selectedDatosOperacion}"
+									immediate="true">
+									<f:selectItem itemLabel="Hipoteca" itemValue="HIP" />
+									<f:selectItem itemLabel="Prenda" itemValue="PRD" />
+									<f:selectItem itemLabel="Fianza" itemValue="FNZ" />
+								</ace:simpleSelectOneMenu></td>
+						</tr>						
+					</table>				
+					<br />
+					<table>
+						<tr>
+							<td valign="top"><h2 align="left" style="font-family: 'Times New Roman', Times, serif;">Documentos Adjuntos</h2>
+								<table>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctAlzAprobRiesgo"
+												partialSubmit="true"
+												value="#{hipotecaFrontClass.chkTasacion}" /></td>
+										<td align="left"><ice:outputLabel for="SlctAlzAprobRiesgo"
+												value="Aprobación de Riesgo" style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctAlzEscritCons"
+												partialSubmit="true"
+												value="#{hipotecaFrontClass.chkInsDomVig}" /></td>
+										<td align="left"><ice:outputLabel for="SlctAlzEscritCons"
+												value="Escritura de Consitución"
+												style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox
+												id="SlctAlzEsc" partialSubmit="true"
+												value="#{hipotecaFrontClass.chkCertMatSol}" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctAlzEsc"
+												value="Escritura"
+												style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctAlzCertHipGrav"
+												partialSubmit="true"
+												value="#{hipotecaFrontClass.chkCertHipGrav}" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctAlzCertHipGrav"
+												value="Certificado de Hipoteca y Gravamenes"
+												style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+									</tr>
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctAlzInforme"
+												partialSubmit="true"
+												value="#{hipotecaFrontClass.chkPersEscrPod}" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctAlzInforme"
+												value="Informe"
+												style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+									</tr>									
+									<tr>
+										<td><ice:selectBooleanCheckbox id="SlctHipOtroDocumento"
+												partialSubmit="true"
+												value="#{hipotecaFrontClass.chkOtrosDoc}"
+												valueChangeListener="#{hipotecaFrontClass.changeHipotecaAdjuntosListener}" /></td>
+										<td align="left"><ice:outputLabel
+												for="SlctHipOtroDocumento" value="Otro/s Documento"
+												style="font-size:small; color:black;font-family: 'Times New Roman', Times, serif;" /></td>
+									</tr>
+								</table></td>
+							<td valign="top" style="padding-left: 100px;">
+							<ice:panelGroup
+									rendered="#{hipotecaFrontClass.adjuntos}">
+									
+									<ice:panelGroup rendered="#{!hipotecaFrontClass.formularioCompleto}">
+										<h2 align="left" style="font-family: 'Times New Roman', Times, serif;">Ingrese los documentos adjuntos</h2>
+									<table>
+										<tr>
+											<td><ace:fileEntry id="file-entry"
+													relativePath="/tmp_hip/" maxFileCount="10"
+													maxFileCountMessage="El limite es de 10 archivos."
+													fileEntryListener="#{hipotecaFrontClass.sampleListener}"
+													maxFileSize="6291456"
+													
+													maxFileSizeMessage="Submitted file is too large."
+													maxTotalSize="18874368"
+													maxTotalSizeMessage="Total size of submitted files is too large."
+													useOriginalFilename="true" useSessionSubdir="true" /></td>
+											<td><h:commandButton type="submit"
+													value="Cargar Archivo" /></td>
+										</tr>
+									</table>
+									<br />
+									<ace:dataTable id="tbl" value="#{hipotecaFrontClass.fileData}"
+										var="fileDataVal">
+										<ace:columnGroup id="columnGroup" type="header">
+											<ace:row>
+												<ace:column colspan="3" headerText="Archivos en el Servidor" style="font-family: 'Times New Roman', Times, serif;"/>
+											</ace:row>
+
+											<ace:row>
+												<ace:column headerText="Nombre del Archivo" style="font-family: 'Times New Roman', Times, serif;" />																						
+											</ace:row>
+										</ace:columnGroup>
+
+										<ace:column>
+											<h:outputText value="#{fileDataVal.name}" style="font-family: 'Times New Roman', Times, serif;"/>
+										</ace:column>
+										  
+										<ace:panelExpansion>
+											<h:outputText rendered="#{not fileDataVal.info == null}"
+												value="#{fileDataVal.info}" style="font-family: 'Times New Roman', Times, serif;" />
+										</ace:panelExpansion>
+
+										<f:facet name="footer">
+											<h:panelGrid columns="1">
+												<h:outputText value="#{fileEntry.totalFiles}" style="font-family: 'Times New Roman', Times, serif;"/>
+												<h:outputText value="#{fileEntry.totalSize}" style="font-family: 'Times New Roman', Times, serif;"/>
+											</h:panelGrid>
+										</f:facet>
+									</ace:dataTable>									
+									</ice:panelGroup>
+									
+									<ice:panelGroup rendered="#{hipotecaFrontClass.formularioCompleto}">
+									<h2 align="left" style="font-family: 'Times New Roman', Times, serif;">Listado de documentos adjuntos</h2>
+										<ace:dataTable  value="#{hipotecaFrontClass.listaAduntos}"
+										var="fileDataVal">										
+										<ace:column headerText="Nombre del Archivo" style="font-family: 'Times New Roman', Times, serif;">
+											<h:outputText value="#{fileDataVal.nombre}" style="font-family: 'Times New Roman', Times, serif;"/>
+										</ace:column>
+										  
+										<ace:column headerText="Acción" style="font-family: 'Times New Roman', Times, serif;">
+										   <h:outputLink value="#{fileDataVal.ruta}" target="_blank" style="font-family: 'Times New Roman', Times, serif;">Ver Archivo</h:outputLink>
+										</ace:column>
+										
+									</ace:dataTable>
+									
+									</ice:panelGroup>
+									
+									
+									
+									
+									
+								</ice:panelGroup></td>
+						</tr>
+					</table>
+				</ice:panelGroup>
+				<hr />
+				<div align="left">
+					<table>
+						<tr>
+							<td><ace:pushButton value="Ingresar Alzamiento"
+									actionListener="#{hipotecaFrontClass.insertObjectListener}" rendered="#{!hipotecaFrontClass.formularioCompleto}" /></td>
+							<td><ace:pushButton value="Modificar Alzamiento"  rendered="#{hipotecaFrontClass.formularioCompleto}"/></td>
+							<td><ace:pushButton value="Limpiar"
+									actionListener="#{hipotecaFrontClass.resetObjectListener}" /></td>
+							<td><ace:pushButton value="Imprimir">
+									<ace:printer   for="panel"  />
+								</ace:pushButton></td>
+						</tr>
+					</table>
+				</div>
+			</ace:tabPane>
+		</ace:tabSet>
+	</h:form>
+</ui:composition>

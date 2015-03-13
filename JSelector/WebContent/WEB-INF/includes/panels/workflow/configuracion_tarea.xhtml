@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:form>
+		<table>
+			<tr>
+				<td><ace:simpleSelectOneMenu  label="Tarea" labelPosition="left"  value="#{tareaConfiguracionFrontBean.inputIdTarea}" immediate="true">
+						<f:selectItem itemValue="-1" itemLabel="Seleccione..."/>
+						<f:selectItems value="#{tareaConfiguracionFrontBean.listaTareas}" />				
+				</ace:simpleSelectOneMenu> </td>
+				<td><ace:textEntry label="Configuracion" labelPosition="left" value="#{tareaConfiguracionFrontBean.inputCheckOption}" /></td>
+			
+			<td><ace:simpleSelectOneMenu  label="Requerida" labelPosition="left"  value="#{tareaConfiguracionFrontBean.inputRequerido}" immediate="true">
+						<f:selectItem itemValue="-1" itemLabel="Seleccione..."/>
+						<f:selectItem itemValue="true" itemLabel="Si"/>
+						<f:selectItem itemValue="false" itemLabel="No"/>			
+				</ace:simpleSelectOneMenu> </td>
+			</tr>
+		</table>
+		<br />
+			<table>
+				<tr>
+					<td><ace:pushButton value="Ingresar"
+							actionListener="#{tareaConfiguracionFrontBean.insertOrganizacionListener}"
+							rendered="#{!tareaConfiguracionFrontBean.selected}" /></td>
+					<td><ace:pushButton value="Modificar"
+							actionListener="#{tareaConfiguracionFrontBean.updateOrganizacionListener}"
+							rendered="#{tareaConfiguracionFrontBean.selected}" /></td>
+					<td><ace:pushButton value="Dar de Baja"
+							actionListener="#{tareaConfiguracionFrontBean.deleteOrganizacionListener}"
+							rendered="#{tareaConfiguracionFrontBean.selected}" /></td>						
+					<td><ace:pushButton value="Limpiar"
+							actionListener="#{tareaConfiguracionFrontBean.resetTareaConfiguracionListener}" /></td>
+				</tr>
+			</table>
+			<br/>
+		<ace:dataTable value="#{tareaConfiguracionFrontBean.listaConfiguracion}" var="conf" selectionMode="single" rowSelectListener="#{tareaConfiguracionFrontBean.tareaConfiguracionSelectListener}">
+			<ace:column headerText="Id">
+				<h:outputText  value="#{conf.id}"/>
+			</ace:column>
+			<ace:column headerText="Id Tarea">
+				<h:outputText value="#{conf.idTarea}"> 
+					<f:converter converterId="tareaConverter"/>
+				</h:outputText>
+			</ace:column>
+			<ace:column headerText="Requerido">
+				<h:outputText value="#{conf.requerido}">
+					<f:converter converterId="booleanConverter"/>
+				</h:outputText>
+			</ace:column>
+			<ace:column headerText="Configuracion">
+				<h:outputText value="#{conf.checkOption}"/>
+			</ace:column>
+		</ace:dataTable>
+	</h:form>
+</ui:composition>
