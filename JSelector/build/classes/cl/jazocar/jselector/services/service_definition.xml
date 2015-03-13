@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<!-- Properties del sistema -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:properties/jselector.properties</value>
+				
+			</list>
+		</property>
+	</bean>
+	
+	
+<!-- 
+*******************************************************************************************************************
+********************************* SERVICIOS DE CONFIGURACION DEL SISTEMA *******************************************
+*******************************************************************************************************************
+ -->
+ 
+ 
+	<bean id="CONF_JPROCESS_SERVICE" class="cl.jazocar.jselector.dao.service.impl.ConfigJProcessServiceImpl">
+		<property name="configJProcessDao" ref="CONF_JPROCESS_DAO" />
+	</bean>
+	
+
+	
+	<bean id="CONF_JPROCESS_DAO" class="cl.jazocar.jselector.dao.base.impl.ConfigJProcessDaoImpl" />
+	
+		
+	<bean id="JPROCESS_FORM_SERVICE" class="cl.jazocar.jselector.dao.service.impl.FormServiceImpl">
+		<property name="formDao" ref="JPROCESS_FORM_DAO" />
+	</bean>
+		
+	<bean id="JPROCESS_FORM_DAO" class="cl.jazocar.jselector.dao.base.impl.FormDaoImpl" />
+	
+	
+	
+<!-- 
+*******************************************************************************************************************
+********************************* READER GENERICOS DE TABLAS DE NEGOCIO *******************************************
+*******************************************************************************************************************
+ -->
+	
+	
+<!-- 
+*******************************************************************************************************************
+********************************* DAO ORACLE / DB2 DE TABLAS DE NEGOCIO *******************************************
+*******************************************************************************************************************
+ -->	
+	
+	
+	
+	
+	
+		
+
+	
+	
+
+					
+<!-- 
+*******************************************************************************************************************
+********************************* SERVICIOS  AJAX  ****************************************************************
+*******************************************************************************************************************
+ -->
+
+<!-- 
+*******************************************************************************************************************
+********************************* DEFAULT  VALUE  ****************************************************************
+*******************************************************************************************************************
+ -->
+
+	
+</beans>

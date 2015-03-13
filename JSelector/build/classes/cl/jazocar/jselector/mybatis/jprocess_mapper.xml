@@ -1,0 +1,1610 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.jselector">
+	
+	
+	
+	<resultMap type="menuJProcessModel" id="menuJProcessModel">
+		<result property="id" 	           column="id" />
+		<result property="etiqueta" 	   column="etiqueta" />
+		<result property="idMenu" 	       column="id_menu" />
+		<result property="estado" 	       column="estado" />
+		<result property="rendered" 	   column="rendered" />
+		<result property="order" 	       column="order" />
+	</resultMap>
+      
+    <resultMap type="submenuJProcessModel" id="submenuJProcessModel">
+    	<result property="id" 	           column="id" />
+    	<result property="estado" 	       column="estado" />
+    	<result property="etiqueta"        column="etiqueta" />
+    	<result property="idMenu" 	       column="id_menu" />
+    	<result property="idSubmenu"       column="id_Submenu" />
+    	<result property="stackName"       column="stack_Name" />
+    	<result property="order" 	       column="order" />
+    </resultMap>
+      
+    <resultMap type="panelJProcessModel" id="panelJProcessModel">
+    	<result property="id" 	           column="id" />
+    	<result property="idPanel" 	       column="id_panel" />
+    	<result property="idSubview" 	   column="id_subview" />
+    	<result property="include" 	       column="include" />
+    	<result property="esFormulario"    column="es_formulario" />
+    </resultMap>
+    
+     <resultMap type="rolJProcessModel" id="rolJProcessModel">
+    	<result property="id" 	           column="id" />
+    	<result property="nombreRol"       column="nombre_rol" />
+    	<result property="estado" 	       column="estado" />
+    </resultMap>
+    
+    <resultMap type="rolProcesoModel" id="rolProcesoModel">
+    	<result property="id" 	           column="id" />
+    	<result property="nombre"          column="nombre" />
+    	<result property="descripcion" 	   column="descripcion" />
+    </resultMap>
+    
+     <resultMap type="tareaModel" id="tareaModel">
+    	<result property="id" 	           column="id" />
+    	<result property="nombre"          column="nombre" />
+    	<result property="descripcion" 	   column="descripcion" />
+    	<result property="prioridad" 	   column="prioridad" />
+		<result property="tipoTarea" 	   column="tipo_tarea" />
+		<result property="duracion" 	   column="duracion" />
+		<result property="tipoDuracion"    column="tipo_duracion" />
+		<result property="idOrganizacion"  column="id_organizacion" />
+		<result property="tipoAsignacion"  column="tipo_asignacion" />
+		<result property="idRolAsignacion" column="id_rol_asignacion" />
+		<result property="tieneFormulario" column="tiene_formulario" />
+    </resultMap>
+	
+	<resultMap type="pendienteModel" id="pendienteModel">
+		<result property="id" 	              column="id" />
+		<result property="idSolicitud" 	      column="id_solicitud" />
+		<result property="idTarea" 	          column="id_tarea" />
+		<result property="idRol" 	          column="id_rol" />
+		<result property="fechaInicio" 	      column="fecha_inicio" />
+		<result property="fechaTermino" 	  column="fecha_termino" />
+		<result property="tiempoFinalizacion" column="tiempo_finalizacion" />
+		<result property="estado" 	          column="estado" />
+		<result property="idUsuario" 	      column="id_usuario" />
+		<result property="asignada" 	      column="asignada" />	
+	</resultMap>
+	
+	<resultMap type="solicitudModel" id="solicitudModel">
+		<result property="id" 	        column="id" />
+		<result property="idAplicacion" column="aplicacion" />
+		<result property="fechaInicio" 	column="fecha_inicio" />
+		<result property="fechaFin" 	column="fecha_fin" />
+		<result property="estado" 	    column="estado" />
+	</resultMap>
+	
+	<resultMap type="comentarioModel" id="comentarioModel">
+		<result property="id" 	            column="id" />
+		<result property="idSolicitud" 	    column="id_solicitud" />
+		<result property="usuario" 	        column="usuario" />
+		<result property="fechaPublicacion" column="publicacion" />
+		<result property="comentario" 	    column="comentario" />	
+	</resultMap>
+	
+	<resultMap type="usuarioJProcessModel" id="usuarioJProcessModel">
+		<result property="id" 	             column="id" />
+		<result property="usuario" 	         column="usuario" />
+		<result property="password" 	     column="password" />
+		<result property="rol" 	             column="rol" />
+		<result property="rolProceso" 	     column="rol_proceso" />
+		<result property="fechaCreacion"     column="fecha_creacion" />
+		<result property="estado" 	         column="estado" />
+		<result property="lenguaje" 	     column="lenguaje" />
+		<result property="nombre" 	         column="nombre" />
+		<result property="organizacion"      column="organizacion" />
+		<result property="area"              column="area" />
+		<result property="subarea"           column="subarea" />
+		<result property="idEmpresa"           column="id_empresa" />
+	</resultMap>
+	
+	<resultMap type="organizacionModel" id="organizacionModel">
+		<result property="id" 	       column="id" />
+		<result property="nombre" 	   column="nombre" />
+	</resultMap>
+	
+	<resultMap type="areaModel" id="areaModel">
+		<result property="id" 	           column="id" />
+		<result property="idOrganizacion"  column="id_organizacion" />
+		<result property="nombre" 	       column="nombre" />
+		<result property="descripcion" 	   column="descripcion" />
+	</resultMap>
+	
+	<resultMap type="subareaModel" id="subareaModel">
+		<result property="id" 	           column="id" />
+		<result property="idArea"          column="id_area" />
+		<result property="nombre" 	       column="nombre" />
+		<result property="descripcion" 	   column="descripcion" />
+	</resultMap>
+	
+	
+	<resultMap type="aplicacionModel" id="aplicacionModel">
+		<result property="id" 	          column="id" />
+		<result property="aplicacion"     column="apliacion" />
+		<result property="descripcion"    column="descripcion" />
+		<result property="version" 	      column="version" />
+		<result property="idTareaInicial" column="tarea_inicial" />
+		<result property="idTareaFinal"   column="tarea_final" />
+		<result property="tipoAsociacion"   column="tipo_asociacion" />	
+	</resultMap>
+	
+	<resultMap type="instanciaModel" id="instanciaModel">
+		<result property="id" 	            column="id" />
+		<result property="idAplicacion" 	column="id_aplicacion" />
+		<result property="idEmpresa" 	    column="id_empresa" />
+		<result property="idOrganizacion" 	column="id_organizacion" />
+		<result property="nombreInstancia" 	column="nombre_instancia" />
+		<result property="idTareaInicial" 	column="id_tarea_inicial" />
+		<result property="idTareaFinal" 	column="id_tarea_final" />
+	</resultMap>
+	
+	<resultMap type="creacionModel" id="creacionModel">
+		<result property="id" 	            column="id" />
+		<result property="idAplicacion" 	column="aplicacion" />
+		<result property="idTareaInicio" 	column="tarea_inicio" />
+		<result property="idTareaExito" 	column="tarea_exito" />
+		<result property="esCondicional" 	column="es_condicional" />
+		<result property="idTareaRechazo" 	column="tarea_rechazo" />	
+		<result property="tipoDestino" 	    column="tipo_destino" />	
+	</resultMap>
+	
+	<resultMap type="tareaConfiguracionModel" id="tareaConfiguracionModel">
+		<result property="id" 	          column="id" />
+		<result property="idTarea" 	      column="id_tarea" />
+		<result property="checkOption"    column="check_option" />
+		<result property="requerido"      column="requerido" />
+	</resultMap>
+	
+	<resultMap type="solicitudFormularioModel" id="solicitudFormularioModel">
+		<result property="id" 	          column="id" />
+		<result property="idSolicitud" 	  column="id_solicitud" />
+		<result property="idTarea" 	      column="id_tarea" />
+		<result property="idPanel" 	      column="id_panel" />
+		<result property="estado" 	      column="estado" />
+	</resultMap>
+	
+	<resultMap type="empresaModel" id="empresaModel">
+		<result property="id" 	           column="id" />
+		<result property="nombre" 	       column="nombre" />
+		<result property="descripcion" 	   column="descripcion" />
+		<result property="idOrganizacion"  column="id_organizacion" />
+	</resultMap>
+	
+	<resultMap type="regionModel" id="regionModel">
+		<result property="id" 	           column="id" />
+		<result property="nombre" 	       column="nombre" />
+		<result property="descripcion" 	   column="descripcion" />
+	</resultMap>
+		
+	<resultMap type="ciudadModel" id="ciudadModel">
+		<result property="id" 	           column="id" />
+		<result property="nombre" 	       column="nombre" />
+		<result property="descripcion" 	   column="descripcion" />
+		<result property="idRegion" 	   column="id_region" />
+	</resultMap>	
+		
+	<resultMap type="comunaModel" id="comunaModel">
+		<result property="id" 	           column="id" />
+		<result property="nombre" 	       column="nombre" />
+		<result property="descripcion" 	   column="descripcion" />
+		<result property="idProvincia" 	   column="id_provincia" />
+	</resultMap>
+	
+	<resultMap type="tipoParametro" id="tipoParametro">
+		<result property="id" 	           column="id" />
+		<result property="nombre" 	       column="nombre" />
+		<result property="descripcion"     column="descripcion" />
+	</resultMap>	
+		
+		
+	<resultMap type="parametroModel" id="parametroModel">
+		<result property="id" 	           column="id" />
+		<result property="nombre" 	       column="nombre" />
+		<result property="descripcion"     column="descripcion" />
+		<result property="idTipoGrupo"     column="id_tipo_parametro" />
+	</resultMap>
+		
+	<resultMap type="estructuraModel"    id="estructuraModel">
+		<result property="id" 	              column="id" />
+		<result property="nombre" 	          column="nombre" />
+		<result property="idLista"            column="id_lista" />
+		<result property="requerido"          column="requerido" />		
+		<result property="idClase"            column="id_clase" />
+		<result property="modeloOrganizacion" column="modelo_organizacion" />		
+	</resultMap>
+	
+	<resultMap type="listaModel"    id="listaModel">
+		<result property="id" 	              column="id" />
+		<result property="valor" 	          column="valor" />
+		<result property="idParametro"        column="id_parametro" />
+	</resultMap>
+	
+		
+	<!-- Usuarios -->
+	
+	<select id="SelectJProcessLoginUsuario" resultMap="usuarioJProcessModel" parameterType="hashmap">
+		SELECT u.id as "id", 
+		       u.usuario  as "usuario", 
+		       u.password  as "password", 
+		       u.rol     AS "rol",
+		       u.rol_proceso AS "rol_proceso",
+		       u.fecha_creacion  as "fecha_creacion", 
+		       u.estado  as "estado",
+		       u.lenguaje as "lenguaje",
+		       u.nombre as "nombre",
+		       u.organizacion as "organizacion",
+		       u.area         as "area",
+		       u.sub_area      as "subarea",
+		       u.id_empresa    as "id_empresa"
+		FROM usuarios u
+		WHERE   u.usuario = #{usuario}
+		AND   u.password = #{password} 
+	</select>
+	
+	<select id="SelectUsuario"  resultMap="usuarioJProcessModel" resultType="usuarioJProcessModel" parameterType="integer">
+		SELECT u.id as "id", 
+		       u.usuario  as "usuario", 
+		       u.password  as "password", 
+		       u.rol     AS "rol",
+		       u.rol_proceso AS "rol_proceso",
+		       u.fecha_creacion  as "fecha_creacion", 
+		       u.estado  as "estado",
+		       u.lenguaje as "lenguaje",
+		       u.nombre as "nombre",
+		       u.organizacion as "organizacion",
+		       u.area         as "area",
+		       u.sub_area      as "subarea",
+		       u.id_empresa    as "id_empresa"
+		FROM   usuarios u
+		WHERE  u.id  = #{idUsuario}	
+	</select>
+	
+	<select id="SelectJProcessAllUsers"  resultMap="usuarioJProcessModel" >
+		SELECT u.id              AS "id", 
+		       u.usuario         AS "usuario", 
+		       u.password        AS "password", 
+		       u.rol             AS "rol",		      
+		       u.rol_proceso AS "rol_proceso",		        
+		       u.fecha_creacion  AS "fecha_creacion", 
+		       u.estado          AS "estado", 
+		       u.lenguaje        AS "lenguaje", 
+		       u.nombre          AS "nombre",
+		       u.organizacion    AS "organizacion",
+		       u.area         as "area",
+		       u.sub_area      as "subarea",
+		       u.id_empresa    as "id_empresa"
+		FROM usuarios u
+				
+	</select>
+	<update id="UpdateJProcessModificarUsuario" parameterType="hashmap">
+			UPDATE usuarios
+   			SET usuario      = #{usuario}, 
+   			 	rol          = #{rol}, 
+   			 	estado       = #{estado}, 
+       			nombre       = #{nombre},
+       			organizacion = #{organizacion},
+       			area         = #{area},
+       			sub_area     = #{subarea},
+       			rol_proceso  = #{rol_proceso},
+       			empresa      = #{empresa}
+			WHERE id = #{id};
+			<if test="usuario == null">
+			 AND usario = #{usuario}
+			</if>
+	</update>
+	
+	<update id="UpdateJProcessModificarPasswordUsuario" parameterType="hashmap">
+			UPDATE usuarios
+   			SET password  = #{password}
+			WHERE id = #{id};
+	</update>
+	
+	
+	
+	<delete id="UpdateDeleteUsuario" parameterType="hashmap">
+		DELETE FROM usuarios
+		WHERE id = #{id};
+	</delete>
+	
+	<select id="SelectJProcessAllUsersSoporte"  resultMap="usuarioJProcessModel">
+		SELECT u.id              AS "id", 
+		       u.usuario         AS "usuario", 
+		       u.password        AS "password", 
+		       u.rol             AS "rol", 
+		       u.fecha_creacion  AS "fecha_creacion", 
+		       u.estado          AS "estado", 
+		       u.lenguaje        AS "lenguaje", 
+		       u.nombre          AS "nombre"
+		FROM usuarios u			
+	</select>
+	
+	<insert id="InsertJProcessUsers" parameterType="hashmap">		 
+
+	INSERT INTO usuarios (id, usuario, "password", rol, fecha_creacion, estado, lenguaje, 
+            			nombre, area, sub_area, organizacion, rol_proceso, id_empresa) 
+            VALUES (nextval('"SEQ_ID_USUARIO"'), 
+										   #{usuario}, 
+										   #{password}, 
+										   #{rol}, 
+										   now(), 1, 'es', #{nombre}, #{area}, #{subarea}, #{organizacion}, #{rol_proceso}, #{empresa})
+	</insert>
+	
+	
+	<!-- System -->
+	
+	<select id="SelectSystemJProcessMenu" resultMap="menuJProcessModel">
+		 SELECT id      AS "id", 
+			id_name     AS "id_menu", 
+			"label"     AS "etiqueta",
+			estado      AS "estado",
+			rendered    AS "rendered",
+			"order"       AS "order"
+		 FROM sys_menu
+		 WHERE estado = 'Vigente'
+		 ORDER BY "order" ASC
+	</select>
+	
+	<select id="SelectMenuById" resultType="menuJProcessModel" resultMap="menuJProcessModel" parameterType="integer">
+		SELECT id      AS "id", 
+			id_name     AS "id_menu", 
+			"label"     AS "etiqueta",
+			estado      AS "estado",
+			rendered    AS "rendered",
+			"order"       AS "order"
+		 FROM sys_menu
+		 WHERE id = #{id}
+	</select>
+	
+	<select id="SelectSystemJProcessMenuPerfilado"  resultMap="menuJProcessModel" parameterType="integer">
+	     SELECT sm.id      AS "id", 
+			sm.id_name     AS "id_menu", 
+			sm."label"     AS "etiqueta",
+			sm.estado      AS "estado",
+			sm.rendered    AS "rendered",
+			sm."order"       AS "order"			
+		 FROM sys_menu sm,
+		      sys_menu_roles mr,
+		      rol br
+		 WHERE sm.estado = 'Vigente'
+		 AND sm.id = mr.id_menu
+		 AND br.id = mr.id_rol
+		 AND br.id = #{rol}
+		 ORDER BY "order" ASC
+	</select>
+	
+	<select id="SelectSystemJProcessRolByMenu"  resultMap="rolJProcessModel" parameterType="integer">
+	        SELECT br.id     AS "id", 
+			       br.valor  AS "nombre_rol", 
+			       br.estado AS "estado"
+			FROM  rol br,
+			      sys_menu_roles mr,
+			      sys_menu m
+			WHERE br.estado = 'Vigente'			
+			AND   m.id       = #{idMenu}
+			AND   mr.id_menu = m.id
+			AND   mr.id_rol = br.id 
+			ORDER BY m.order ASC
+	</select>
+	
+	
+	
+	<select id="SelectSystemJProcessSubmenu" resultMap="submenuJProcessModel" parameterType="integer">
+		 SELECT id          AS "id", 
+		        id_name     AS "id_submenu", 
+		        "label"     AS "etiqueta", 
+		        stack_name  AS "stack_name", 
+		        menu_id     AS "id_menu"
+		 FROM sys_sub_menu
+		 WHERE estado = 'Vigente'
+		 AND   menu_id  = #{idMenu}
+		 ORDER BY "order" ASC
+	</select>
+	
+	<select id="SelectSystemJProcessAllSubmenu" resultMap="submenuJProcessModel">
+		 SELECT id          AS "id", 
+		        id_name     AS "id_submenu", 
+		        "label"     AS "etiqueta", 
+		        stack_name  AS "stack_name", 
+		        menu_id     AS "id_menu",
+		        estado      AS "estado",
+		        "order"    	AS "order"
+		 FROM sys_sub_menu
+		 WHERE estado = 'Vigente'
+		 ORDER BY "order" ASC
+	</select>
+	
+	
+	
+	<select id="SelectSystemJProcessPanel" resultMap="panelJProcessModel">
+		 SELECT id              AS "id", 
+		        id_panel        AS "id_panel", 
+		        id_subview      AS "id_subview", 
+		        include_src     AS "include", 
+		        estado          AS "estado",
+		        es_formulario   AS "es_formulario"
+		 FROM sys_panel
+		 WHERE estado = 'Vigente'
+	</select>
+	
+	<select id="SelectPanelFormulario"  resultMap="panelJProcessModel">
+		 SELECT id              AS "id", 
+		        id_panel        AS "id_panel", 
+		        id_subview      AS "id_subview", 
+		        include_src     AS "include", 
+		        estado          AS "estado",
+		        es_formulario   AS "es_formulario"
+		 FROM sys_panel
+		 WHERE estado = 'Vigente'
+		 AND  es_formulario = 'S'
+	</select>
+	
+	<select id="SelectPanelFormularioByTarea"  resultMap="panelJProcessModel" parameterType="hashmap">
+		 SELECT p.id              AS "id", 
+				p.id_panel        AS "id_panel", 
+				p.id_subview      AS "id_subview", 
+				p.include_src     AS "include", 
+				p.estado          AS "estado",
+				p.es_formulario   AS "es_formulario"
+			 FROM sys_panel p,
+			      sys_tarea_formulario tf,
+			      sys_aplicacion_instancia i
+			 WHERE p.estado = 'Vigente'
+			 AND   p.id = tf.id_panel
+			 AND   tf.id_tarea = #{tarea}
+			 AND   tf.id_aplicacion = i.id_aplicacion
+			 AND   i.id_aplicacion = #{aplicacion}
+			 AND   i.id = #{instancia}
+			 AND  p.es_formulario = 'S'
+	</select>
+	
+	<insert id="InsertSystemJProcessPanel" parameterType="hashmap">
+		INSERT INTO sys_panel(
+            id, id_panel, id_subview, include_src, estado, es_formulario)
+        VALUES (nextval('"SEQ_SYS_PANEL_ID"'), #{panel_id}, #{subview_id}, #{include}, 'Vigente', #{es_formulario})
+	</insert>
+	
+	<update id="UpdateSystemJProcessPanel" parameterType="hashmap">
+		UPDATE sys_panel
+   		SET id_panel      = #{panel_id}, 
+   		    id_subview    = #{subview_id}, 
+   		    include_src   = #{include}
+   		    es_formulario = #{es_formulario}
+ 		WHERE id = #{id}
+	</update>
+	
+	<delete id="DeleteSystemJProcessPanel" parameterType="integer">
+		DELETE FROM sys_panel
+		WHERE  id = #{id}
+	</delete>
+	
+	<insert id="InsertJProcessInsertarMenu" parameterType="hashmap">	  
+	  	INSERT INTO sys_menu("id", "id_name", "label", estado, rendered)
+		VALUES ( nextval('"SEQ_SYS_MENU_ID"'), #{id_menu}, #{label}, 'Vigente', 'true');	
+	</insert>
+	
+	<insert id="InsertSystemJProcessSubmenu" parameterType="hashmap">
+		INSERT INTO sys_sub_menu(
+	            id, id_name, "label", stack_name, menu_id, estado)
+		VALUES ( nextval('"SEQ_SYS_SUBMENU_ID"'), 
+				#{name_id}, 
+				#{etiqueta}, 
+				#{stack_name}, 
+				#{menu_id}, 
+				'Vigente');	
+	</insert>
+	
+	<update id="UpdateJProcessModificarMenu" parameterType="hashmap">
+		UPDATE sys_menu
+   		SET    id_name  = #{id_menu}, 
+   			   label    = #{label}, 
+   			   "order"  = #{order}
+ 		WHERE id = #{id}		
+	</update>
+	
+	<update id="UpdateSystemJProcessDaBajaMenu" parameterType="integer">
+		UPDATE sys_menu
+   		SET   estado = 'Baja' 
+ 		WHERE id = #{id}		
+	</update>
+	
+	<update id="UpdateSystemJProcessDaBajaSubMenu" parameterType="integer">
+		UPDATE sys_sub_menu
+   		SET   estado = 'Baja' 
+ 		WHERE id = #{id}		
+	</update>	
+	
+	<update id="UpdateSystemJProcessModificarSubmenu" parameterType="hashmap">
+		UPDATE sys_sub_menu
+   		SET id_name    = #{submenu_id}, 
+   			label      = #{etiqueta}, 
+   			stack_name = #{stack_name}, 
+   			menu_id    = #{menu_id}, 
+       		"order"    = #{order}
+ 		WHERE id=#{id}
+			
+	</update>
+	
+	<select id="SelectSystemJProcessRoles" resultType="rolJProcessModel" resultMap="rolJProcessModel">
+		SELECT br.id     AS "id", 
+			   br.valor  AS "nombre_rol", 
+			   br.estado AS "estado"
+  		FROM rol br
+  		WHERE estado = 'Vigente'  		
+	</select>
+	
+	<insert id="InsertSystemJProcessRol" parameterType="hashmap">
+		INSERT INTO rol(
+            id, valor, estado)
+    	VALUES ( nextval('"SEQ_ROL_ID"'), #{valor}, 'Vigente');
+	</insert>
+	
+	<select id="SelectRolById" resultMap="rolJProcessModel" resultType="rolJProcessModel" parameterType="integer">
+		SELECT br.id     AS "id", 
+			   br.valor  AS "nombre_rol", 
+			   br.estado AS "estado"
+  		FROM rol br
+  		WHERE estado = 'Vigente'
+  		AND   id = #{id}
+	</select>
+	
+	<update id="UpdateSystemJProcessRol" parameterType="hashmap">
+		UPDATE rol
+   		SET   valor  = #{valor}
+ 		WHERE id = #{id};
+	</update>
+	
+	<update id="DeleteSystemJProcessRol" parameterType="integer">
+		UPDATE rol
+   		SET    estado = 'Baja'
+ 		WHERE  id = #{id};
+	</update>
+	
+	<delete id="DeleteSystemJProcessMenuRol" parameterType="integer">
+		DELETE FROM sys_menu_roles
+ 		WHERE id_menu = #{idMenu};
+	</delete>
+	
+	<insert id="InsertSystemJProcessMenuRol" parameterType="hashmap">
+		INSERT INTO sys_menu_roles(
+            id, id_menu, id_rol)
+    	VALUES ( nextval('"SEQ_MENU_ROL_ID"'), #{id_menu}, #{id_rol});
+	</insert>
+	
+	<!-- Tareas -->
+	<select id="SelectTareas" resultType="tareaModel" resultMap="tareaModel">
+		SELECT id  				AS "id",
+			   nombre  			AS "nombre",
+			   descripcion  	AS "descripcion",
+			   prioridad  		AS "prioridad",
+			   tipo_tarea  		AS "tipo_tarea",
+			   duracion  	    AS "duracion",
+			   tipo_duracion    AS "tipo_duracion",
+      		   id_organizacion  AS "id_organizacion", 
+      		   tipo_asignacion  AS "tipo_asignacion", 
+      		   rol_asignacion   AS "id_rol_asignacion",
+      		   tiene_formulario AS "tiene_formulario"
+  		FROM sys_tarea	
+  		WHERE estado = 'Vigente'	
+	</select>
+	
+	<insert id="InsertTarea" parameterType="hashmap">
+		INSERT INTO sys_tarea(
+            id, nombre, descripcion, prioridad, tipo_tarea, duracion, tipo_duracion, 
+            id_organizacion, tipo_asignacion, rol_asignacion, estado, tiene_formulario)
+    	VALUES (nextval('"SEQ_TAREA_ID"'), #{nombre}, #{descripcion}, #{prioridad} ,#{tipo_tarea}, #{duracion}, #{tipo_duracion}, 
+    	#{organizacion}, #{tipo_asignacion}, #{rol}, 'Vigente', #{tiene_formulario})
+	</insert>
+	
+	<update id="UpdateTarea" parameterType="hashmap">
+		UPDATE sys_tarea
+   		SET 	nombre			= #{nombre}, 
+   				descripcion		= #{descripcion}, 
+   				prioridad		= #{prioridad}, 
+   				tipo_tarea		= #{tipo_tarea}, 
+   				duracion		= #{duracion}, 
+       			tipo_duracion   = #{tipo_duracion}, 
+       			id_organizacion = #{organizacion}, 
+       			tipo_asignacion = #{tipo_asignacion}, 
+       			rol_asignacion  = #{rol},
+       			tiene_formulario = #{tiene_formulario}
+ 		WHERE id = #{id}
+	</update>
+	
+	<update id="DeleteTarea" parameterType="integer">
+		UPDATE sys_tarea
+   		SET    estado  = 'Baja'
+ 		WHERE  id = #{id}
+	</update>
+	
+	<select id="SelectTareaById" resultType="tareaModel" resultMap="tareaModel" parameterType="integer">
+		SELECT id  				AS "id",
+			   nombre  			AS "nombre",
+			   descripcion  	AS "descripcion",
+			   prioridad  		AS "prioridad",
+			   tipo_tarea  		AS "tipo_tarea",
+			   duracion  	    AS "duracion",
+			   tipo_duracion    AS "tipo_duracion",
+      		   id_organizacion  AS "id_organizacion", 
+      		   tipo_asignacion  AS "tipo_asignacion", 
+      		   rol_asignacion   AS "id_rol_asignacion",
+      		   tiene_formulario AS "tiene_formulario"
+  		FROM sys_tarea	
+  		WHERE estado = 'Vigente'
+  		AND   id = #{id}
+	</select>
+	
+	<select id="SelectOrganizacion" resultMap="organizacionModel" resultType="organizacionModel">
+		SELECT id AS "id",
+			   valor AS "nombre"
+		FROM   sys_organizacion 
+	</select>
+	
+	<select id="SelectOrganizacionById" resultMap="organizacionModel" resultType="organizacionModel" parameterType="integer">
+		SELECT id AS "id",
+			   valor AS "nombre"
+		FROM   sys_organizacion 
+		WHERE  id = #{id}
+	</select>
+	
+	<insert id="InsertOrganizacion" parameterType="hashmap">
+		INSERT INTO sys_organizacion(
+            id, valor)
+    	VALUES ( nextval('"SEQ_ORGANIZACION_ID"'), #{valor})
+	</insert>
+	
+	<update id="UpdateOrganizacion" parameterType="hashmap">
+		UPDATE sys_organizacion
+  		SET    valor= #{valor}
+ 		WHERE id = #{id}
+	</update>
+	
+	<delete id="DeleteOrganizacion" parameterType="hashmap">
+		DELETE FROM sys_organizacion WHERE id = #{id}
+	</delete>
+	
+	<select id="SelectAplicacion" resultMap="aplicacionModel" resultType="aplicacionModel">
+		SELECT id              AS "id", 
+		       aplicacion      AS "aplicacion", 
+		       descripcion     AS "descripcion", 
+		       "version"       AS "version",
+		       id_tarea_inicial AS "tarea_inicial",
+		       id_tarea_final  AS "tarea_final",
+		       tipo_asociacion AS "tipo_asociacion"
+  		FROM sys_aplicacion
+	</select>
+	
+	<select id="SelectAplicacionById" resultMap="aplicacionModel" resultType="aplicacionModel" parameterType="integer">
+		SELECT a.id              AS "id", 
+		       a.aplicacion      AS "aplicacion", 
+		       a.descripcion     AS "descripcion", 
+		       a."version"       AS "version",
+		       a.id_tarea_inicial AS "tarea_inicial",
+		       a.id_tarea_final  AS "tarea_final",
+		       a.tipo_asociacion AS "tipo_asociacion"
+  		FROM sys_aplicacion a, sys_aplicacion_instancia i
+		WHERE  a.id = i.id_aplicacion
+		AND    i.id = #{id}
+	</select>
+	
+	<select id="SelectAplicacionBusquedaById" resultMap="aplicacionModel" resultType="aplicacionModel" parameterType="integer">
+		SELECT id              AS "id", 
+		       aplicacion      AS "aplicacion", 
+		       descripcion     AS "descripcion", 
+		       "version"       AS "version",
+		       id_tarea_inicial AS "tarea_inicial",
+		       id_tarea_final  AS "tarea_final",
+		       tipo_asociacion AS "tipo_asociacion"
+  		FROM   sys_aplicacion a 
+		WHERE  id = #{id}
+	</select>
+	
+	
+	
+	<update id="UpdateAplicacionInicioFin" parameterType="integer">
+		UPDATE sys_aplicacion
+		SET   id_tarea_inicial = (SELECT id_tarea_inicial 
+			  					  FROM sys_creacion 
+			  					  WHERE id_aplicacion = #{id}
+			  					  AND   id_tarea_inicial not in 
+			  					     (SELECT id_tarea_exito FROM sys_creacion WHERE id_aplicacion = #{id})),
+      		id_tarea_final   = (SELECT id_tarea_exito 
+			  					FROM sys_creacion 
+			 					WHERE id_aplicacion = #{id}
+			  					AND   id_tarea_exito not in 
+			  						 (SELECT id_tarea_inicial  FROM sys_creacion WHERE id_aplicacion = #{id}))
+		WHERE   id  = #{id}
+	</update>
+	
+	<insert id="InsertAplicacion" parameterType="hashmap">
+		INSERT INTO sys_aplicacion(
+            id, aplicacion, descripcion, "version")
+    	VALUES (nextval('"SEQ_ORGANIZACION_ID"'), #{aplicacion}, #{descripcion}, #{version})		
+	</insert>
+	
+	<update id="UpdateAplicacion" parameterType="hashmap">
+		UPDATE sys_aplicacion
+   		SET   aplicacion    = #{aplicacion}, 
+   		      descripcion   = #{descripcion}, 
+   		      "version"     = #{version}
+ 		WHERE id = #{id}
+	</update>
+	
+	<delete id="DeleteAplicacion" parameterType="hashmap">
+		DELETE FROM sys_aplicacion WHERE id = #{id}
+	</delete>
+
+	<!-- Creación -->
+	
+	<select id="SelectCreacion" resultMap="creacionModel" resultType="creacionModel">
+		SELECT  id                AS "id", 
+				id_instancia     AS "aplicacion",
+				id_tarea_inicial  AS "tarea_inicio",
+				id_tarea_exito    AS "tarea_exito",
+				es_condicional    AS "es_condicional",
+       			id_tarea_rechazo  AS "tarea_rechazo",
+       			tipo_destino	  AS "tipo_destino"
+  		FROM sys_creacion
+  		ORDER BY id ASC
+	</select>
+	
+	<select id="SelectCreacionByAplicacion" resultMap="creacionModel" resultType="creacionModel" parameterType="integer">
+		SELECT  id                AS "id", 
+				id_instancia     AS "aplicacion",
+				id_tarea_inicial  AS "tarea_inicio",
+				id_tarea_exito    AS "tarea_exito",
+				es_condicional    AS "es_condicional",
+       			id_tarea_rechazo  AS "tarea_rechazo",
+       			tipo_destino	  AS "tipo_destino"
+  		FROM sys_creacion
+		WHERE  id_instancia = #{idAplicacion}
+		ORDER BY id ASC
+	</select>
+	
+	<select id="SelectCreacionById" resultMap="creacionModel" resultType="creacionModel" parameterType="integer">
+		SELECT  id                AS "id", 
+				id_instancia     AS "aplicacion",
+				id_tarea_inicial  AS "tarea_inicio",
+				id_tarea_exito    AS "tarea_exito",
+				es_condicional    AS "es_condicional",
+       			id_tarea_rechazo  AS "tarea_rechazo",
+       			tipo_destino	  AS "tipo_destino"
+  		FROM sys_creacion
+		WHERE  id = #{id}
+	</select>	
+	
+	<select id="SelectCreacionByTarea" resultMap="creacionModel" resultType="creacionModel" parameterType="hashmap">
+		SELECT  id                AS "id", 
+				id_instancia     AS "aplicacion",
+				id_tarea_inicial  AS "tarea_inicio",
+				id_tarea_exito    AS "tarea_exito",
+				es_condicional    AS "es_condicional",
+       			id_tarea_rechazo  AS "tarea_rechazo",
+       			tipo_destino	  AS "tipo_destino"
+  		FROM sys_creacion
+		WHERE  id_tarea_inicial = #{tarea}
+		AND    id_instancia    = #{aplicacion}
+	</select>
+	
+	<select id="SelectNextIdCreacion" resultType="integer">
+		 SELECT nextval('"SEQ_CREACION_ID"')
+	</select>
+	
+	<insert id="InsertCreacion" parameterType="hashmap">
+				INSERT INTO sys_creacion(
+			            id, id_instancia, id_tarea_inicial, id_tarea_exito, es_condicional, 
+			            id_tarea_rechazo, tipo_destino)
+			    VALUES (#{id}, #{aplicacion}, #{inicio}, #{exito}, #{condicional}, 
+			            #{rechazo}, #{tipo_destino})	
+	</insert>
+	
+	<update id="UpdateCreacion" parameterType="hashmap">
+		UPDATE sys_creacion
+   		SET   id_instancia    = #{aplicacion}, 
+   			  id_tarea_inicial = #{inicio}, 
+   			  id_tarea_exito   = #{exito}, 
+       		  es_condicional   = #{condicional}, 
+       		  id_tarea_rechazo = #{rechazo},
+       		  tipo_destino     = #{tipo_destino}
+ 		WHERE id = #{id}
+	</update>
+	
+	<delete id="DeleteCreacion" parameterType="hashmap">
+		DELETE FROM sys_creacion WHERE id = #{id}
+	</delete>
+
+    <!-- Solicitudes  -->
+    <insert id="InsertSolicitud" parameterType="hashmap">
+   	  
+    		INSERT INTO sys_solicitud(id, aplicacion, fecha_inicio, fecha_fin, estado, empresa)
+    		VALUES (#{id}, #{aplicacion} , now(), 
+    		(SELECT (now()+ CAST( t.duracion||' days' AS INTERVAL))
+    		    FROM sys_tarea t, 
+    		         sys_aplicacion a,
+                     sys_aplicacion_instancia ia
+			    WHERE a.id = ia.id_aplicacion
+			    AND   ia.id = #{aplicacion}
+			    AND   a.id_tarea_inicial = t.id ),'Pendiente', #{empresa});
+    </insert>
+    
+    <insert id="InsertSolicitudFormulario" parameterType="hashmap">
+    	INSERT INTO sys_tarea_formulario_det(
+            id, id_solicitud, id_tarea, id_panel, estado)
+    VALUES (nextval('"SEQ_SOLICITUD_FORMULARIO_ID"'), #{id_solicitud}, #{id_tarea}, #{id_panel}, 'P')
+    </insert>
+    
+    <select id="SelectNewSolicitudId" resultType="integer">
+    	SELECT nextval('"SEQ_SOLICITUD_ID"')
+    </select>
+    
+    <select id="SelectSolicitudesPendientesPorRol" resultMap="solicitudModel" resultType="solicitudModel" parameterType="integer">
+    	SELECT s.id           AS "id", 
+    		   s.aplicacion   AS "aplicacion",
+    		   s.fecha_inicio AS "fecha_inicio", 
+    		   s.fecha_fin    AS "fecha_fin", 
+    		   s.estado       AS "estado"
+  		FROM sys_solicitud s, 
+  		sys_pendiente p
+  		WHERE s.id = p.id_solicitud
+		AND p.id_rol =  #{id_rol}
+		AND p.estado = 'Pendiente' 
+		<if test="id_organizacion == 1">
+  			AND s.empresa =  #{id_empresa}
+  		</if>  
+    </select>
+    
+    
+    <select id="SelectSolicitudesByUser"  resultMap="solicitudModel" resultType="solicitudModel" parameterType="hashmap">
+        SELECT s.id           AS "id", 
+    		   a.id_aplicacion   AS "aplicacion",    		    
+    		   s.fecha_inicio AS "fecha_inicio", 
+    		   s.fecha_fin    AS "fecha_fin", 
+    		   s.estado       AS "estado"
+  		FROM sys_solicitud s,
+  		     sys_aplicacion_instancia a
+		WHERE s.aplicacion = a.id
+		<if test="organizacion == 1">		
+	        AND a.id_empresa = #{empresa}
+	    </if>	    		
+		ORDER BY s.id ASC		
+    </select>
+    
+    <select id="SearchSolicitudesByFields"  resultMap="solicitudModel" resultType="solicitudModel" parameterType="hashmap">
+        SELECT s.id           AS "id", 
+    		   a.id_aplicacion AS "aplicacion", 
+    		   s.fecha_inicio AS "fecha_inicio", 
+    		   s.fecha_fin    AS "fecha_fin", 
+    		   s.estado       AS "estado"
+  		FROM sys_solicitud s,
+  		     sys_aplicacion_instancia a
+		WHERE s.aplicacion = a.id
+		<if test="organizacion == 1">		
+	         AND a.id_empresa = #{empresa}
+	    </if>	
+	    <if test="aplicacion != -1">
+	    	AND s.aplicacion = a.id_aplicacion
+	    	AND a.id         =  #{aplicacion}
+	    </if>
+	    <if test="estado != null">
+	    	AND s.estado = #{estado}
+	    </if>  
+	    <if test="inicio != null">
+	        AND s.fecha_inicio >= #{inicio}
+	    </if>  		
+	    <if test="fin != null">
+	    	AND s.fecha_fin  &lt;= #{fin}
+	    </if>
+		ORDER BY s.id ASC		
+    </select>
+    
+    
+    
+     <select id="SelectSolicitudById" resultMap="solicitudModel" resultType="solicitudModel" parameterType="integer">
+    	SELECT s.id           AS "id", 
+    		   s.aplicacion   AS "aplicacion",
+    		   s.fecha_inicio AS "fecha_inicio", 
+    		   s.fecha_fin    AS "fecha_fin", 
+    		   s.estado       AS "estado"
+  		FROM sys_solicitud s, sys_pendiente p
+		WHERE s.id = p.id_solicitud
+		AND   s.id = #{idSolicitud}
+		AND p.estado = 'Pendiente'   
+    </select>
+    
+    <select id="SelectSolicitudFormulario" resultMap="solicitudFormularioModel" resultType="solicitudFormularioModel" parameterType="hashmap">
+    	SELECT id, id_solicitud, id_tarea, id_panel, estado
+  		FROM   sys_tarea_formulario_det
+  		WHERE  id_solicitud = #{id_solicitud}
+  		AND    id_tarea     = #{id_tarea}
+    </select>
+    
+    <update id="UpdateSolicitudFormulario" parameterType="hashmap">
+    	UPDATE sys_tarea_formulario_det
+   		SET   estado= 'C'
+ 		WHERE id_solicitud = #{id_solicitud}
+ 		AND   id_tarea     = #{id_tarea}
+    </update>
+    
+   <select id="SelectTareaActualBySolicitudId" resultMap="tareaModel" resultType="tareaModel" parameterType="integer">
+   		SELECT t.id  				AS "id",
+			   t.nombre  			AS "nombre",
+			   t.descripcion  	AS "descripcion",
+			   t.prioridad  		AS "prioridad",
+			   t.tipo_tarea  		AS "tipo_tarea",
+			   t.duracion  	    AS "duracion",
+			   t.tipo_duracion    AS "tipo_duracion",
+      		   t.id_organizacion  AS "id_organizacion", 
+      		   t.tipo_asignacion  AS "tipo_asignacion", 
+      		   t.rol_asignacion   AS "id_rol_asignacion",
+      		   t.tiene_formulario AS "tiene_formulario"
+      FROM sys_tarea t, sys_solicitud s, sys_pendiente p
+ 	  WHERE t.id = p.id_tarea
+  	  AND   p.estado = 'Pendiente'
+  	  AND   p.id_solicitud = s.id
+  	  AND   s.estado = 'Pendiente'
+      AND   p.id_solicitud = #{idSolicitud}
+   </select>
+    
+    <!-- Pendientes -->
+    <insert id="InsertPendiente" parameterType="hashmap"> 		  
+    	INSERT INTO sys_pendiente(
+            id, id_solicitud, id_tarea, id_rol, fecha_inicio, fecha_termino, 
+            estado, asignada)
+    VALUES (nextval('"SEQ_PENDIENTE_ID"'), #{solicitud}, #{tarea}, #{rol}, now(), now(), 
+            'Pendiente', FALSE)
+    </insert>
+   
+    <select id="SelectPendienteBySolicitud" resultMap="pendienteModel" resultType="pendienteModel" parameterType="integer">
+    	SELECT id                    AS "id", 
+    	       id_solicitud          AS "id_solicitud", 
+    	       id_tarea              AS "id_tarea",
+    	       id_rol                AS "id_rol",
+    	       fecha_inicio          AS "fecha_inicio",
+    	       fecha_termino         AS "fecha_termino",
+       		   tiempo_finalizacion   AS "tiempo_finalizacion",
+       		   estado                AS "estado",
+       		   id_usuario            AS "id_usuario",
+       		   asignada              AS "asignada"
+  		FROM sys_pendiente  
+  		WHERE id_solicitud = #{id}
+  		AND   estado = 'Pendiente'  	
+    </select>
+    
+    
+    <!-- Comentarios -->
+    <insert id="InsertSolicitudComentario" parameterType="hashmap">
+    	INSERT INTO sys_solicitud_comentario(
+            id, id_solicitud, usuario, fecha_publicacion, comentario)
+   		VALUES (nextval('"SEQ_SOLICITUD_COMENTARIO_ID"'), #{solicitud}, #{usuario}, now(), #{comentario})    	
+    </insert>
+    
+    <select id="SelectComentariosBySolicitud" parameterType="integer" resultMap="comentarioModel" resultType="comentarioModel">
+    		SELECT id                    AS "id", 
+    			   id_solicitud          AS "id_solicitud", 
+    			   usuario               AS "usuario", 
+    			   fecha_publicacion     AS "publicacion", 
+    			   comentario            AS "comentario"
+  			FROM sys_solicitud_comentario
+  			WHERE id_solicitud = #{idSolicitud}
+  			ORDER BY fecha_publicacion ASC
+    		
+    </select>
+    
+    <update id="UpdateCerrarSolicitud" parameterType="integer">
+    	UPDATE sys_solicitud
+   		SET    estado= 'Cerrada'
+ 		WHERE id = #{idSolicitud};
+    </update>
+    
+     <update id="UpdateCerrarCreacion" parameterType="integer">
+    	UPDATE sys_pendiente
+   		SET    estado= 'Cerrada',
+   		       tiempo_finalizacion = now()
+ 		WHERE id = #{idPendiente}		
+    </update>
+    
+     <insert id="InsertDespacharCreacion" parameterType="integer">
+    	INSERT INTO sys_pendiente(
+            id, id_solicitud, id_tarea, id_rol, fecha_inicio, fecha_termino, 
+            estado, asignada)
+    	VALUES (nextval('"SEQ_PENDIENTE_ID"'), 
+    	        #{solicitud}, #{tarea}, 
+    	        #{rol}, 
+    	        now(), 
+    	        (SELECT  (now()+ CAST( duracion||' days' AS INTERVAL))
+				  FROM sys_tarea
+				  WHERE id = #{tarea}), 
+            'Pendiente', FALSE)
+    </insert>
+    
+    <update id="UpdateAsignarResponsableSolicitud" parameterType="hashmap">
+    	UPDATE sys_pendiente
+   		SET id_usuario= #{usuario},
+   		    tiempo_inicio = now(),
+   		    asignada = true
+ 		WHERE id_solicitud in (select id from sys_solicitud where estado = 'Pendiente')
+ 		AND   id_solicitud = #{solicitud}
+ 		AND   estado = 'Pendiente'
+    
+    </update>
+    
+     <update id="UpdateLiberarResponsableSolicitud" parameterType="hashmap">
+    	UPDATE sys_pendiente
+   		SET id_usuario= 0,
+   		    asignada = false
+ 		WHERE id_solicitud in (select id from sys_solicitud where estado = 'Pendiente')
+ 		AND   id_solicitud = #{solicitud}
+ 		AND   estado = 'Pendiente'
+    
+    </update>
+    
+    <!-- Tarea Configuracion -->
+    <select id="SelectTareaConfiguracion" resultMap="tareaConfiguracionModel" resultType="tareaConfiguracionModel">
+    	SELECT id           AS "id", 
+    	       id_tarea     AS "id_tarea", 
+    	       check_option AS "check_option",
+    	       requerido    AS "requerido"
+  		FROM sys_tarea_configuracion    
+    </select>
+    
+     <select id="SelectTareaConfiguracionByTarea" resultMap="tareaConfiguracionModel" resultType="tareaConfiguracionModel" parameterType="integer">
+    	SELECT id           AS "id", 
+    	       id_tarea     AS "id_tarea", 
+    	       check_option AS "check_option",
+    	       requerido    AS "requerido"
+  		FROM sys_tarea_configuracion 
+  		WHERE  id_tarea = #{tarea}   
+    </select>
+    
+    <select id="SelectTareaConfiguracionById" resultMap="tareaConfiguracionModel" resultType="tareaConfiguracionModel" parameterType="integer">
+    	SELECT id           AS "id", 
+    	       id_tarea     AS "id_tarea", 
+    	       check_option AS "check_option",
+    	       requerido    AS "requerido"
+  		FROM sys_tarea_configuracion 
+  		WHERE  id = #{id}   
+    </select>
+    
+    <insert id="InsertTareaConfiguracion" parameterType="hashmap">
+    	INSERT INTO sys_tarea_configuracion(
+            id, id_tarea, check_option, requerido)
+   		 VALUES ( nextval('"SEQ_TAREA_CONFIGURACION_ID"'), #{tarea}, #{option}, #{requerido});
+    	
+    </insert>
+    
+    <update id="UpdateTareaConfiguracion" parameterType="hashmap">
+    	UPDATE sys_tarea_configuracion
+   		SET   id_tarea     = #{tarea}, 
+   		      check_option = #{option},
+   		      requerido    = #{requerido}
+ 		WHERE id = #{id}
+    </update>
+    
+    <delete id="DeleteTareaConfiguracion" parameterType="integer">
+    	DELETE FROM sys_tarea_configuracion
+ 		WHERE id = #{id}    	
+    </delete>
+    
+    <!-- Area -->
+    <select id="SelectAreas" resultMap="areaModel" resultType="areaModel">
+    	SELECT id                AS "id", 
+    	       id_organizacion   AS "id_organizacion", 
+    	       nombre            AS "nombre", 
+    	       descripcion       AS "descripcion"
+  		FROM sys_area   
+    </select>
+    
+     <select id="SelectAreasByOrganizacion" resultMap="areaModel" resultType="areaModel"  parameterType="integer">
+    	SELECT id                AS "id", 
+    	       id_organizacion   AS "id_organizacion", 
+    	       nombre            AS "nombre", 
+    	       descripcion       AS "descripcion"
+  		FROM sys_area   
+  		WHERE  id_organizacion = #{idOrganizacion}
+    </select>
+    
+     <select id="SelectAreaById" resultMap="areaModel" resultType="areaModel" parameterType="integer">
+    	SELECT id                AS "id", 
+    	       id_organizacion   AS "id_organizacion", 
+    	       nombre            AS "nombre", 
+    	       descripcion       AS "descripcion"
+  		FROM sys_area  
+  		WHERE id = #{idArea} 
+    </select>
+    
+    <insert id="InsertArea" parameterType="hashmap">
+    	INSERT INTO sys_area(
+            id, id_organizacion, nombre, descripcion)
+    	VALUES ( nextval('"SEQ_AREA_ID"'), #{organizacion}, #{nombre}, #{descripcion})
+    </insert>
+    
+    <update id="UpdateArea"  parameterType="hashmap">
+    	UPDATE sys_area
+   		SET   id_organizacion= #{organizacion}, nombre= #{nombre}, descripcion=#{descripcion}
+ 		WHERE id = #{id}    	
+    </update>
+    
+    <delete id="DeleteArea"  parameterType="hashmap">
+    	DELETE FROM sys_area
+ 		WHERE id = #{id}    	
+    </delete>
+    
+    <!-- Subareas -->
+       <select id="SelectSubareas" resultMap="subareaModel" resultType="subareaModel">
+    	SELECT id                AS "id", 
+    	       id_area           AS "id_area", 
+    	       nombre            AS "nombre", 
+    	       descripcion       AS "descripcion"
+  		FROM sys_subarea   
+    </select>
+    
+     <select id="SelectSubareaByArea" resultMap="subareaModel" resultType="subareaModel"  parameterType="integer">
+    	SELECT id                AS "id", 
+    	       id_area           AS "id_area", 
+    	       nombre            AS "nombre", 
+    	       descripcion       AS "descripcion"
+  		FROM sys_subarea   
+  		WHERE  id_area = #{idArea}
+    </select>
+    
+     <select id="SelectSubareaById" resultMap="subareaModel" resultType="subareaModel" parameterType="integer">
+    	SELECT id                AS "id", 
+    	       id_area           AS "id_area", 
+    	       nombre            AS "nombre", 
+    	       descripcion       AS "descripcion"
+  		FROM sys_subarea  
+  		WHERE id = #{idSubarea} 
+    </select>
+    
+    <insert id="InsertSubarea" parameterType="hashmap">
+    	INSERT INTO sys_subarea(
+            id, id_area, nombre, descripcion)
+    	VALUES ( nextval('"SEQ_SUBAREA_ID"'), #{area}, #{nombre}, #{descripcion})
+    </insert>
+    
+    <update id="UpdateSubarea"  parameterType="hashmap">
+    	UPDATE sys_subarea
+   		SET   id_area= #{area}, nombre= #{nombre}, descripcion=#{descripcion}
+ 		WHERE id = #{id}    	
+    </update>
+    
+    <delete id="DeleteSubarea"  parameterType="hashmap">
+    	DELETE FROM sys_subarea
+ 		WHERE id = #{id}    	
+    </delete>
+    
+    
+    <!-- Empresas. -->
+    <select id="SelectEmpresas" resultMap="empresaModel" resultType="empresaModel">
+    	SELECT id, 
+    	       nombre, 
+    	       id_organizacion, 
+    	       descripcion
+  		FROM sys_empresa
+  		ORDER BY nombre ASC
+    </select>
+    
+    <select id="SelectEmpresaById"  resultMap="empresaModel" resultType="empresaModel" parameterType="integer">
+    	SELECT id, 
+    	       nombre, 
+    	       id_organizacion, 
+    	       descripcion
+  		FROM sys_empresa
+  		WHERE id = #{idEmpresa}
+    </select>
+    
+    <select id="SelectEmpresasByOrganizacion"  resultMap="empresaModel" resultType="empresaModel" parameterType="integer">
+    	SELECT id, 
+    	       nombre, 
+    	       id_organizacion, 
+    	       descripcion
+  		FROM sys_empresa
+  		WHERE id_organizacion = #{idOrganizacion}
+  		ORDER BY nombre ASC
+    </select>
+    
+    <insert id="InsertEmpresa" parameterType="hashmap">
+    	INSERT INTO sys_empresa(id, nombre, descripcion, id_organizacion)
+        VALUES ( nextval('"SEQ_EMPRESA_ID"'), #{nombre}, #{descripcion}, #{organizacion})
+    </insert>
+    
+    
+    <!-- Regiones. -->
+    
+    <select id="SelectRegiones" resultMap="regionModel" resultType="regionModel">
+    	SELECT id, 
+    	       nombre, 
+    	       descripcion
+ 		FROM sys_region
+ 		ORDER BY nombre ASC
+    </select>
+    
+    
+     <select id="SelectRegionById" resultMap="regionModel" resultType="regionModel" parameterType="integer">
+    	SELECT id, 
+    	       nombre, 
+    	       descripcion
+ 		FROM sys_region
+ 		WHERE id = #{idRegion}
+ 		ORDER BY nombre ASC
+    </select>
+    
+    <insert id="InsertRegion" parameterType="hashmap">
+       INSERT INTO sys_region(
+            id, nombre, descripcion)
+    VALUES (nextval('"SEQ_REGION_ID"'), #{nombre}, #{descripcion})
+    </insert>
+    
+    <!-- Ciudad -->
+    <select id="SelectCiudades" resultMap="ciudadModel" resultType="ciudadModel">
+    	SELECT id, nombre, descripcion, id_region
+        FROM sys_ciudad
+    </select>
+    
+    <select id="SelectCiudadesByRegion" resultMap="ciudadModel" resultType="ciudadModel" parameterType="integer">
+    	SELECT id, nombre, descripcion, id_region
+        FROM sys_ciudad
+        WHERE id_region = #{idRegion}
+    </select>
+    
+    <select id="SelectCiudadById" resultMap="ciudadModel" resultType="ciudadModel" parameterType="integer">
+    	SELECT id, nombre, descripcion, id_region
+        FROM sys_ciudad
+        WHERE id = #{idCiudad}
+        ORDER BY nombre ASC
+    </select>
+    
+    <insert id="InsertCiudad" parameterType="hashmap">
+    	INSERT INTO sys_ciudad(
+            id, nombre, descripcion, id_region)
+        VALUES (nextval('"SEQ_CIUDAD_ID"'), #{nombre}, #{descripcion}, #{region})
+    </insert>
+    
+    <!-- Comuna -->
+       <select id="SelectComunas" resultMap="comunaModel" resultType="comunaModel">
+    	SELECT id, nombre, descripcion, id_provincia
+        FROM sys_comuna
+    </select>
+    
+    <select id="SelectComunasByProvincia" resultMap="comunaModel" resultType="comunaModel" parameterType="integer">
+    	SELECT id, nombre, descripcion, id_provincia
+        FROM sys_comuna
+        WHERE id_provincia = #{idProvincia}
+    </select>
+    
+    <select id="SelectComunaById" resultMap="comunaModel" resultType="comunaModel" parameterType="integer">
+    	SELECT id, nombre, descripcion, id_provincia
+        FROM sys_comuna
+        WHERE id = #{idComuna}
+        ORDER BY nombre ASC
+    </select>
+    
+    <insert id="InsertComuna" parameterType="hashmap">
+    	INSERT INTO sys_comuna(
+            id, nombre, descripcion, id_provincia)
+        VALUES (nextval('"SEQ_COMUNA_ID"'), #{nombre}, #{descripcion}, #{provincia})
+    </insert>
+    
+    <!-- Rol de Proceso. -->
+    <select id="SelectRolProcesos" resultMap="rolProcesoModel" resultType="rolProcesoModel">
+    	SELECT id, nombre, descripcion
+        FROM sys_rol_proceso
+    </select>
+    
+    <select id="SelectRolProcesoById" resultMap="rolProcesoModel" resultType="rolProcesoModel" parameterType="integer">
+    	SELECT id, nombre, descripcion
+        FROM sys_rol_proceso
+        WHERE id = #{id}
+    </select>
+    
+    <insert id="InsertRolProceso" parameterType="hashmap">
+    	INSERT INTO sys_rol_proceso(
+            id, nombre, descripcion)
+        VALUES ( nextval('"SEQ_ROL_PROCESO_ID"'), #{nombre}, #{descripcion})
+    </insert>
+    
+    <!-- Instancia de Flujo. -->
+    
+    <select id="SelectInstancia" resultMap="instanciaModel" resultType="instanciaModel">
+    	SELECT id, id_aplicacion, nombre_instancia, id_tarea_inicial, id_tarea_final, 
+       		   id_organizacion, id_empresa
+  		FROM sys_aplicacion_instancia
+    </select>
+    
+    <select id="SelectInstanciaByFlujo" resultMap="instanciaModel" resultType="instanciaModel" parameterType="integer">
+    	SELECT id, id_aplicacion, nombre_instancia, id_tarea_inicial, id_tarea_final, 
+       		   id_organizacion, id_empresa
+  		FROM sys_aplicacion_instancia
+  		WHERE id_aplicacion = #{idAplicacion}
+    </select>
+    
+     <select id="SelectInstanciaById" resultMap="instanciaModel" resultType="instanciaModel" parameterType="integer">
+    	SELECT id, id_aplicacion, nombre_instancia, id_tarea_inicial, id_tarea_final, 
+       		   id_organizacion, id_empresa
+  		FROM sys_aplicacion_instancia
+  		WHERE id = #{id}
+    </select>
+    
+     <select id="SelectInstanciaByEmpresaAplicacion" resultMap="instanciaModel" resultType="instanciaModel" parameterType="hashmap">
+    	SELECT id, id_aplicacion, nombre_instancia, id_tarea_inicial, id_tarea_final, 
+       		   id_organizacion, id_empresa
+  		FROM sys_aplicacion_instancia
+  		WHERE id_empresa = #{id_empresa}
+  		AND   id_aplicacion = #{id_aplicacion}
+    </select>
+    
+    <select id="SelectNextIdInstancia" resultType="integer">
+    	SELECT nextval('"SEQ_APLICACION_INSTANCIA_ID"')
+    </select>
+    
+    
+    <insert id="InsertInstancia" parameterType="hashmap">
+    	INSERT INTO sys_aplicacion_instancia(
+            id, id_aplicacion, nombre_instancia, id_tarea_inicial, id_tarea_final, 
+            id_organizacion, id_empresa)
+    	VALUES ( #{id}, #{id_aplicacion}, #{nombre_instancia}, 
+    	#{id_tarea_inicial}, #{id_tarea_final}, #{id_organizacion}, #{id_empresa})
+    </insert>
+    
+    <update id="UpdateInstancia" parameterType="hashmap">
+    
+    </update>
+    
+    <delete id="DeleteInstancia" parameterType="integer">
+    
+    </delete>
+    
+    
+    <select id="SelectTipoParametro" resultMap="tipoParametro" resultType="tipoParametro">
+    	SELECT id, nombre, descripcion
+  	    FROM sys_tipo_parametro
+  	    ORDER BY nombre ASC
+    </select>
+    
+    <select id="SelectTipoParametroById" resultMap="tipoParametro" resultType="tipoParametro" parameterType="integer">
+    	SELECT id, nombre, descripcion
+  	    FROM sys_tipo_parametro
+  	    WHERE id = #{id}
+    </select>
+    
+    <select id="SearchTipoParametro" resultMap="tipoParametro" resultType="tipoParametro" parameterType="hashmap">
+    	SELECT id, nombre, descripcion
+  	    FROM sys_tipo_parametro
+  	    <if test="nombre != null">
+  	    	WHERE upper(nombre) LIKE '%'||#{nombre}||'%'
+  	    	<if test="descripcion != null">
+  	    		AND upper(descripcion) LIKE '%'||#{descripcion}||'%'
+  	    	</if>
+  	    </if>
+  	    <if test="nombre == null">
+  	    	<if test="descripcion != null">
+  	    		WHERE upper(descripcion) LIKE '%'||#{descripcion}||'%'
+  	    	</if>
+  	    </if>
+    </select>
+    
+    <insert id="InsertTipoParametro" parameterType="hashmap">    	
+    	INSERT INTO sys_tipo_parametro(
+            id, nombre, descripcion)
+    VALUES (nextval('"SEQ_TIPO_PARAMETRO_ID"'), #{nombre}, #{descripcion})
+    </insert>
+    
+    <update id="UpdateTipoParametro" parameterType="hashmap">
+    	UPDATE sys_tipo_parametro
+  		SET  nombre      = #{nombre}, 
+  		     descripcion = #{descripcion}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="DeleteTipoParametro" parameterType="hashmap">
+    	DELETE FROM sys_tipo_parametro
+ 		WHERE id = #{id}
+    </delete>
+    
+    <!-- Parámetros -->
+    <select id="SelectParametro" resultMap="parametroModel" resultType="parametroModel">
+    	SELECT id, nombre, descripcion, id_tipo_parametro
+  	    FROM sys_parametros
+  	    ORDER BY nombre ASC
+    </select>
+    
+    <select id="SelectParametroById" resultMap="parametroModel" resultType="parametroModel" parameterType="integer">
+    	SELECT id, nombre, descripcion, id_tipo_parametro
+  	    FROM sys_parametros
+  	    WHERE id = #{id}
+    </select>
+    
+    <select id="SearchParametro" resultMap="parametroModel" resultType="parametroModel" parameterType="hashmap">
+    	SELECT id, nombre, descripcion, id_tipo_parametro
+  	    FROM sys_parametros
+  	    <if test="nombre != null">
+  	    	WHERE upper(nombre) LIKE '%'||#{nombre}||'%'
+  	    	<if test="descripcion != null">
+  	    		AND upper(descripcion) LIKE '%'||#{descripcion}||'%'
+  	    	</if>
+  	    	<if test="tipo_parametro != -1">
+  	    		AND id_tipo_parametro = #{tipo_parametro}
+  	    	</if>
+  	    </if>
+  	    <if test="nombre == null">
+  	    	<if test="descripcion != null">
+  	    		WHERE upper(descripcion) LIKE '%'||#{descripcion}||'%'
+  	    		<if test="tipo_parametro != -1">
+  	    			AND id_tipo_parametro = #{tipo_parametro}
+  	    	    </if>
+  	    	</if>
+  	    	<if test="descripcion == null">
+  	    		<if test="tipo_parametro != -1">
+  	    			WHERE id_tipo_parametro = #{tipo_parametro}
+  	    	    </if>
+  	    	</if>
+  	    </if>
+    </select>
+    
+    
+    
+    <select id="SelectParametroByTipoParametro" resultMap="parametroModel" resultType="parametroModel" parameterType="integer">
+    	SELECT id, nombre, descripcion, id_tipo_parametro
+  	    FROM sys_parametros
+  	    WHERE id_tipo_parametro = #{idTipoParametro}
+  	    ORDER BY nombre ASC
+    </select>
+    
+    <insert id="InsertParametro" parameterType="hashmap">    	
+    	INSERT INTO sys_parametros( id, nombre, descripcion, id_tipo_parametro)
+        VALUES (nextval('"SEQ_TIPO_PARAMETRO_ID"'), #{nombre}, #{descripcion}, #{tipo_parametro})
+    </insert>
+    
+    <update id="UpdateParametro" parameterType="hashmap">
+    	UPDATE sys_parametros
+  		SET  nombre            = #{nombre}, 
+  		     descripcion       = #{descripcion},
+  		     id_tipo_parametro = #{id_tipo_parametro}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="DeleteParametro" parameterType="hashmap">
+    	DELETE FROM sys_parametros
+ 		WHERE id = #{id}
+    </delete>
+    
+    <select id="SelectEstructura" resultMap="estructuraModel" resultType="estructuraModel">
+    	SELECT id, nombre, requerido, modelo_organizacion, id_lista, id_clase
+  		FROM sys_estructura
+  		ORDER BY nombre ASC
+    </select> 
+    
+    <select id="SelectEstructuraByModelo" resultMap="estructuraModel" resultType="estructuraModel" parameterType="string">
+    	SELECT id, nombre, requerido, modelo_organizacion, id_lista, id_clase
+  		FROM sys_estructura WHERE modelo_organizacion = #{modelo}
+  		ORDER BY nombre ASC
+    </select>   
+    
+    <select id="SelectEstructuraById" resultMap="estructuraModel" resultType="estructuraModel" parameterType="integer">
+    	SELECT id, nombre, requerido, modelo_organizacion, id_lista, id_clase
+  		FROM sys_estructura WHERE id = #{id}
+    </select>
+    
+    <select id="SearchEstructura" resultMap="estructuraModel" resultType="estructuraModel" parameterType="hashmap">
+    	SELECT id, nombre, requerido, modelo_organizacion, id_lista, id_clase
+  		FROM sys_estructura
+  		<if test="nombre != null">
+  			WHERE upper(nombre) LIKE '%'||#{nombre}||'%'
+  			<if test="modelo != null">
+  				AND modelo_organizacion = #{modelo}
+  			</if>
+  			<if test="lista != -1">
+  			    AND id_lista = #{lista}
+  			</if>
+  			<if test="clase != -1">
+  				AND id_clase = #{clase}
+  			</if>
+  			<if test="requerido != null">
+  				AND requerido = #{requerido}
+  			</if>  			
+  		</if>
+  		<if test="nombre == null">
+  			<if test="modelo != null">
+  				WHERE modelo_organizacion = #{modelo}
+	  				<if test="lista != -1">
+	  			    	AND id_lista = #{lista}
+		  			</if>
+		  			<if test="clase != -1">
+		  				AND id_clase = #{clase}
+		  			</if>
+		  			<if test="requerido != null">
+		  				AND requerido = #{requerido}
+		  			</if>  
+  			</if>
+  			<if test="modelo == null">
+	  				<if test="lista != -1">
+	  			    	WHERE id_lista = #{lista}
+	  			    		<if test="clase != -1">
+		  						AND id_clase = #{clase}
+		  					</if>
+		  					<if test="requerido != null">
+		  						AND requerido = #{requerido}
+		  					</if> 
+		  			</if>
+		  			<if test="lista == -1">
+					  		<if test="clase != -1">
+		  						WHERE id_clase = #{clase}
+		  							<if test="requerido != null">
+		  								AND requerido = #{requerido}
+		  							</if> 
+		  					</if>
+		  					<if test="clase == -1">		  						
+		  							<if test="requerido != null">
+		  								WHERE requerido = #{requerido}
+		  							</if> 
+		  					</if>
+		  			</if>
+  			</if>			
+  		</if>
+  		 
+  		WHERE id = #{id}
+    </select>    
+     
+    
+    
+    <select id="SelectLista" resultMap="listaModel" resultType="listaModel">
+    	SELECT id, valor, id_parametro
+  		FROM sys_listas
+  		ORDER BY valor ASC
+    </select>
+    
+    <select id="SelectListaById" resultMap="listaModel" resultType="listaModel" parameterType="integer">
+    	SELECT id, valor, id_parametro
+  		FROM sys_listas
+  		WHERE id = #{id}
+    </select>
+    
+    <select id="SelectListaByIdParametro" resultMap="listaModel" resultType="listaModel" parameterType="integer">
+    	SELECT id, valor, id_parametro
+  		FROM sys_listas
+  		WHERE id_parametro = #{id}
+  		ORDER BY valor ASC
+    </select>    
+    
+    <select id="SearchLista" resultMap="listaModel" resultType="listaModel" parameterType="hashmap">
+    	SELECT id, valor, id_parametro
+  		FROM sys_listas
+  		<if test="valor != null">
+  			WHERE upper(valor) LIKE '%'||#{valor}||'%'
+  			<if test="parametro != -1">
+  				AND id_parametro = #{parametro}
+  			</if>
+  		</if>
+  		<if test="valor == null">
+  			<if test="parametro != -1">
+  				WHERE id_parametro = #{parametro}
+  			</if>
+  		</if>
+    </select>  
+    
+    
+    
+    <insert id="InsertLista" parameterType="hashmap">
+    	INSERT INTO sys_listas(
+            id, valor, id_parametro)
+    	VALUES ( nextval('"SEQ_ID_LISTA"'), #{valor}, #{parametro})
+    </insert>    
+    
+    <update id="UpdateLista" parameterType="hashmap">
+    	UPDATE sys_listas
+   		SET  valor        =#{valor}, 
+   		     id_parametro =#{parametro}
+ 		WHERE id= #{id}
+    </update>
+    
+    <delete id="DeleteLista" parameterType="hashmap">
+    	DELETE FROM sys_listas
+ 		WHERE id= #{id}
+    </delete>
+    
+</mapper>

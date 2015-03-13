@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <properties resource="properties/jselector.properties"/>
+  <!-- settings>
+  	<setting name="logImpl" value="org.apache.ibatis.logging.LogFactory.useLog4JLogging()"/>
+  </settings-->
+  <typeAliases>      
+    
+      <typeAlias alias="informeLegalModel"          type="cl.jazocar.jselector.front.form.dto.InformeLegalDTO"/>
+      <typeAlias alias="hipotecaModel"              type="cl.jazocar.jselector.front.form.dto.HipotecaDTO"/>
+      <typeAlias alias="vendedorGaranteModel"       type="cl.jazocar.jselector.front.form.dto.VendedorGaranteDTO"/>
+      <typeAlias alias="avalModel"                  type="cl.jazocar.jselector.front.form.dto.AvalDTO"/>
+      <typeAlias alias="antecedentesPropiedadModel" type="cl.jazocar.jselector.front.form.dto.AntecedentesPropiedadDTO"/>
+      <typeAlias alias="bodegaModel"                type="cl.jazocar.jselector.front.form.dto.BodegaDTO"/>
+      <typeAlias alias="estacionamientoModel"       type="cl.jazocar.jselector.front.form.dto.EstacionamientoDTO"/>
+      <typeAlias alias="hipotecaCheckModel"         type="cl.jazocar.jselector.front.form.dto.HipotecaCheckDTO"/>
+      <typeAlias alias="hipotecaCheckAdjuntoModel" type="cl.jazocar.jselector.front.form.dto.HipotecaCheckAdjuntosDTO"/>
+     <typeAlias alias="calendar"                    type="java.util.Calendar"/>	 
+  </typeAliases>  
+ 
+  
+  <environments default="${enviroment}">
+    <environment id="localhost">
+      <transactionManager type="JDBC"/>
+	     <dataSource type="JNDI">
+        	 <property name="data_source" value="${cl.jazocar.jselector.jndi.local}"/>
+    	</dataSource>
+    </environment>  
+     <environment id="development">
+      <transactionManager type="JDBC"/>
+	     <dataSource type="JNDI">
+        	 <property name="data_source" value="${cl.jazocar.jselector.jndi.development}"/>
+    	</dataSource>
+    </environment> 
+  </environments>
+  
+  <mappers>
+   	<mapper resource="cl/jazocar/jselector/mybatis/form_mapper.xml"/>
+  </mappers>
+
+</configuration>
