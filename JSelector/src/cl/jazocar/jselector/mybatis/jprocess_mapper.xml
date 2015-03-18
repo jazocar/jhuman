@@ -225,6 +225,12 @@
 		<result property="idParametro"        column="id_parametro" />
 	</resultMap>
 	
+	<resultMap type="afpModel" id="afpModel">
+		<result property="id" 	              column="id" />
+		<result property="codigo" 	          column="codigo" />
+		<result property="glosa" 	          column="glosa" />
+	</resultMap>
+	
 		
 	<!-- Usuarios -->
 	
@@ -1244,12 +1250,14 @@
     <select id="SelectCiudades" resultMap="ciudadModel" resultType="ciudadModel">
     	SELECT id, nombre, descripcion, id_region
         FROM sys_ciudad
+        ORDER BY nombre ASC 
     </select>
     
     <select id="SelectCiudadesByRegion" resultMap="ciudadModel" resultType="ciudadModel" parameterType="integer">
     	SELECT id, nombre, descripcion, id_region
         FROM sys_ciudad
         WHERE id_region = #{idRegion}
+        ORDER BY nombre ASC 
     </select>
     
     <select id="SelectCiudadById" resultMap="ciudadModel" resultType="ciudadModel" parameterType="integer">
@@ -1269,12 +1277,14 @@
        <select id="SelectComunas" resultMap="comunaModel" resultType="comunaModel">
     	SELECT id, nombre, descripcion, id_provincia
         FROM sys_comuna
+        ORDER BY nombre ASC
     </select>
     
     <select id="SelectComunasByProvincia" resultMap="comunaModel" resultType="comunaModel" parameterType="integer">
     	SELECT id, nombre, descripcion, id_provincia
         FROM sys_comuna
         WHERE id_provincia = #{idProvincia}
+        ORDER BY nombre ASC
     </select>
     
     <select id="SelectComunaById" resultMap="comunaModel" resultType="comunaModel" parameterType="integer">
@@ -1606,5 +1616,36 @@
     	DELETE FROM sys_listas
  		WHERE id= #{id}
     </delete>
+    
+    
+    <select id="SelectAFP" resultMap="afpModel" resultType="afpModel">
+    	SELECT id, codigo, glosa
+  		FROM auxiliares.afp
+  		ORDER BY glosa ASC
+    </select>
+     
+     <select id="SelectAFPById" resultMap="afpModel" resultType="afpModel">
+    	SELECT id, codigo, glosa
+  		FROM auxiliares.afp
+  		WHERE id = #{id}
+    </select>
+    
+    <insert id="InsertAFP" parameterType="hashmap">
+    	INSERT INTO auxiliares.afp(id, codigo, glosa)
+        VALUES ( nextval('auxiliares."SEQ_ID_AFP"'), #{codigo}, #{glosa})
+    </insert>
+    
+    <update id="UpdateAFP" parameterType="hashmap">
+    	UPDATE auxiliares.afp
+   		SET codigo= #{codigo}, glosa=#{glosa}
+ 		WHERE id = #{id}
+    </update>
+    
+    <delete id="DeleteAFP" parameterType="hashmap">
+    	DELETE FROM auxiliares.afp
+ 		WHERE id = #{id}
+    </delete>
+    
+    
     
 </mapper>

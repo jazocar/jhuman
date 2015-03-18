@@ -21,7 +21,20 @@
 	    <ace:ajax event="activate" execute="@this">
 										<f:param name="stackName" value="inicioPorHacerPanel" />
 									</ace:ajax>
-		</ice:commandLink><ice:outputText value=">"/>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Mantención y Utilidades" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorAreasPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Organización" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorAreasPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
 		<ice:commandLink value="Mantenedor de Áreas" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
 	    <ace:ajax event="activate" execute="@this">
 										<f:param name="stackName" value="mantenedorAreasPanel" />
@@ -51,6 +64,7 @@
 			</tr>
 		</table>
 		<br />
+		<div align="right">
 			<table>
 				<tr>
 					<td><ace:pushButton value="Ingresar"
@@ -66,17 +80,18 @@
 							actionListener="#{areaFrontBean.resetAreaListener}" /></td>
 				</tr>
 			</table>
+			</div>
 			<br/>
 		<ace:dataTable id="idListado" value="#{areaFrontBean.listaArea}" var="area" selectionMode="single" paginator="true" paginatorPosition="top" rows="10" rowSelectListener="#{areaFrontBean.organizacionSelectListener}">
-			<ace:column headerText="Organizacion" style="font-family: 'Times New Roman', Times, serif;text-align:left;">
+			<ace:column headerText="Organizacion" sortBy="#{area.idOrganizacion}" style="font-family: 'Times New Roman', Times, serif;text-align:left;">
 				<h:outputText  value="#{area.idOrganizacion}" style="font-family: 'Times New Roman', Times, serif;">
 					<f:converter converterId="organizationConverter"/>
 				</h:outputText>
 			</ace:column>
-			<ace:column headerText="Nombre" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+			<ace:column headerText="Nombre" sortBy="#{area.nombre}" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
 				<h:outputText  value="#{area.nombre}" style="font-family: 'Times New Roman', Times, serif;" />
 			</ace:column>
-			<ace:column headerText="Descripción" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+			<ace:column headerText="Descripción" sortBy="#{area.descripcion}" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
 				<h:outputText  value="#{area.descripcion}" style="font-family: 'Times New Roman', Times, serif;"/>
 			</ace:column>
 		</ace:dataTable>

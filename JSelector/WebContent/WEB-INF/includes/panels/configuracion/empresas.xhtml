@@ -21,8 +21,21 @@
 	    <ace:ajax event="activate" execute="@this">
 										<f:param name="stackName" value="inicioPorHacerPanel" />
 									</ace:ajax>
-		</ice:commandLink><ice:outputText value=">"/>
-		<ice:commandLink value="Mantenedor de Empresas" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Mantención y Utilidades" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorEmpresasPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Organización" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorEmpresasPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Crear Empresa" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
 	    <ace:ajax event="activate" execute="@this">
 										<f:param name="stackName" value="mantenedorEmpresasPanel" />
 									</ace:ajax>
@@ -33,7 +46,7 @@
 	   <ice:panelGroup style="width: 1010px; background-color:white; padding-top: 5px;">
                            <ice:panelGroup styleClass="iceDatTblColHdr">
                            <div align="left">
-                               <ice:outputText value="::Mantenedor de Empresas" style="font-size:medium; color:black;"/>
+                               <ice:outputText value="::Crear Empresa" style="font-size:medium; color:black;"/>
                            </div>
                </ice:panelGroup>                 
                <br/> 

@@ -8,6 +8,7 @@ import cl.jazocar.jselector.front.form.dto.BodegaDTO;
 import cl.jazocar.jselector.front.form.dto.AntecedentesPropiedadDTO;
 import cl.jazocar.jselector.front.form.dto.AvalDTO;
 import cl.jazocar.jselector.front.form.dto.EstacionamientoDTO;
+import cl.jazocar.jselector.front.form.dto.FichaPersonalDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaCheckAdjuntosDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaCheckDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaDTO;
@@ -298,6 +299,36 @@ public class FormServiceImpl implements FormServiceInterface {
 			int idHipoteca) {
 		// TODO Auto-generated method stub
 		return formDao.selectDocAdjuntosHipotecaFileByHipoteca(idHipoteca);
+	}
+
+	@Override
+	public Integer insertFichaPersonal(FichaPersonalDTO fichaPersonal) {
+		// TODO Auto-generated method stub
+		return formDao.insertFichaPersonal(fichaPersonal);
+	}
+
+	@Override
+	public Integer updateFichaPersonal(FichaPersonalDTO fichaPersonal) {
+		// TODO Auto-generated method stub
+		return formDao.updateFichaPersonal(fichaPersonal);
+	}
+
+	@Override
+	public Integer deleteFichaPersonal(FichaPersonalDTO fichaPersonal) {
+		// TODO Auto-generated method stub
+		return formDao.deleteFichaPersonal(fichaPersonal);
+	}
+
+	@Override
+	public List<FichaPersonalDTO> selectFichaPersonal() {
+		// TODO Auto-generated method stub
+		return formDao.selectFichaPersonal();
+	}
+
+	@Override
+	public FichaPersonalDTO selectFichaPersonalByIdEmpleado(int id) {
+		// TODO Auto-generated method stub
+		return formDao.selectFichaPersonalByIdEmpleado(id);
 	}
 	
 	

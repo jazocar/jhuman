@@ -103,6 +103,35 @@
     </resultMap>
     
     
+    <resultMap type="fichaPersonalModel" id="fichaPersonalModel">
+    	<result property="idEmpleado"      column="id_empleado" />
+    	<result property="rutaImagen"      column="ruta_imagen" />
+    	<result property="rut"             column="rut" />
+    	<result property="apPaterno"       column="ap_paterno" />
+    	<result property="apMaterno"       column="ap_materno" />
+    	<result property="nombres"         column="nombres" />
+    	<result property="sexo"            column="sexo" />
+    	<result property="estCivil"        column="est_civil" />
+    	<result property="discapacidad"    column="discapacidad" />
+    	<result property="fecNac"          column="fec_nac" />
+    	<result property="idCiudad"        column="ciudad_id" />
+    	<result property="idComuna"        column="comuna_id" />
+    	<result property="idRegion"        column="region_id" />
+    	<result property="idPais"          column="pais_id" />
+    	<result property="sitMilitar"      column="sit_militar" />
+    	<result property="calle"           column="calle" />
+    	<result property="numero"          column="numero" />
+    	<result property="villa"           column="villa" />
+    	<result property="calleRef"        column="calle_ref" />
+    	<result property="codPostal"       column="cod_postal" />
+    	<result property="fonoMovil"       column="fono_movil" />
+    	<result property="telefonoFijo"    column="telefono_fijo" />
+    	<result property="emailEmpresa"    column="email_empresa" />
+    	<result property="emailPersonal"   column="email_personal" />
+    	<result property="fonoEmergencia"  column="fono_emergencia" />
+    </resultMap>
+    
+    
     <select id="SelectNextIdInformeLegal" resultType="integer" parameterType="integer">
     	SELECT nextval('formularios."SEQ_INFORME_LEGAL_ID"') 
     </select>
@@ -344,4 +373,92 @@
    	    VALUES (nextval('formularios."SEQ_HIPOTECA_CHECK_ADJUNTO_ID"'), #{id_hipoteca}, #{nombre}, replace(#{ruta}, ' ', '%20'))
     </insert>
     
+    
+    <!-- Ficha Personal -->
+    <select id="SelectFichaPersonal" resultMap="fichaPersonalModel" resultType="fichaPersonalModel">
+    	SELECT id_empleado, image_id, rut, ap_paterno, ap_materno, nombres, 
+       		   sexo, est_civil, discapacidad, fec_nac, ciudad_id, comuna_id, 
+       		   region_id, pais_id, sit_militar, calle, numero, villa, calle_ref, 
+       		   cod_postal, fono_movil, telefono_fijo, email_empresa, email_personal, 
+       		   fono_emergencia
+  	    FROM formularios.ficha_personal
+    </select>
+    
+    <select id="SelectFichaPersonalByIdEmpleado" resultMap="fichaPersonalModel" resultType="fichaPersonalModel" parameterType="integer">
+    	SELECT id_empleado, ruta_imagen, rut, ap_paterno, ap_materno, nombres, 
+       		   sexo, est_civil, discapacidad, fec_nac, ciudad_id, comuna_id, 
+       		   region_id, pais_id, sit_militar, calle, numero, villa, calle_ref, 
+       		   cod_postal, fono_movil, telefono_fijo, email_empresa, email_personal, 
+       		   fono_emergencia
+  	    FROM formularios.ficha_personal
+  	    WHERE id_empleado = #{id}
+    </select>
+    
+    <insert id="InsertFichaPersonal" parameterType="hashmap">
+    	INSERT INTO formularios.ficha_personal(
+            id_empleado, ruta_imagen, rut, ap_paterno, ap_materno, nombres, 
+            sexo, est_civil, discapacidad, fec_nac, ciudad_id, comuna_id, 
+            region_id, pais_id, sit_militar, calle, numero, villa, calle_ref, 
+            cod_postal, fono_movil, telefono_fijo, email_empresa, email_personal, 
+            fono_emergencia)
+    	VALUES (nextval('formularios."SEQ_FICHA_PERSONAL_ID"'), 
+	            #{ruta_imagen}, 
+	            #{rut}, 
+	            #{ap_paterno}, 
+	            #{ap_materno}, 
+	            #{nombres}, 
+	            #{sexo}, 
+	            #{est_civil}, 
+	            #{discapacidad}, 
+	            #{fec_nac}, 
+	            #{ciudad_id}, 
+	            #{comuna_id}, 
+	            #{region_id}, 
+	            #{pais_id}, 
+	            #{sit_militar}, 
+	            #{calle}, 
+	            #{numero}, 
+	            #{villa}, 
+	            #{calle_ref}, 
+	            #{cod_postal}, 
+	            #{fono_movil}, 
+	            #{telefono_fijo}, 
+	            #{email_empresa}, 
+	            #{email_personal}, 
+	            #{fono_emerencia})
+    </insert>
+    
+    <update id="UpdateFichaPersonal" parameterType="hashmap">
+    	UPDATE formularios.ficha_personal
+   		SET rut=#{rut}, 
+   			ap_paterno=#{ap_paterno}, 
+   			ap_materno=#{ap_materno}, 
+   			nombres=#{nombres}, 
+       		sexo=#{sexo}, 
+       		est_civil=#{est_civil}, 
+       		discapacidad=#{discapacidad}, 
+       		fec_nac=#{fec_nac}, 
+       		ciudad_id=#{ciudad_id}, 
+       		comuna_id=#{comuna_id}, 
+       		region_id=#{region_id}, 
+       		pais_id=#{pais_id}, 
+       		sit_militar=#{sit_militar}, 
+       		calle=#{calle}, 
+       		numero=#{numero}, 
+       		villa=#{villa}, 
+       		calle_ref=#{calle_ref}, 
+       		cod_postal=#{cod_postal}, 
+       		fono_movil=#{fono_movil}, 
+       		telefono_fijo=#{telefono_fijo}, 
+       		email_empresa=#{email_empresa}, 
+       		email_personal=#{email_personal}, 
+       		fono_emergencia=#{fono_emergencia}, 
+       		ruta_imagen=#{ruta_imagen}
+ 		WHERE id_empleado = #{id}
+    </update>
+    
+    <delete id="DeleteFichaPersonal" parameterType="hashmap">
+    	DELETE FROM formularios.ficha_personal
+ 		WHERE id = #{id}
+    </delete>
 </mapper>

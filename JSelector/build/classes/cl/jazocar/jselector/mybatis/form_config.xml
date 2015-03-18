@@ -15,8 +15,11 @@
       <typeAlias alias="bodegaModel"                type="cl.jazocar.jselector.front.form.dto.BodegaDTO"/>
       <typeAlias alias="estacionamientoModel"       type="cl.jazocar.jselector.front.form.dto.EstacionamientoDTO"/>
       <typeAlias alias="hipotecaCheckModel"         type="cl.jazocar.jselector.front.form.dto.HipotecaCheckDTO"/>
-      <typeAlias alias="hipotecaCheckAdjuntoModel" type="cl.jazocar.jselector.front.form.dto.HipotecaCheckAdjuntosDTO"/>
-     <typeAlias alias="calendar"                    type="java.util.Calendar"/>	 
+      <typeAlias alias="hipotecaCheckAdjuntoModel"  type="cl.jazocar.jselector.front.form.dto.HipotecaCheckAdjuntosDTO"/>
+      <typeAlias alias="calendar"                   type="java.util.Calendar"/>	
+      <typeAlias alias="fichaPersonalModel"         type="cl.jazocar.jselector.front.form.dto.FichaPersonalDTO"/>
+     
+      
   </typeAliases>  
  
   

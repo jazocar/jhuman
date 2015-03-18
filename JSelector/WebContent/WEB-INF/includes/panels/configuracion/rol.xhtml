@@ -21,7 +21,14 @@
 	    <ace:ajax event="activate" execute="@this">
 										<f:param name="stackName" value="inicioPorHacerPanel" />
 									</ace:ajax>
-		</ice:commandLink><ice:outputText value=">"/>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Seguridad" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorRolPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
 		<ice:commandLink value="Mantenedor de Roles" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
 	    <ace:ajax event="activate" execute="@this">
 										<f:param name="stackName" value="mantenedorRolPanel" />
@@ -32,7 +39,7 @@
 	  <ice:panelGroup style="width: 1010px; background-color:white; padding-top: 5px;">
                            <ice:panelGroup styleClass="iceDatTblColHdr">
                            <div align="left">
-                               <ice:outputText value="::Mantenedor de Roles" style="font-size:medium; color:black;"/>
+                               <ice:outputText value="::Mantenedor de Roles y Perfiles" style="font-size:medium; color:black;"/>
                            </div>
                </ice:panelGroup>                 
                <br/> 
@@ -42,7 +49,7 @@
 				<td><ice:inputText  value="#{rolFrontBean.inputNombreRol}"  immediate="true" style="font-family: 'Times New Roman', Times, serif;"/></td>
 			</tr>
 		</table>
-		<div align="left">
+		<div align="right">
 			<br />
 			<table>
 				<tr>
@@ -61,11 +68,25 @@
 			</table>
 		</div>
 		<br/>
-		<ace:dataTable value="#{rolFrontBean.listaRol}" var="rol" paginator="true" paginatorPosition="top" rows="10" rowSelectListener="#{rolFrontBean.rolSelectListener}" selectionMode="single">
-			<ace:column headerText="Nombre" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+		<ace:dataTable id="idListado" value="#{rolFrontBean.listaRol}" var="rol" paginator="true" paginatorPosition="top" rows="10" rowSelectListener="#{rolFrontBean.rolSelectListener}" selectionMode="single">
+			<ace:column headerText="Nombre" sortBy="#{rol.nombreRol}" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
 				<h:outputText value="#{rol.nombreRol}" style="font-family: 'Times New Roman', Times, serif;"/>
 			</ace:column>
 		</ace:dataTable>
+		<div align="right">
+					<table>
+						<tr>
+							<td><ace:dataExporter id="dataExporterXls" label="Excel"
+									type="xls" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterPdf" label="PDF"
+									type="pdf" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterCsv" label="CSV"
+									type="csv" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterXml" label="XML"
+									type="xml" target="idListado" fileName="output" /></td>
+						</tr>
+					</table>
+				</div>			
       </ice:panelGroup>
 	
 	</h:form>

@@ -12,6 +12,7 @@ import cl.jazocar.jselector.front.form.dto.AntecedentesPropiedadDTO;
 import cl.jazocar.jselector.front.form.dto.AvalDTO;
 import cl.jazocar.jselector.front.form.dto.BodegaDTO;
 import cl.jazocar.jselector.front.form.dto.EstacionamientoDTO;
+import cl.jazocar.jselector.front.form.dto.FichaPersonalDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaCheckAdjuntosDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaCheckDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaDTO;
@@ -357,6 +358,89 @@ public class FormDaoImpl  extends MyBatisCommonDao  implements FormDaoInterface 
 			int idHipoteca) {
 		// TODO Auto-generated method stub
 		return genericSelect("mybatis.form.SelectChkHipotecaAdjuntosByHipoteca", idHipoteca);
+	}
+
+	@Override
+	public Integer insertFichaPersonal(FichaPersonalDTO fichaPersonal) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> hash = new HashMap<String, Object>();
+		hash.put("rut", fichaPersonal.getRut());
+		hash.put("ap_paterno", fichaPersonal.getApPaterno());
+		hash.put("ap_materno", fichaPersonal.getApMaterno());
+		hash.put("nombres", fichaPersonal.getNombres());
+		hash.put("sexo", fichaPersonal.getSexo());
+		hash.put("est_civil", fichaPersonal.getEstCivil());
+		hash.put("discapacidad", fichaPersonal.getDiscapacidad());
+		hash.put("fec_nac", fichaPersonal.getFecNac());
+		hash.put("ciudad_id", fichaPersonal.getIdCiudad());
+		hash.put("comuna_id", fichaPersonal.getIdComuna());
+		hash.put("region_id", fichaPersonal.getIdRegion());
+		hash.put("pais_id", fichaPersonal.getIdPais());
+		hash.put("sit_militar", fichaPersonal.getSitMilitar());
+		hash.put("calle", fichaPersonal.getCalle());
+		hash.put("numero", fichaPersonal.getNumero());
+		hash.put("villa", fichaPersonal.getVilla());
+		hash.put("calle_ref", fichaPersonal.getCalleRef());
+		hash.put("cod_postal", fichaPersonal.getCodPostal());
+		hash.put("fono_movil", fichaPersonal.getFonoMovil());
+		hash.put("telefono_fijo", fichaPersonal.getTelefonoFijo());
+		hash.put("email_empresa", fichaPersonal.getEmailEmpresa());
+		hash.put("email_personal", fichaPersonal.getEmailPersonal());
+		hash.put("fono_emergencia", fichaPersonal.getFonoEmergencia());
+		hash.put("ruta_imagen", fichaPersonal.getRutaImagen());
+		return genericInsert("mybatis.form.InsertFichaPersonal", hash);
+	}
+
+	@Override
+	public Integer updateFichaPersonal(FichaPersonalDTO fichaPersonal) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> hash = new HashMap<String, Object>();
+		hash.put("id", fichaPersonal.getIdEmpleado());
+		hash.put("rut", fichaPersonal.getRut());
+		hash.put("ap_paterno", fichaPersonal.getApPaterno());
+		hash.put("ap_materno", fichaPersonal.getApMaterno());
+		hash.put("nombres", fichaPersonal.getNombres());
+		hash.put("sexo", fichaPersonal.getSexo());
+		hash.put("est_civil", fichaPersonal.getEstCivil());
+		hash.put("discapacidad", fichaPersonal.getDiscapacidad());
+		hash.put("fec_nac", fichaPersonal.getFecNac());
+		hash.put("ciudad_id", fichaPersonal.getIdCiudad());
+		hash.put("comuna_id", fichaPersonal.getIdComuna());
+		hash.put("region_id", fichaPersonal.getIdRegion());
+		hash.put("pais_id", fichaPersonal.getIdPais());
+		hash.put("sit_militar", fichaPersonal.getSitMilitar());
+		hash.put("calle", fichaPersonal.getCalle());
+		hash.put("numero", fichaPersonal.getNumero());
+		hash.put("villa", fichaPersonal.getVilla());
+		hash.put("calle_ref", fichaPersonal.getCalleRef());
+		hash.put("cod_postal", fichaPersonal.getCodPostal());
+		hash.put("fono_movil", fichaPersonal.getFonoMovil());
+		hash.put("telefono_fijo", fichaPersonal.getTelefonoFijo());
+		hash.put("email_empresa", fichaPersonal.getEmailEmpresa());
+		hash.put("email_personal", fichaPersonal.getEmailPersonal());
+		hash.put("fono_emergencia", fichaPersonal.getFonoEmergencia());
+		hash.put("ruta_imagen", fichaPersonal.getRutaImagen());
+		return genericUpdate("mybatis.form.UpdateFichaPersonal", hash);
+	}
+
+	@Override
+	public Integer deleteFichaPersonal(FichaPersonalDTO fichaPersonal) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> hash = new HashMap<String, Object>();
+		hash.put("id", fichaPersonal.getIdEmpleado());
+		return genericDelete("mybatis.form.DeleteFichaPersonal", hash);
+	}
+
+	@Override
+	public List<FichaPersonalDTO> selectFichaPersonal() {
+		// TODO Auto-generated method stub
+		return genericSelect("mybatis.form.SelectFichaPersonal");
+	}
+
+	@Override
+	public FichaPersonalDTO selectFichaPersonalByIdEmpleado(int id) {
+		// TODO Auto-generated method stub
+		return genericSelectOne("mybatis.form.SelectFichaPersonalByIdEmpleado", id);
 	}
 
 }

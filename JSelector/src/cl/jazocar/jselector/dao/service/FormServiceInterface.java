@@ -6,6 +6,7 @@ import cl.jazocar.jselector.front.form.dto.AntecedentesPropiedadDTO;
 import cl.jazocar.jselector.front.form.dto.AvalDTO;
 import cl.jazocar.jselector.front.form.dto.BodegaDTO;
 import cl.jazocar.jselector.front.form.dto.EstacionamientoDTO;
+import cl.jazocar.jselector.front.form.dto.FichaPersonalDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaCheckAdjuntosDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaCheckDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaDTO;
@@ -13,6 +14,13 @@ import cl.jazocar.jselector.front.form.dto.InformeLegalDTO;
 import cl.jazocar.jselector.front.form.dto.VendedorGaranteDTO;
 
 public interface FormServiceInterface {
+	
+	//Ficha Personal.
+	public Integer               insertFichaPersonal(FichaPersonalDTO fichaPersonal);
+	public Integer  		     updateFichaPersonal(FichaPersonalDTO fichaPersonal);
+	public Integer               deleteFichaPersonal(FichaPersonalDTO fichaPersonal);
+	public List<FichaPersonalDTO> selectFichaPersonal();
+	public FichaPersonalDTO       selectFichaPersonalByIdEmpleado(int id);	
 
 	//Informe Legal.
 		public Integer               selectNextIdInformeLegal();

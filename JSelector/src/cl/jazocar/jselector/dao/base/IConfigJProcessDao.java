@@ -2,6 +2,7 @@ package cl.jazocar.jselector.dao.base;
 
 import java.util.List;
 
+import cl.jazocar.jselector.dto.AFPDTO;
 import cl.jazocar.jselector.dto.AplicacionDTO;
 import cl.jazocar.jselector.dto.AreaDTO;
 import cl.jazocar.jselector.dto.CasoComentarioDTO;
@@ -282,4 +283,10 @@ public interface IConfigJProcessDao {
 	  public List<ListaDTO>  selectListaByIdParametro(int id);
 	  public  List<ListaDTO> searchLista(ListaDTO listaDTO);	 
 
+	  public  Integer        insertAFP(AFPDTO afpDTO);	  
+	  public  Integer        updateAFP(AFPDTO afpDTO);	  
+	  public  Integer        deleteAFP(AFPDTO afpDTO);	  
+	  public  List<AFPDTO>   selectAFP();	  
+	  public  AFPDTO         selectAFPById(int id);
+	  public  List<AFPDTO>   searchAFP(AFPDTO afpDTO);	 
 }

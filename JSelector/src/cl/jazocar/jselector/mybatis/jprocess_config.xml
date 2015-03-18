@@ -34,6 +34,7 @@
       <typeAlias alias="parametroModel"          type="cl.jazocar.jselector.dto.ParametroDTO"/>
       <typeAlias alias="estructuraModel"         type="cl.jazocar.jselector.dto.EstructuraDTO"/>
       <typeAlias alias="listaModel"             type="cl.jazocar.jselector.dto.ListaDTO"/>
+       <typeAlias alias="afpModel"             type="cl.jazocar.jselector.dto.AFPDTO"/>
        
       
       <typeAlias alias="calendar"                type="java.util.Calendar"/>	 

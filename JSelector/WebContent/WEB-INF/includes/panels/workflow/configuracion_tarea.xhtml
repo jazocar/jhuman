@@ -6,56 +6,127 @@
 	xmlns:ice="http://www.icesoft.com/icefaces/component"
 	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	<h:form>
-		<table>
-			<tr>
-				<td><ace:simpleSelectOneMenu  label="Tarea" labelPosition="left"  value="#{tareaConfiguracionFrontBean.inputIdTarea}" immediate="true">
-						<f:selectItem itemValue="-1" itemLabel="Seleccione..."/>
-						<f:selectItems value="#{tareaConfiguracionFrontBean.listaTareas}" />				
-				</ace:simpleSelectOneMenu> </td>
-				<td><ace:textEntry label="Configuracion" labelPosition="left" value="#{tareaConfiguracionFrontBean.inputCheckOption}" /></td>
-			
-			<td><ace:simpleSelectOneMenu  label="Requerida" labelPosition="left"  value="#{tareaConfiguracionFrontBean.inputRequerido}" immediate="true">
-						<f:selectItem itemValue="-1" itemLabel="Seleccione..."/>
-						<f:selectItem itemValue="true" itemLabel="Si"/>
-						<f:selectItem itemValue="false" itemLabel="No"/>			
-				</ace:simpleSelectOneMenu> </td>
-			</tr>
-		</table>
-		<br />
-			<table>
-				<tr>
-					<td><ace:pushButton value="Ingresar"
-							actionListener="#{tareaConfiguracionFrontBean.insertOrganizacionListener}"
-							rendered="#{!tareaConfiguracionFrontBean.selected}" /></td>
-					<td><ace:pushButton value="Modificar"
-							actionListener="#{tareaConfiguracionFrontBean.updateOrganizacionListener}"
-							rendered="#{tareaConfiguracionFrontBean.selected}" /></td>
-					<td><ace:pushButton value="Dar de Baja"
-							actionListener="#{tareaConfiguracionFrontBean.deleteOrganizacionListener}"
-							rendered="#{tareaConfiguracionFrontBean.selected}" /></td>						
-					<td><ace:pushButton value="Limpiar"
-							actionListener="#{tareaConfiguracionFrontBean.resetTareaConfiguracionListener}" /></td>
-				</tr>
-			</table>
-			<br/>
-		<ace:dataTable value="#{tareaConfiguracionFrontBean.listaConfiguracion}" var="conf" selectionMode="single" rowSelectListener="#{tareaConfiguracionFrontBean.tareaConfiguracionSelectListener}">
-			<ace:column headerText="Id">
-				<h:outputText  value="#{conf.id}"/>
-			</ace:column>
-			<ace:column headerText="Id Tarea">
-				<h:outputText value="#{conf.idTarea}"> 
-					<f:converter converterId="tareaConverter"/>
-				</h:outputText>
-			</ace:column>
-			<ace:column headerText="Requerido">
-				<h:outputText value="#{conf.requerido}">
-					<f:converter converterId="booleanConverter"/>
-				</h:outputText>
-			</ace:column>
-			<ace:column headerText="Configuracion">
-				<h:outputText value="#{conf.checkOption}"/>
-			</ace:column>
-		</ace:dataTable>
+	<ace:submitMonitor for="configuracionTareasForm" idleLabel="Idle"
+		activeLabel="Cargando..." serverErrorLabel="Error de Servidor"
+		networkErrorLabel="Error de Red" sessionExpiredLabel="Sesión expirada"
+		blockUI="@all" rendered="true" />
+	<h:form id="configuracionTareasForm">
+		<ice:panelGroup styleClass="iceDatTblColHdr">
+			<div align="left">
+				<ice:outputText value="Estas aquí : " style="padding-right: 10px;" />
+				<ice:commandLink value="Inicio" style="padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="inicioPorHacerPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Configuración de Workflow"
+					style="padding-left:5px; padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="inicioPorHacerPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Configuración de Tareas"
+					style="padding-left:5px; padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="configuradorTareaPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+			</div>
+		</ice:panelGroup>
+		<ice:panelGroup
+			style="width: 1010px; background-color:white; padding-top: 5px;">
+			<ice:panelGroup styleClass="iceDatTblColHdr">
+				<div align="left">
+					<ice:outputText value="::Configuración de Tareas"
+						style="font-size:medium; color:black;" />
+				</div>
+			</ice:panelGroup>
+			<br />
+			<ice:panelGroup style="padding-left:10px; padding-right:10px;">
+				<table>
+					<tr>
+						<td><ace:simpleSelectOneMenu label="Tarea"
+								labelPosition="left"
+								value="#{tareaConfiguracionFrontBean.inputIdTarea}"
+								immediate="true">
+								<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+								<f:selectItems
+									value="#{tareaConfiguracionFrontBean.listaTareas}" />
+							</ace:simpleSelectOneMenu></td>
+						<td><ace:textEntry label="Configuracion" labelPosition="left"
+								value="#{tareaConfiguracionFrontBean.inputCheckOption}" /></td>
+
+						<td><ace:simpleSelectOneMenu label="Requerida"
+								labelPosition="left"
+								value="#{tareaConfiguracionFrontBean.inputRequerido}"
+								immediate="true">
+								<f:selectItem itemValue="-1" itemLabel="Seleccione..." />
+								<f:selectItem itemValue="true" itemLabel="Si" />
+								<f:selectItem itemValue="false" itemLabel="No" />
+							</ace:simpleSelectOneMenu></td>
+					</tr>
+				</table>
+				<br />
+				<div align="right">
+				<table>
+					<tr>
+						<td><ace:pushButton value="Ingresar"
+								actionListener="#{tareaConfiguracionFrontBean.insertOrganizacionListener}"
+								rendered="#{!tareaConfiguracionFrontBean.selected}" /></td>
+						<td><ace:pushButton value="Modificar"
+								actionListener="#{tareaConfiguracionFrontBean.updateOrganizacionListener}"
+								rendered="#{tareaConfiguracionFrontBean.selected}" /></td>
+						<td><ace:pushButton value="Dar de Baja"
+								actionListener="#{tareaConfiguracionFrontBean.deleteOrganizacionListener}"
+								rendered="#{tareaConfiguracionFrontBean.selected}" /></td>
+						<td><ace:pushButton value="Limpiar"
+								actionListener="#{tareaConfiguracionFrontBean.resetTareaConfiguracionListener}" /></td>
+					</tr>
+				</table>
+				</div>
+				<br />
+				<ace:dataTable id="idListado"
+					value="#{tareaConfiguracionFrontBean.listaConfiguracion}"
+					var="conf" selectionMode="single" rows="11" paginator="true" paginatorPosition="top"
+					rowSelectListener="#{tareaConfiguracionFrontBean.tareaConfiguracionSelectListener}">
+					<ace:column headerText="Id">
+						<h:outputText value="#{conf.id}" />
+					</ace:column>
+					<ace:column headerText="Id Tarea">
+						<h:outputText value="#{conf.idTarea}">
+							<f:converter converterId="tareaConverter" />
+						</h:outputText>
+					</ace:column>
+					<ace:column headerText="Requerido">
+						<h:outputText value="#{conf.requerido}">
+							<f:converter converterId="booleanConverter" />
+						</h:outputText>
+					</ace:column>
+					<ace:column headerText="Configuracion">
+						<h:outputText value="#{conf.checkOption}" />
+					</ace:column>
+				</ace:dataTable>
+				<br/><br/>
+		<div align="right">
+					<table>
+						<tr>
+							<td><ace:dataExporter id="dataExporterXls" label="Excel"
+									type="xls" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterPdf" label="PDF"
+									type="pdf" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterCsv" label="CSV"
+									type="csv" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterXml" label="XML"
+									type="xml" target="idListado" fileName="output" /></td>
+						</tr>
+					</table>
+				</div>
+			</ice:panelGroup>
+		</ice:panelGroup>
 	</h:form>
 </ui:composition>

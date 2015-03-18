@@ -11,6 +11,7 @@ import cl.jazocar.jselector.common.context.JProcessContextImpl;
 import cl.jazocar.jselector.constants.IConstants;
 import cl.jazocar.jselector.dao.base.IConfigJProcessDao;
 import cl.jazocar.jselector.dao.service.IConfigJProcessService;
+import cl.jazocar.jselector.dto.AFPDTO;
 import cl.jazocar.jselector.dto.AplicacionDTO;
 import cl.jazocar.jselector.dto.AreaDTO;
 import cl.jazocar.jselector.dto.CasoComentarioDTO;
@@ -1219,5 +1220,41 @@ public class ConfigJProcessServiceImpl extends MyBatisCommonDao implements IConf
 		if(estructuraDTO.getModeloOrganizacion().equals("-1"))
 			estructuraDTO.setModeloOrganizacion(null);
 		return configJProcessDao.searchEstructura(estructuraDTO);
+	}
+
+	@Override
+	public Integer insertAFP(AFPDTO afpDTO) {
+		// TODO Auto-generated method stub
+		return configJProcessDao.insertAFP(afpDTO);
+	}
+
+	@Override
+	public Integer updateAFP(AFPDTO afpDTO) {
+		// TODO Auto-generated method stub
+		return configJProcessDao.updateAFP(afpDTO);
+	}
+
+	@Override
+	public Integer deleteAFP(AFPDTO afpDTO) {
+		// TODO Auto-generated method stub
+		return configJProcessDao.deleteAFP(afpDTO);
+	}
+
+	@Override
+	public List<AFPDTO> selectAFP() {
+		// TODO Auto-generated method stub
+		return configJProcessDao.selectAFP();
+	}
+
+	@Override
+	public AFPDTO selectAFPById(int id) {
+		// TODO Auto-generated method stub
+		return configJProcessDao.selectAFPById(id);
+	}
+
+	@Override
+	public List<AFPDTO> searchAFP(AFPDTO afpDTO) {
+		// TODO Auto-generated method stub
+		return configJProcessDao.searchAFP(afpDTO);
 	}
 }

@@ -21,7 +21,7 @@
 					</ace:ajax>
 				</ice:commandLink>
 				>
-				<ice:commandLink value="Creación de Flujos"
+				<ice:commandLink value="Configuración de Workflow"
 					style="padding-left:5px; padding-right:5px;"
 					actionListener="#{navigationBean.navigationStackChange}">
 					<ace:ajax event="activate" execute="@this">
@@ -29,13 +29,20 @@
 					</ace:ajax>
 				</ice:commandLink>
 				>
+				<ice:commandLink value="Construir Workflow"
+					style="padding-left:5px; padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="construirFlujoPanel" />
+					</ace:ajax>
+				</ice:commandLink>
 			</div>
 		</ice:panelGroup>
 		<ice:panelGroup
 			style="width: 1010px; background-color:white; padding-top: 5px;">
 			<ice:panelGroup styleClass="iceDatTblColHdr">
 				<div align="left">
-					<ice:outputText value="::Creación de Flujos"
+					<ice:outputText value="::Construir Workflow"
 						style="font-size:medium; color:black;" />
 				</div>
 			</ice:panelGroup>

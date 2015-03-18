@@ -24,7 +24,7 @@
 					</ace:ajax>
 				</ice:commandLink>
 				>
-				<ice:commandLink value="Mantenedor de Flujos"
+				<ice:commandLink value="Configuración de Workflow"
 					style="padding-left:5px; padding-right:5px;"
 					actionListener="#{navigationBean.navigationStackChange}">
 					<ace:ajax event="activate" execute="@this">
@@ -32,6 +32,13 @@
 					</ace:ajax>
 				</ice:commandLink>
 				>
+				<ice:commandLink value="Creación de Flujos"
+					style="padding-left:5px; padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="flujosPanel" />
+					</ace:ajax>
+				</ice:commandLink>
 			</div>
 		</ice:panelGroup>
 		
@@ -61,6 +68,7 @@
 												</ice:selectOneMenu> </td>
 			</tr>
 		</table>
+		<div align="right">
 		<table>
 					<tr>
 						<td><ace:pushButton
@@ -79,6 +87,7 @@
 								</ace:pushButton></td>						
 					</tr>
 				</table>
+				</div>
 				<br/>
 				<hr/>
 		<ace:dataTable id="idListado" value="#{aplicacionFrontClass.listaAplicacion}" var="app" selectionMode="single" paginator="true" paginatorPosition="top" rows="10" rowSelectListener="#{aplicacionFrontClass.aplicacionSelectListener}">

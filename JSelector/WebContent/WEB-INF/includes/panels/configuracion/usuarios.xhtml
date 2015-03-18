@@ -21,8 +21,21 @@
 	    <ace:ajax event="activate" execute="@this">
 										<f:param name="stackName" value="inicioPorHacerPanel" />
 									</ace:ajax>
-		</ice:commandLink><ice:outputText value=">"/>
-		<ice:commandLink value="Mantenedor de Usuarios" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Mantención y Utilidades" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="inicioPorHacerPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Usuarios" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorUsuariosPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Crear Usuario" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
 	    <ace:ajax event="activate" execute="@this">
 										<f:param name="stackName" value="mantenedorUsuariosPanel" />
 									</ace:ajax>
@@ -32,7 +45,7 @@
 	 <ice:panelGroup style="width: 1010px; background-color:white; padding-top: 5px;">
                            <ice:panelGroup styleClass="iceDatTblColHdr">
                            <div align="left">
-                               <ice:outputText value="::Mantenedor de Usuarios" style="font-size:medium; color:black;"/>
+                               <ice:outputText value="::Crear Usuario" style="font-size:medium; color:black;"/>
                            </div>
                </ice:panelGroup>   
                
@@ -95,6 +108,7 @@
 					<td></td>
 			</tr>
 		</table>
+		<div align="right">
 		<br />
 			<table>
 				<tr>
@@ -111,7 +125,9 @@
 							actionListener="#{usuarioFrontBean.resetUsuarioListener}" /></td>
 				</tr>
 			</table>
-		<ace:dataTable value="#{usuarioFrontBean.listaUsuarios}" var="user" rows="10" paginator="true" paginatorPosition="top" selectionMode="single" rowSelectListener="#{usuarioFrontBean.usuarioSelectListener}">
+			</div>
+			<hr/>
+		<ace:dataTable value="#{usuarioFrontBean.listaUsuarios}" var="user" rows="11" paginator="true" paginatorPosition="top" selectionMode="single" rowSelectListener="#{usuarioFrontBean.usuarioSelectListener}">
 			<ace:column headerText="Usuario" style="color:black; font-size: small;font-family: 'Times New Roman', Times, serif;  text-align:left;">
 				<h:outputText  value="#{user.usuario}" style="color:black; font-size: small;font-family: 'Times New Roman', Times, serif;"/>
 			</ace:column>

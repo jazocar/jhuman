@@ -38,9 +38,9 @@
                <br/> 
                <table>
 			<tr>
-				<td valign="top"><ace:tabSet id="sampleTabSet"
-						clientSide="false" style="font-family: 'Times New Roman', Times, serif;"  selectedIndex="#{usuarioFrontBean.selectedIndex}"  immediate="true">
-						<ace:tabPane id="tareasTab" label="Tareas">
+				<td><ace:tabSet id="sampleTabSet"
+						clientSide="false" style="font-family: 'Times New Roman', Times, serif; width:800px;"  selectedIndex="#{usuarioFrontBean.selectedIndex}"  immediate="true">
+						<ace:tabPane id="tareasTab" label="Solicitudes Pendientes">
 							<table>
 								<tr>
 									<td><ice:commandButton image="./img/refresh.png"
@@ -59,10 +59,9 @@
 											<ace:ajax event="activate" execute="@this" />
 										</ace:pushButton></td>
 								</tr>
-							</table>
-							<br />
+							</table>							
 							<ace:dataTable id="tareasTable" var="sol" paginator="true"
-								paginatorPosition="bottom" rows="10" selectionMode="single"
+								paginatorPosition="top" rows="5" selectionMode="single"
 								value="#{toDoFrontBean.listaSolicitud}"
 								rowSelectListener="#{toDoFrontBean.toDoSelectListener}">
 
@@ -110,28 +109,25 @@
 										<f:convertDateTime pattern="dd-MM-yyyy"/>
 									</h:outputText>
 								</ace:column>
-
 							</ace:dataTable>
+							<hr/>
+							<div align="left">
+							   <ice:outputText value="*** Haga click con el mouse en alguna tarea para poder ver información de ella en el panel inferior."/>
+							</div>
+							<br/>
+							<table>
+								<tr>
+									<td><div style="width:10px; height:10px; background:red; font-family:arial; font-weight:bold; color:red; "></div></td>
+									<td align="left"><ice:outputText value="Tarea con plazo vencido"/> </td>
+								</tr>
+								<tr>
+									<td><div style="width:10px; height:10px; background:green; font-family:arial; font-weight:bold; color:green; "></div></td>
+									<td  align="left"><ice:outputText value="Tarea en el plazo correcto"/> </td>
+								</tr>
+							</table>
 						</ace:tabPane>
-						<ace:tabPane id="shoppingList" label="Casos">
-
-							<ace:dataTable value="#{toDoFrontBean.listaCaso}" var="caso"
-								paginator="true" paginatorPosition="bottom" rows="10"
-								selectionMode="single"
-								rowSelectListener="#{toDoFrontBean.casoSelectListener}">								
-								<ace:column headerText="Aplicación" sortBy="#{caso.aplicacion}"
-									filterBy="#{caso.aplicacion}" style="text-align:left;"
-									filterMatchMode="contains">
-									<h:outputText value="#{caso.aplicacion}" />
-								</ace:column>
-								<ace:column headerText="Inicio" sortBy="#{caso.strIniciadoEn}"
-									filterBy="#{caso.strIniciadoEn}" style="text-align:left;"
-									filterMatchMode="contains">
-									<h:outputText value="#{caso.strIniciadoEn}" />
-								</ace:column>
-							</ace:dataTable>
-						</ace:tabPane>
-						<ace:tabPane id="picOfDay" label="Procesos">
+						
+						<ace:tabPane label="Procesos">
 							<ace:dataTable value="#{toDoFrontBean.listaAplicacion}"
 								var="aplicacion" paginator="true" paginatorPosition="bottom"
 								rows="6" selectionMode="single"
@@ -150,7 +146,9 @@
 							</ace:dataTable>
 						</ace:tabPane>
 					</ace:tabSet></td>
-				<td valign="top" width="450"><ice:panelGroup
+				</tr>
+				<tr>
+				<td valign="top"><ice:panelGroup
 						rendered="#{toDoFrontBean.selected}">
 						<ace:tabSet id="descripcionTareaTabSet" clientSide="true" style="font-family: 'Times New Roman', Times, serif; ">
 							<ace:tabPane label="Tarea" rendered="#{toDoFrontBean.tareaPanel}" >
@@ -169,57 +167,47 @@
 												style="color:red; font-family: 'Times New Roman', Times, serif;" /> <ice:outputText
 												value="#{toDoFrontBean.outputCaso}"
 												style="color:black; padding-left:5px;font-family: 'Times New Roman', Times, serif;" /></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td align="left"><ice:outputText value="Aplicación:"
+										<td align="left" style="padding-left: 50px;"><ice:outputText value="Aplicación:"
 												style="color:red; font-family: 'Times New Roman', Times, serif;" /> <ice:outputText
 												value="#{toDoFrontBean.outputAplicacion}"
 												style="color:black; padding-left:5px; font-family: 'Times New Roman', Times, serif;" /></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td align="left"><ice:outputText value="Vencimiento:"
+										<td align="left" style="padding-left: 50px;"><ice:outputText value="Vencimiento:"
 												style="color:red; font-family: 'Times New Roman', Times, serif;" /> <ice:outputText
 												value="#{toDoFrontBean.outputVencimiento}"
 												style="color:black; padding-left:5px; font-family: 'Times New Roman', Times, serif;" > 
 												 <f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss"/>
 												</ice:outputText></td>
-										<td></td>
 									</tr>
 									<tr>
 										<td align="left"><ice:outputText value="Prioridad:"
 												style="color:red; font-family: 'Times New Roman', Times, serif;" /> <ice:outputText
 												value="#{toDoFrontBean.outputPrioridad}"
 												style="color:black; padding-left:5px;font-family: 'Times New Roman', Times, serif;" /></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td align="left"><ice:outputText value="Estado:"
+										
+									
+										<td align="left" style="padding-left: 50px;"><ice:outputText value="Estado:"
 												style="color:red; font-family: 'Times New Roman', Times, serif;" /> <ice:outputText value="Pendiente"
 												style="color:black; padding-left:5px; font-family: 'Times New Roman', Times, serif;" /></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td align="left"><ice:outputText value="Asignado a:"
+										
+									
+										<td align="left" style="padding-left: 50px;"><ice:outputText value="Asignado a:"
 												style="color:red; font-family: 'Times New Roman', Times, serif;" /> <ice:outputText
 												value="#{toDoFrontBean.outputUsuario}"
 												style="color:black; padding-left:5px; font-family: 'Times New Roman', Times, serif;" >
 													<f:converter converterId="usuarioConverter" />
 													</ice:outputText>
-												</td>
-										<td></td>
+												</td>										
 									</tr>
 								</table>
-								<table>
-									<tr>
-										<td align="left"><ace:pushButton value="MÁS"
-												style="width:90px; height:30px; font-family: 'Times New Roman', Times, serif;" rendered="#{toDoFrontBean.tieneAsignacion}">												
+								<br/>
+								<div align="right">
+								<ace:pushButton value="Ver Tarea"
+												style="width:150px; height:30px; font-family: 'Times New Roman', Times, serif;" rendered="#{toDoFrontBean.tieneAsignacion}">												
 												<ace:ajax event="activate" execute="@this"
 												 listener="#{toDoFrontBean.hacerTareaListener}" />												
-											</ace:pushButton></td>										
-									</tr>
-								</table>
+											</ace:pushButton>									
+									</div>
+								
 								<hr />
 
 								

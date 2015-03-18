@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import cl.jazocar.jselector.common.context.JProcessContextImpl;
 import cl.jazocar.jselector.constants.IConstants;
 import cl.jazocar.jselector.dao.base.IConfigJProcessDao;
+import cl.jazocar.jselector.dto.AFPDTO;
 import cl.jazocar.jselector.dto.AplicacionDTO;
 import cl.jazocar.jselector.dto.AreaDTO;
 import cl.jazocar.jselector.dto.CasoComentarioDTO;
@@ -1405,6 +1406,51 @@ public class ConfigJProcessDaoImpl extends MyBatisCommonDao implements IConfigJP
 		hash.put("clase", estructuraDTO.getIdClase());
 		hash.put("requerido", estructuraDTO.getRequerido());
 		return genericSelect("mybatis.jselector.SearchEstructura", hash);
+	}
+
+	@Override
+	public Integer insertAFP(AFPDTO afpDTO) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> hash = new HashMap<String, Object>();
+		hash.put("codigo", afpDTO.getCodigo());
+		hash.put("glosa", afpDTO.getGlosa());
+		return genericInsert("mybatis.jselector.InsertAFP", hash);
+	}
+
+	@Override
+	public Integer updateAFP(AFPDTO afpDTO) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> hash = new HashMap<String, Object>();
+		hash.put("id", afpDTO.getId());
+		hash.put("codigo", afpDTO.getCodigo());
+		hash.put("glosa", afpDTO.getGlosa());
+		return genericUpdate("mybatis.jselector.UpdateAFP", hash);
+	}
+
+	@Override
+	public Integer deleteAFP(AFPDTO afpDTO) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> hash = new HashMap<String, Object>();
+		hash.put("id", afpDTO.getId());
+		return genericDelete("mybatis.jselector.DeleteAFP", hash);
+	}
+
+	@Override
+	public List<AFPDTO> selectAFP() {
+		// TODO Auto-generated method stub
+		return genericSelect("mybatis.jselector.SelectAFP");
+	}
+
+	@Override
+	public AFPDTO selectAFPById(int id) {
+		// TODO Auto-generated method stub
+		return genericSelectOne("mybatis.jselector.SelectAFPById", id);
+	}
+
+	@Override
+	public List<AFPDTO> searchAFP(AFPDTO afpDTO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

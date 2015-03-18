@@ -24,7 +24,7 @@
 					</ace:ajax>
 				</ice:commandLink>
 				>
-				<ice:commandLink value="Mantenedor de Tareas"
+				<ice:commandLink value="Configuración de Workflow"
 					style="padding-left:5px; padding-right:5px;"
 					actionListener="#{navigationBean.navigationStackChange}">
 					<ace:ajax event="activate" execute="@this">
@@ -32,22 +32,29 @@
 					</ace:ajax>
 				</ice:commandLink>
 				>
+				<ice:commandLink value="Crear Tareas"
+					style="padding-left:5px; padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="tareaWorkflowPanel" />
+					</ace:ajax>
+				</ice:commandLink>
 			</div>
 		</ice:panelGroup>
 		 <ice:panelGroup style="width: 1010px; background-color:white; padding-top: 5px;">
                            <ice:panelGroup styleClass="iceDatTblColHdr">
                            <div align="left">
-                               <ice:outputText value="::Mantenedor de Tareas" style="font-size:medium; color:black;"/>
+                               <ice:outputText value="::Crear Tareas" style="font-size:medium; color:black;"/>
                            </div>
                </ice:panelGroup>                 
                <br/>
                <ice:panelGroup style="padding-left:10px; padding-right:10px;">  
 			<table>
 			<tr>
-			    <td align="left"><ice:outputText value="Nombre" style="color:black;font-family: 'Times New Roman', Times, serif;"/> </td>
-				<td align="left"><ice:inputText value="#{tareaBean.inputNombre}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/> </td>
-				<td align="left"><ice:outputText value="Descripción" style="color:black;font-family: 'Times New Roman', Times, serif;"/></td>				
-				<td align="left" colspan="3"><ice:inputTextarea cols="61" rows="1" value="#{tareaBean.inputDescripcion}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/> </td>	
+			    <td align="left" valign="top"><ice:outputText value="Nombre" style="color:black;font-family: 'Times New Roman', Times, serif;"/> </td>
+				<td align="left" valign="top"><ice:inputText value="#{tareaBean.inputNombre}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/> </td>
+				<td align="left" valign="top"><ice:outputText value="Descripción" style="color:black;font-family: 'Times New Roman', Times, serif;"/></td>				
+				<td align="left" colspan="3" valign="top"><ice:inputTextarea cols="61" rows="1" value="#{tareaBean.inputDescripcion}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/> </td>	
 								
 			</tr>
 			<tr>				

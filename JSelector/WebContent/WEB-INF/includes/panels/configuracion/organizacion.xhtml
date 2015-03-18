@@ -21,8 +21,21 @@
 	    <ace:ajax event="activate" execute="@this">
 										<f:param name="stackName" value="inicioPorHacerPanel" />
 									</ace:ajax>
-		</ice:commandLink><ice:outputText value=">"/>
-		<ice:commandLink value="Mantenedor de Organizaciones" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Mantención y Utilidades" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="organizacionPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Organización" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="organizacionPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Crear Organización" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
 	    <ace:ajax event="activate" execute="@this">
 										<f:param name="stackName" value="organizacionPanel" />
 									</ace:ajax>
@@ -32,7 +45,7 @@
 	 <ice:panelGroup style="width: 1010px; background-color:white; padding-top: 5px;">
                            <ice:panelGroup styleClass="iceDatTblColHdr">
                            <div align="left">
-                               <ice:outputText value="::Mantenedor de Organizaciones" style="font-size:medium; color:black;"/>
+                               <ice:outputText value="::Crear Organización" style="font-size:medium; color:black;"/>
                            </div>
                </ice:panelGroup>                 
                <br/> 
@@ -42,7 +55,7 @@
 				<td><ice:inputText  value="#{organizacionFrontBean.nombreOrganizacion}" immediate="true" style="font-family: 'Times New Roman', Times, serif;"/> </td>
 			</tr>
 		</table>
-		<div align="left">
+		<div align="right">
 			<br />
 			<table>
 				<tr>
@@ -62,7 +75,7 @@
 		</div>
 		<br/>
 		<ace:dataTable id="idListado" value="#{organizacionFrontBean.listaOrganizacion}" var="org" rowSelectListener="#{organizacionFrontBean.organizacionSelectListener}" selectionMode="single">
-			<ace:column headerText="Nombre" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+			<ace:column headerText="Nombre" sortBy="#{org.nombre}" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
 				<h:outputText value="#{org.nombre}" style="font-family: 'Times New Roman', Times, serif;"/>
 			</ace:column>		
 		</ace:dataTable>
