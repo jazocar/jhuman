@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:form>
+			<ace:submitMonitor for="fichaPrevisionInsert" idleLabel="Idle"
+			activeLabel="Ingresando Ficha Previsión"
+			serverErrorLabel="Error de Servidor" networkErrorLabel="Error de Red"
+			sessionExpiredLabel="Sesión expirada" autoCenter="true"
+			blockUI="@source" rendered="true" />
+			<ace:submitMonitor for="fichaPrevisionForm" idleLabel="Idle"
+			activeLabel="Cargando..."
+			serverErrorLabel="Error de Servidor" networkErrorLabel="Error de Red"
+			sessionExpiredLabel="Sesión expirada" autoCenter="true"
+			blockUI="@source" rendered="true" />
+		<ace:tooltip id="tooltip" global="true" />
+		<ice:panelGroup styleClass="iceDatTblColHdr">
+			<div align="left">
+				<ice:outputText value="Estas aquí : " style="padding-right: 10px;" />
+				<ice:commandLink value="Inicio" style="padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="pantallaInicio" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Maestro de Contratos" style="padding-left:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="pantallaInicio" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Datos Personales" style="padding-left:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="fichaPersonalPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+			</div>
+		</ice:panelGroup>
+		
+		<ice:panelGroup id="fichaPrevisionForm">
+			<ice:panelGroup
+				style="width: 1010px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::Previsión"
+							style="font-size:medium; color:black;" />
+					</div>
+				</ice:panelGroup>
+				<br />
+					<table>
+					<tr>
+						<td><ice:outputText value="Nombre Campo"
+								style="font-size:small; color:black;" /></td>
+						<td><ice:inputText /></td>
+					</tr>
+				</table>
+				<div align="left">
+					<table>
+						<tr>
+							<td><ace:pushButton id="fichaPrevisionInsert" value="Ingresar" rendered="true"
+									actionListener="#{FrontBean.insertObjectListener}" /></td>
+							<td><ace:pushButton value="Modificar" rendered="true"
+									actionListener="#{FrontBean.updateObjectListener}" /></td>
+							<td><ace:pushButton value="Dar de Baja" rendered="true"
+									actionListener="#{FrontBean.deleteObjectListener}" /></td>
+							<td><ace:pushButton value="Limpiar"
+									actionListener="#{FrontBean.resetObjectListener}" /></td>
+						</tr>
+					</table>
+				</div>
+				<hr />
+				</ice:panelGroup>
+				</ice:panelGroup>
+	</h:form>
+</ui:composition>

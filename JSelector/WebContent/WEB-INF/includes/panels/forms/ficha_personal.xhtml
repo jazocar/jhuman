@@ -1,0 +1,226 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:form>
+		<ace:submitMonitor for="fichaPersonalInsert" idleLabel="Idle"
+			activeLabel="Ingresando Ficha Personal"
+			serverErrorLabel="Error de Servidor" networkErrorLabel="Error de Red"
+			sessionExpiredLabel="Sesión expirada" autoCenter="true"
+			blockUI="@source" rendered="true" />
+			<ace:submitMonitor for="fichaPersonalForm" idleLabel="Idle"
+			activeLabel="Cargando..."
+			serverErrorLabel="Error de Servidor" networkErrorLabel="Error de Red"
+			sessionExpiredLabel="Sesión expirada" autoCenter="true"
+			blockUI="@source" rendered="true" />
+		<ace:tooltip id="tooltip" global="true" />
+		<ice:panelGroup styleClass="iceDatTblColHdr">
+			<div align="left">
+				<ice:outputText value="Estas aquí : " style="padding-right: 10px;" />
+				<ice:commandLink value="Inicio" style="padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="pantallaInicio" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Maestro de Contratos" style="padding-left:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="pantallaInicio" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Datos Personales" style="padding-left:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="fichaPersonalPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+			</div>
+		</ice:panelGroup>
+		<ice:panelGroup id="fichaPersonalForm">
+			<ice:panelGroup
+				style="width: 1010px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::Datos Personales"
+							style="font-size:medium; color:black;" />
+					</div>
+				</ice:panelGroup>
+				<br />
+				<table>
+					<tr>
+						<td align="right"><ice:outputText value="Rut"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.rut}" immediate="true" /></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Nombres"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.nombres}" immediate="true"/></td>
+						<td colspan="2"></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Apellido Paterno"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.apPaterno}" immediate="true"/></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Apellido Materno" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.apMaterno}" immediate="true"/></td>
+
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Sexo"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu value="#{fichaPersonalFrontClass.sexo}" immediate="true">
+								<f:selectItem itemLabel="Seleccione..." itemValue="-1"/>
+								<f:selectItems
+									value="#{fichaPersonalFrontClass.listaSexo}" />
+							</ice:selectOneMenu></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Estado Civil" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu value="#{fichaPersonalFrontClass.estCivil}" immediate="true">
+								<f:selectItem itemLabel="Seleccione..." itemValue="-1"/>
+								<f:selectItems
+									value="#{fichaPersonalFrontClass.listaEstadoCivil}" />
+							</ice:selectOneMenu></td>
+					</tr>
+					<tr>
+
+						<td align="right"><ice:outputText value="Discapacidad"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu value="#{fichaPersonalFrontClass.discapacidad}" immediate="true">
+								<f:selectItem itemLabel="Seleccione..." itemValue="-1"/>
+								<f:selectItems
+									value="#{fichaPersonalFrontClass.listaDiscapacidad}" />
+							</ice:selectOneMenu></td>
+
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Fecha de Nacimiento" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectInputDate renderAsPopup="true"
+								renderMonthAsDropdown="false" renderYearAsDropdown="false"
+								value="#{fichaPersonalFrontClass.fecNac}" immediate="true">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</ice:selectInputDate></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Region"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu value="#{fichaPersonalFrontClass.idRegion}" partialSubmit="true" immediate="true" valueChangeListener="#{fichaPersonalFrontClass.changeRegionListener}"
+												style="font-family: 'Times New Roman', Times, serif;">
+								<f:selectItem itemValue="-1" itemLabel="Seleccione..."/>
+								<f:selectItems value="#{fichaPersonalFrontClass.listaRegiones}"/>
+							</ice:selectOneMenu></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText
+								value="Ciudad" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu value="#{fichaPersonalFrontClass.idCiudad}" immediate="true" style="font-family: 'Times New Roman', Times, serif;" valueChangeListener="#{fichaPersonalFrontClass.changeProvinciaListener}" partialSubmit="true">
+								<f:selectItem itemValue="-1" itemLabel="Seleccione..."/>
+							     <f:selectItems value="#{fichaPersonalFrontClass.listaCiudades}"/>
+							</ice:selectOneMenu></td>
+
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText
+								value="Comuna" style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu value="#{fichaPersonalFrontClass.idComuna}" immediate="true" style="font-family: 'Times New Roman', Times, serif;">
+							          <f:selectItem itemValue="-1" itemLabel="Seleccione..."/>
+							           <f:selectItems value="#{fichaPersonalFrontClass.listaComunas}"/>
+							</ice:selectOneMenu></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="País de Nacimiento"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"> <ice:selectOneMenu value="#{fichaPersonalFrontClass.idPais}" immediate="true" style="font-family: 'Times New Roman', Times, serif;">
+							          <f:selectItem itemValue="-1" itemLabel="Seleccione..."/>
+							           <f:selectItems value="#{fichaPersonalFrontClass.listaPaises}"/>
+							</ice:selectOneMenu> </td>
+						
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Situación Militar"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu value="#{fichaPersonalFrontClass.sitMilitar}" immediate="true">
+								<f:selectItem itemLabel="Seleccione..." itemValue="-1"/>
+								<f:selectItems
+									value="#{fichaPersonalFrontClass.listaSituacionMilitar}" />
+							</ice:selectOneMenu></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Fono Móvil"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.fonoMovil}" immediate="true"/></td>
+					</tr>	
+					<tr>
+						<td align="right"><ice:outputText value="Teléfono Fijo"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.telefonoFijo}" immediate="true"/></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Email Corporativo"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.emailEmpresa}" immediate="true"/></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Email Personal"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.emailPersonal}" immediate="true"/></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Teléfono de Emergencia"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.fonoEmergencia}" immediate="true"/></td>
+					</tr>
+				</table>
+				<br/>
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::Domicilio"
+							style="font-size:medium; color:black;" />
+					</div>
+				</ice:panelGroup>
+				<br />
+				<table>				
+					<tr>
+						<td align="right"><ice:outputText value="Calle"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.calle}" immediate="true"/></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Número"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.numero}" immediate="true"/></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Villa"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.villa}" immediate="true"/></td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Calle de Referencia"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.calleRef}" immediate="true"/></td>
+					</tr>
+					<tr>
+						<td align="right"><ice:outputText value="Código Postal"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.codPostal}" immediate="true"/></td>
+						<td align="right" style="padding-left: 50px;"></td>
+						<td align="left"></td>
+					</tr>
+					
+					
+				</table>
+
+			</ice:panelGroup>
+			<br />		
+		</ice:panelGroup>
+		<br />
+
+		<div align="right">
+			<table>
+				<tr>
+					<td><ace:pushButton id="fichaPersonalInsert" value="Ingresar"
+							rendered="true"
+							actionListener="#{fichaPersonalFrontClass.insertObjectListener}" /></td>
+					<td><ace:pushButton value="Modificar" rendered="false"
+							actionListener="#{fichaPersonalFrontClass.updateObjectListener}" /></td>
+					<td><ace:pushButton value="Dar de Baja" rendered="false"
+							actionListener="#{fichaPersonalFrontClass.deleteObjectListener}" /></td>
+					<td><ace:pushButton value="Limpiar"
+							actionListener="#{fichaPersonalFrontClass.resetObjectListener}" /></td>					
+				</tr>
+			</table>
+		</div>
+	</h:form>
+</ui:composition>

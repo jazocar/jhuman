@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ace:submitMonitor for="mantenedorAfp"
+									   idleLabel="Idle"
+                                       activeLabel="Cargando..."
+                                       serverErrorLabel="Error de Servidor"
+                                       networkErrorLabel="Error de Red"
+                                       sessionExpiredLabel="Sesión expirada"
+                                        blockUI="@all" rendered="true" />
+	<h:form id="mantenedorAfp">
+	<ice:panelGroup styleClass="iceDatTblColHdr">
+	<div align="left">
+	<ice:outputText value="Estas aquí : " style="padding-right: 10px;"/>   
+	 <ice:commandLink value="Inicio" style="padding-right:5px;" actionListener="#{navigationBean.navigationStackChange}" >
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="inicioPorHacerPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Mantención y Utilidades" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorAreasPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="Maestro Auxiliares" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorAreasPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+		>
+		<ice:commandLink value="AFP" style="padding-left:5px;" actionListener="#{navigationBean.navigationStackChange}">
+	    <ace:ajax event="activate" execute="@this">
+										<f:param name="stackName" value="mantenedorAreasPanel" />
+									</ace:ajax>
+		</ice:commandLink>
+	  </div>	
+	  </ice:panelGroup>
+	  
+	  <ice:panelGroup style="width: 900px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
+                           <ice:panelGroup styleClass="iceDatTblColHdr">
+                           <div align="left">
+                               <ice:outputText value="::AFP" style="font-size:medium; color:black;"/>
+                           </div>
+               </ice:panelGroup>                 
+               <br/> 
+               <table>
+			<tr>
+			    <td><ice:outputText value="Código" style="font-family: 'Times New Roman', Times, serif;"/> </td>
+				<td><ice:inputText value="#{afpFrontClass.codigo}" immediate="true" /> </td>
+				<td><ice:outputText value="Glosa" style="font-family: 'Times New Roman', Times, serif;"/> </td>
+				<td><ice:inputText value="#{afpFrontClass.glosa}" immediate="true" /> </td>			
+			</tr>
+		</table>
+		<br />
+		<div align="right">
+			<table>
+				<tr>
+					<td><ace:pushButton value="Ingresar"
+							actionListener="#{afpFrontClass.insertObjectListener}"
+							rendered="#{!afpFrontClass.selected}" /></td>
+					<td><ace:pushButton value="Modificar"
+							actionListener="#{afpFrontClass.updateObjectListener}"
+							rendered="#{afpFrontClass.selected}" /></td>
+					<td><ace:pushButton value="Dar de Baja"
+							actionListener="#{afpFrontClass.deleteObjectListener}"
+							rendered="#{afpFrontClass.selected}" /></td>						
+					<td><ace:pushButton value="Limpiar"
+							actionListener="#{afpFrontClass.resetObjectListener}" /></td>
+				</tr>
+			</table>
+			</div>
+			<br/>
+		<ace:dataTable id="idListado" value="#{afpFrontClass.listaAfp}" var="area" selectionMode="single" paginator="true" paginatorPosition="top" rows="10" rowSelectListener="#{afpFrontClass.objectSelectListener}">
+			<ace:column headerText="Código" sortBy="#{area.codigo}" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+				<h:outputText  value="#{area.codigo}" style="font-family: 'Times New Roman', Times, serif;" />
+			</ace:column>
+			<ace:column headerText="Glosa" sortBy="#{area.glosa}" style="font-family: 'Times New Roman', Times, serif; text-align:left;">
+				<h:outputText  value="#{area.glosa}" style="font-family: 'Times New Roman', Times, serif;"/>
+			</ace:column>
+		</ace:dataTable>
+            <div align="right">
+					<table>
+						<tr>
+							<td><ace:dataExporter id="dataExporterXls" label="Excel"
+									type="xls" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterPdf" label="PDF"
+									type="pdf" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterCsv" label="CSV"
+									type="csv" target="idListado" fileName="output" /></td>
+							<td><ace:dataExporter id="dataExporterXml" label="XML"
+									type="xml" target="idListado" fileName="output" /></td>
+						</tr>
+					</table>
+				</div>   
+      </ice:panelGroup>
+	</h:form>
+</ui:composition>
