@@ -7,14 +7,14 @@
 	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<h:form>
-			<ace:submitMonitor for="fichaPrevisionInsert" idleLabel="Idle"
+		<ace:submitMonitor for="fichaPrevisionInsert" idleLabel="Idle"
 			activeLabel="Ingresando Ficha Previsión"
 			serverErrorLabel="Error de Servidor" networkErrorLabel="Error de Red"
 			sessionExpiredLabel="Sesión expirada" autoCenter="true"
 			blockUI="@source" rendered="true" />
-			<ace:submitMonitor for="fichaPrevisionForm" idleLabel="Idle"
-			activeLabel="Cargando..."
-			serverErrorLabel="Error de Servidor" networkErrorLabel="Error de Red"
+		<ace:submitMonitor for="fichaPrevisionForm" idleLabel="Idle"
+			activeLabel="Cargando..." serverErrorLabel="Error de Servidor"
+			networkErrorLabel="Error de Red"
 			sessionExpiredLabel="Sesión expirada" autoCenter="true"
 			blockUI="@source" rendered="true" />
 		<ace:tooltip id="tooltip" global="true" />
@@ -28,7 +28,8 @@
 					</ace:ajax>
 				</ice:commandLink>
 				>
-				<ice:commandLink value="Maestro de Contratos" style="padding-left:5px;"
+				<ice:commandLink value="Maestro de Contratos"
+					style="padding-left:5px;"
 					actionListener="#{navigationBean.navigationStackChange}">
 					<ace:ajax event="activate" execute="@this">
 						<f:param name="stackName" value="pantallaInicio" />
@@ -43,28 +44,252 @@
 				</ice:commandLink>
 			</div>
 		</ice:panelGroup>
-		
+		<br />
+
 		<ice:panelGroup id="fichaPrevisionForm">
 			<ice:panelGroup
 				style="width: 1010px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
 				<ice:panelGroup styleClass="iceDatTblColHdr">
 					<div align="left">
-						<ice:outputText value="::Previsión"
-							style="font-size:medium; color:black;" />
+						<ice:outputText value="::Funcionario"
+							style="font-size:x-large; color:black;" />
 					</div>
-				</ice:panelGroup>
-				<br />
-					<table>
-					<tr>
-						<td><ice:outputText value="Nombre Campo"
-								style="font-size:small; color:black;" /></td>
-						<td><ice:inputText /></td>
-					</tr>
-				</table>
-				<div align="left">
+					<hr />
 					<table>
 						<tr>
-							<td><ace:pushButton id="fichaPrevisionInsert" value="Ingresar" rendered="true"
+							<td align="right"><ice:outputText value="Rut"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+							<td align="left"><ace:pushButton value="Buscar" /></td>
+							<td align="right" style="padding-left: 30px;"><ice:outputText
+									value="Nombre del Funcionario"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText immediate="true"
+									style="width:350px;" disabled="true" /></td>
+						</tr>
+						<tr>
+
+						</tr>
+					</table>
+					<br />
+					<br />
+				</ice:panelGroup>
+				<br />
+				<br />
+
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::Previsión"
+							style="font-size:x-large; color:black;" />
+					</div>
+					<hr />
+
+
+					<table>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Institución de Salud"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems
+										value="#{previsionFrontClass.listaInstitucionSalud}" />
+								</ice:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Fecha de Afiliación"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectInputDate renderAsPopup="true"
+									renderMonthAsDropdown="false" renderYearAsDropdown="false"
+									immediate="true">
+									<f:convertDateTime pattern="dd-MM-yyyy" />
+								</ice:selectInputDate></td>
+						</tr>
+					</table>
+					<br />
+					<table>
+						<tr>
+							<td>
+								<div align="left">
+									<h2>Primera Cotización Pactada</h2>
+								</div>
+								<table>
+									<tr>
+										<td align="right"><ice:outputText value="Moneda Pactada"
+												style="font-size:small; color:black;" /></td>
+										<td align="left"><ice:selectOneMenu immediate="true">
+												<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+												<f:selectItems
+													value="#{previsionFrontClass.listaMonedaPactada}" />
+											</ice:selectOneMenu></td>
+									
+										<td align="right" style="padding-left: 10px;"><ice:outputText value="Monto"
+												style="font-size:small; color:black;" /></td>
+										<td align="left"><ice:inputText /></td>
+									</tr>
+								</table>
+							</td>
+							<td style="padding-left: 100px;"><ice:panelGroup>
+									<div align="left">
+										<h2>Segunda Cotización Pactada</h2>
+									</div>
+									<table>
+										<tr>
+											<td align="right"><ice:outputText value="Moneda Pactada"
+													style="font-size:small; color:black;" /></td>
+											<td align="left"><ice:selectOneMenu immediate="true">
+													<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+													<f:selectItems
+														value="#{previsionFrontClass.listaMonedaPactada}" />
+												</ice:selectOneMenu></td>
+										
+											<td align="right" style="padding-left: 10px;"><ice:outputText value="Monto"
+													style="font-size:small; color:black;" /></td>
+											<td align="left"><ice:inputText /></td>
+										</tr>
+									</table>
+								</ice:panelGroup></td>
+						</tr>
+
+					</table>
+					<br />
+					<br />
+				</ice:panelGroup>
+				<br />
+				<br />
+
+
+
+
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::AFP"
+							style="font-size:x-large; color:black;" />
+					</div>
+					<hr />
+					<br />
+					<table>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Institución Previsional"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu immediate="true">
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems value="#{previsionFrontClass.listaAFP}" />
+								</ice:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Fecha de Afiliación"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectInputDate renderAsPopup="true"
+									renderMonthAsDropdown="false" renderYearAsDropdown="false"
+									immediate="true">
+									<f:convertDateTime pattern="dd-MM-yyyy" />
+								</ice:selectInputDate></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="Tasa %"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Modalidad de Jubilación"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems value="#{previsionFrontClass.listaJubilacion}"/>									
+								</ice:selectOneMenu></td>
+						</tr>
+					</table>
+					<br />
+					<table>
+						<tr>
+							<td>
+								<div align="left">
+									<h2>Ahorro Voluntario</h2>
+								</div>
+								<table>
+									<tr>
+										<td align="right"><ice:outputText value="Moneda Pactada"
+												style="font-size:small; color:black;" /></td>
+										<td align="left"><ice:selectOneMenu immediate="true">
+												<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+												<f:selectItems
+													value="#{previsionFrontClass.listaMonedaPactada}" />
+											</ice:selectOneMenu></td>
+									
+										<td align="right" style="padding-left: 10px;"><ice:outputText value="Monto"
+												style="font-size:small; color:black;" /></td>
+										<td align="left"><ice:inputText /></td>
+									</tr>
+								</table>
+							</td>
+							<td style="padding-left: 100px;"><ice:panelGroup>
+									<div align="left">
+										<h2>Cotización Voluntaria</h2>
+									</div>
+									<table>
+										<tr>
+											<td align="right"><ice:outputText value="Moneda Pactada"
+													style="font-size:small; color:black;" /></td>
+											<td align="left"><ice:selectOneMenu immediate="true">
+													<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+													<f:selectItems
+														value="#{previsionFrontClass.listaMonedaPactada}" />
+												</ice:selectOneMenu></td>
+										
+											<td align="right" style="padding-left: 10px;"><ice:outputText value="Monto"
+													style="font-size:small; color:black;" /></td>
+											<td align="left"><ice:inputText /></td>
+										</tr>
+									</table>
+								</ice:panelGroup></td>
+						</tr>
+					</table>
+					<br />
+					<br />
+					<div align="left">
+						<h2 style="color: black;">Ahorro Previsional Voluntario</h2>
+					</div>
+					<table>
+						<tr>
+							<td align="right"><ice:outputText value="Institución APV"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu immediate="true">
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems value="#{previsionFrontClass.listaAFP}" />
+								</ice:selectOneMenu></td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td align="right"><ice:outputText value="Moneda Pactada"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu immediate="true">
+									<f:selectItem itemLabel="Seleccione..." itemValue="-1" />
+									<f:selectItems
+										value="#{previsionFrontClass.listaMonedaPactada}" />
+								</ice:selectOneMenu></td>
+						
+							<td align="right" style="padding-left: 10px;"><ice:outputText value="Monto"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText /></td>
+						</tr>
+					</table>
+					<br />
+					<br />
+				</ice:panelGroup>
+				<br />
+				<br />
+				
+				<div align="right">
+					<table>
+						<tr>
+							<td><ace:pushButton id="fichaPrevisionInsert"
+									value="Ingresar" rendered="true"
 									actionListener="#{FrontBean.insertObjectListener}" /></td>
 							<td><ace:pushButton value="Modificar" rendered="true"
 									actionListener="#{FrontBean.updateObjectListener}" /></td>
@@ -76,7 +301,7 @@
 					</table>
 				</div>
 				<hr />
-				</ice:panelGroup>
-				</ice:panelGroup>
+			</ice:panelGroup>
+		</ice:panelGroup>
 	</h:form>
 </ui:composition>

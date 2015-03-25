@@ -50,6 +50,9 @@
 						<td align="right"><ice:outputText value="Valor"
 								style="font-size:small; color:black;" /></td>
 						<td align="left"><ice:inputText value="#{listasFrontClass.valor}" immediate="true"/></td>
+					<td align="right"><ice:outputText value="Código Adicional"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{listasFrontClass.codigoAdicional}" immediate="true"/></td>
 						
 						<td align="right"><ice:outputText value="Lista"
 								style="font-size:small; color:black;" /></td>
@@ -81,6 +84,9 @@
 					rowSelectListener="#{listasFrontClass.objectSelectListener}" paginator="true" paginatorPosition="top">
 					<ace:column headerText="Valor" style="text-align:left;" sortBy="#{lista.valor}">
 						<h:outputText value="#{lista.valor}" />
+					</ace:column>
+					<ace:column headerText="Código Adicional" style="text-align:left;" sortBy="#{lista.codigoAdicional}">
+						<h:outputText value="#{lista.codigoAdicional}" />
 					</ace:column>
 					<ace:column headerText="Lista" style="text-align:left;" sortBy="#{lista.idParametro}">
 						<h:outputText value="#{lista.idParametro}">

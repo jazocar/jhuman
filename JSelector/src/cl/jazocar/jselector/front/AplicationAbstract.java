@@ -33,7 +33,7 @@ public abstract class AplicationAbstract implements AplicationInterface {
 						IConfigJProcessService.class);
 
 		formService = JProcessFactoryService.getInstance().getService(
-				"jselector_FORM_SERVICE", FormServiceInterface.class);
+				"JPROCESS_FORM_SERVICE", FormServiceInterface.class);
 	}
 
 	public Effect getPanelEffect() {
@@ -65,7 +65,7 @@ public abstract class AplicationAbstract implements AplicationInterface {
 			EstructuraFrontBean.listaClase.add(new SelectItem(parametro.getId(), parametro.getNombre()));
 		
 		//Parametros.
-		ParametrosFrontBean.listaTipoParametro = new ArrayList();
+		ParametrosFrontBean.listaTipoParametro = new ArrayList<SelectItem>();
 	    for (TipoParametroDTO tipoParametro : configJProcessService.selectTipoParametro()) 
 	    	ParametrosFrontBean.listaTipoParametro.add(new SelectItem(Integer.valueOf(tipoParametro.getId()), tipoParametro.getNombre()));	    
 	    

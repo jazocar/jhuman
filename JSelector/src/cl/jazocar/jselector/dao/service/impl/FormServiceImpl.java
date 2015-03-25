@@ -13,6 +13,7 @@ import cl.jazocar.jselector.front.form.dto.HipotecaCheckAdjuntosDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaCheckDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaDTO;
 import cl.jazocar.jselector.front.form.dto.InformeLegalDTO;
+import cl.jazocar.jselector.front.form.dto.RegistroBancarioDTO;
 import cl.jazocar.jselector.front.form.dto.VendedorGaranteDTO;
 
 public class FormServiceImpl implements FormServiceInterface {
@@ -329,6 +330,48 @@ public class FormServiceImpl implements FormServiceInterface {
 	public FichaPersonalDTO selectFichaPersonalByIdEmpleado(int id) {
 		// TODO Auto-generated method stub
 		return formDao.selectFichaPersonalByIdEmpleado(id);
+	}
+
+	@Override
+	public Integer selectNextIdFichaPersonal() {
+		// TODO Auto-generated method stub
+		return formDao.selectNextIdFichaPersonal();
+	}
+
+	@Override
+	public Integer insertRegistroBancario(RegistroBancarioDTO registroBancario) {
+		// TODO Auto-generated method stub
+		return formDao.insertRegistroBancario(registroBancario);
+	}
+
+	@Override
+	public Integer updateRegistroBancario(RegistroBancarioDTO registroBancario) {
+		// TODO Auto-generated method stub
+		return formDao.updateRegistroBancario(registroBancario);
+	}
+
+	@Override
+	public Integer deleteRegistroBancario(RegistroBancarioDTO registroBancario) {
+		// TODO Auto-generated method stub
+		return formDao.deleteRegistroBancario(registroBancario);
+	}
+
+	@Override
+	public List<RegistroBancarioDTO> selectRegistroBancario() {
+		// TODO Auto-generated method stub
+		return formDao.selectRegistroBancario();
+	}
+
+	@Override
+	public RegistroBancarioDTO selectRegistroBancarioById(int id) {
+		// TODO Auto-generated method stub
+		return formDao.selectRegistroBancarioById(id);
+	}
+
+	@Override
+	public RegistroBancarioDTO selectRegistroBancarioByIdEmpleado(int id) {
+		// TODO Auto-generated method stub
+		return formDao.selectRegistroBancarioByIdEmpleado(id);
 	}
 	
 	

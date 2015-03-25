@@ -51,7 +51,7 @@
 						<ice:outputText value="::Datos Personales"
 							style="font-size:medium; color:black;" />
 					</div>
-				</ice:panelGroup>
+				<hr/>
 				<br />
 				<table>
 					<tr>
@@ -167,12 +167,14 @@
 					</tr>
 				</table>
 				<br/>
+				</ice:panelGroup>
+				<br/>
 				<ice:panelGroup styleClass="iceDatTblColHdr">
 					<div align="left">
 						<ice:outputText value="::Domicilio"
 							style="font-size:medium; color:black;" />
 					</div>
-				</ice:panelGroup>
+				    <hr/>
 				<br />
 				<table>				
 					<tr>
@@ -197,11 +199,64 @@
 						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.codPostal}" immediate="true"/></td>
 						<td align="right" style="padding-left: 50px;"></td>
 						<td align="left"></td>
+					</tr>					
+				</table>
+				<br/>
+				</ice:panelGroup>
+				<br/>
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::Registro Bancario"
+							style="font-size:medium; color:black;" />
+					</div>					
+					<hr/>
+					<br/>
+					<table>	
+					<tr>
+						<td align="right"><ice:outputText value="Banco"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"> <ice:selectOneMenu value="#{fichaPersonalFrontClass.idBanco}" immediate="true">
+												<f:selectItem itemLabel="Seleccione..." itemValue="-1"/>
+												<f:selectItems value="#{fichaPersonalFrontClass.listaBancos}"/>
+									     </ice:selectOneMenu> </td>
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Producto Bancario"
+								style="font-size:small; color:black;" /></td>
+								
+					   <td align="left">
+								<ice:selectOneMenu value="#{fichaPersonalFrontClass.idProductoBanco}" immediate="true">
+												<f:selectItem itemLabel="Seleccione..." itemValue="-1"/>
+												<f:selectItems value="#{fichaPersonalFrontClass.listaProductosBancarios}" />
+						                    </ice:selectOneMenu>  
+						        </td>											
+					</tr>			
+					<tr>
+					<td align="right"><ice:outputText value="Número de Cuenta"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.numeroCuenta}" immediate="true"/></td>
+						
+						<td align="right" style="padding-left: 50px;"><ice:outputText value="Estado"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:selectOneMenu value="#{fichaPersonalFrontClass.idEstado}" immediate="true">
+												<f:selectItem itemLabel="Seleccione..." itemValue="-1"/>
+												<f:selectItems value="#{fichaPersonalFrontClass.listaEstados}" />
+						                    </ice:selectOneMenu></td>						
 					</tr>
 					
+					<tr>
+						<td align="right"><ice:outputText value="Observaciones"
+								style="font-size:small; color:black;" /></td>
+						<td align="left"><ice:inputText value="#{fichaPersonalFrontClass.observaciones}" immediate="true"/></td>
+						<td align="right" style="padding-left: 50px;"></td>
+						<td align="left">  </td>
 					
-				</table>
-
+					</tr>
+					<tr>
+																	
+					</tr>
+					</table>
+					<br/>
+				</ice:panelGroup>
+				<br />
 			</ice:panelGroup>
 			<br />		
 		</ice:panelGroup>

@@ -18,13 +18,16 @@ import cl.jazocar.jselector.dto.ListaDTO;
 import cl.jazocar.jselector.dto.RegionDTO;
 import cl.jazocar.jselector.front.AplicationAbstract;
 import cl.jazocar.jselector.front.form.dto.FichaPersonalDTO;
+import cl.jazocar.jselector.front.form.dto.RegistroBancarioDTO;
 
 @ManagedBean (name = "fichaPersonalFrontClass")
 @SessionScoped
 public class FichaPersonalFrontClass extends AplicationAbstract {
 	
 	private FichaPersonalDTO fichaPersonalDto;
+	private RegistroBancarioDTO registroBancario;
 	
+	//Ficha Personal
 	private List<SelectItem> listaSexo;
 	private List<SelectItem> listaEstadoCivil;
 	private List<SelectItem> listaDiscapacidad;
@@ -33,6 +36,12 @@ public class FichaPersonalFrontClass extends AplicationAbstract {
 	private List<SelectItem> listaRegiones;
 	private List<SelectItem> listaCiudades;
 	private List<SelectItem> listaComunas;
+	
+	//Registros Bancarios.
+	private List<SelectItem> listaEstados;
+	private List<SelectItem> listaBancos;
+	private List<SelectItem> listaProductosBancarios;
+	
 	
 	private int    idEmpleado;
 	private String rutaImagen;
@@ -60,6 +69,13 @@ public class FichaPersonalFrontClass extends AplicationAbstract {
     private String idComuna;
     private String idCiudad;
 
+    //Registro Bancario.
+    private String idEstado;
+	private String idBanco;
+	private String idProductoBanco;
+	private String numeroCuenta;
+	private String observaciones;
+    
 	public FichaPersonalFrontClass(){
 		init();
 	}
@@ -77,6 +93,10 @@ public class FichaPersonalFrontClass extends AplicationAbstract {
 		listaSituacionMilitar  = new ArrayList<SelectItem>();
 		listaPaises            = new ArrayList<SelectItem>();
 		
+		listaEstados            = new ArrayList<SelectItem>();
+		listaBancos             = new ArrayList<SelectItem>();
+		listaProductosBancarios = new ArrayList<SelectItem>();
+		
 		for(RegionDTO region : configJProcessService.selectRegiones())
 			listaRegiones.add(new SelectItem(region.getId(), region.getNombre()));
 		
@@ -93,13 +113,26 @@ public class FichaPersonalFrontClass extends AplicationAbstract {
 			listaSituacionMilitar.add(new SelectItem(lista.getId(), lista.getValor()));		
 		
 		for(ListaDTO lista : configJProcessService.selectListaByIdParametro(54))
-			listaPaises.add(new SelectItem(lista.getId(), lista.getValor()));			
+			listaPaises.add(new SelectItem(lista.getId(), lista.getValor()));	
+		
+		for(ListaDTO lista : configJProcessService.selectListaByIdParametro(50))
+			listaBancos.add(new SelectItem(lista.getId(), lista.getValor()));
+		
+		for(ListaDTO lista : configJProcessService.selectListaByIdParametro(55))
+			listaEstados.add(new SelectItem(lista.getId(), lista.getValor()));
+		
+		for(ListaDTO lista : configJProcessService.selectListaByIdParametro(56))
+			listaProductosBancarios.add(new SelectItem(lista.getId(), lista.getValor()));
 	}
 
 	@Override
 	public void insertObjectListener(ActionEvent e) {
 		// TODO Auto-generated method stub
-		fichaPersonalDto = new FichaPersonalDTO();
+		
+		//Insert Ficha Personal.
+		fichaPersonalDto = new FichaPersonalDTO();		
+		int idFicha = formService.selectNextIdFichaPersonal();
+		fichaPersonalDto.setIdEmpleado(idFicha);
 		fichaPersonalDto.setRutaImagen(rutaImagen);
 		fichaPersonalDto.setRut(rut);
 		fichaPersonalDto.setApPaterno(apPaterno);
@@ -126,6 +159,19 @@ public class FichaPersonalFrontClass extends AplicationAbstract {
 		fichaPersonalDto.setIdComuna(Integer.parseInt(idComuna));
 	
 		formService.insertFichaPersonal(fichaPersonalDto);
+		
+		//Insert Registro Bancario.
+		registroBancario = new RegistroBancarioDTO();
+		registroBancario.setIdEmpleado(idFicha);
+		registroBancario.setIdBanco(Integer.parseInt(idBanco));
+		registroBancario.setIdEstado(Integer.parseInt(idEstado));
+		registroBancario.setIdProductoBanco(Integer.parseInt(idProductoBanco));
+		//registroBancario.setLinea(linea);
+		registroBancario.setNumeroCuenta(numeroCuenta);
+		registroBancario.setObservaciones(observaciones);
+		
+		formService.insertRegistroBancario(registroBancario);
+		
 		resetObject();
 	}
 
@@ -219,7 +265,14 @@ public class FichaPersonalFrontClass extends AplicationAbstract {
 		listaComunas  = new ArrayList<SelectItem>();
 		
 		for(RegionDTO region : configJProcessService.selectRegiones())
-			listaRegiones.add(new SelectItem(region.getId(), region.getNombre()));	
+			listaRegiones.add(new SelectItem(region.getId(), region.getNombre()));
+		
+		
+		idEstado ="-1";
+		idBanco ="-1";
+		idProductoBanco ="-1";
+		numeroCuenta ="";
+		observaciones ="";
 	}
 
 	@Override
@@ -521,7 +574,77 @@ public class FichaPersonalFrontClass extends AplicationAbstract {
 
 	public void setListaPaises(List<SelectItem> listaPaises) {
 		this.listaPaises = listaPaises;
-	}	
-	
-	
+	}
+
+	public RegistroBancarioDTO getRegistroBancario() {
+		return registroBancario;
+	}
+
+	public void setRegistroBancario(RegistroBancarioDTO registroBancario) {
+		this.registroBancario = registroBancario;
+	}
+
+	public String getNumeroCuenta() {
+		return numeroCuenta;
+	}
+
+	public void setNumeroCuenta(String numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
+	public List<SelectItem> getListaEstados() {
+		return listaEstados;
+	}
+
+	public void setListaEstados(List<SelectItem> listaEstados) {
+		this.listaEstados = listaEstados;
+	}
+
+	public List<SelectItem> getListaBancos() {
+		return listaBancos;
+	}
+
+	public void setListaBancos(List<SelectItem> listaBancos) {
+		this.listaBancos = listaBancos;
+	}
+
+	public List<SelectItem> getListaProductosBancarios() {
+		return listaProductosBancarios;
+	}
+
+	public void setListaProductosBancarios(List<SelectItem> listaProductosBancarios) {
+		this.listaProductosBancarios = listaProductosBancarios;
+	}
+
+	public String getIdEstado() {
+		return idEstado;
+	}
+
+	public void setIdEstado(String idEstado) {
+		this.idEstado = idEstado;
+	}
+
+	public String getIdBanco() {
+		return idBanco;
+	}
+
+	public void setIdBanco(String idBanco) {
+		this.idBanco = idBanco;
+	}
+
+	public String getIdProductoBanco() {
+		return idProductoBanco;
+	}
+
+	public void setIdProductoBanco(String idProductoBanco) {
+		this.idProductoBanco = idProductoBanco;
+	}		
 }

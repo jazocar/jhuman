@@ -11,17 +11,27 @@ import cl.jazocar.jselector.front.form.dto.HipotecaCheckAdjuntosDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaCheckDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaDTO;
 import cl.jazocar.jselector.front.form.dto.InformeLegalDTO;
+import cl.jazocar.jselector.front.form.dto.RegistroBancarioDTO;
 import cl.jazocar.jselector.front.form.dto.VendedorGaranteDTO;
 
 public interface FormServiceInterface {
 	
 	//Ficha Personal.
-	public Integer               insertFichaPersonal(FichaPersonalDTO fichaPersonal);
-	public Integer  		     updateFichaPersonal(FichaPersonalDTO fichaPersonal);
-	public Integer               deleteFichaPersonal(FichaPersonalDTO fichaPersonal);
+	public Integer                insertFichaPersonal(FichaPersonalDTO fichaPersonal);
+	public Integer  		      updateFichaPersonal(FichaPersonalDTO fichaPersonal);
+	public Integer                deleteFichaPersonal(FichaPersonalDTO fichaPersonal);
+	public Integer                selectNextIdFichaPersonal();
 	public List<FichaPersonalDTO> selectFichaPersonal();
 	public FichaPersonalDTO       selectFichaPersonalByIdEmpleado(int id);	
 
+	//Registro Bancario.
+		public Integer                   insertRegistroBancario(RegistroBancarioDTO registroBancario);
+		public Integer  		         updateRegistroBancario(RegistroBancarioDTO registroBancario);
+		public Integer                   deleteRegistroBancario(RegistroBancarioDTO registroBancario);
+		public List<RegistroBancarioDTO> selectRegistroBancario();
+		public RegistroBancarioDTO       selectRegistroBancarioById(int id);
+		public RegistroBancarioDTO       selectRegistroBancarioByIdEmpleado(int id);
+		
 	//Informe Legal.
 		public Integer               selectNextIdInformeLegal();
 		public Integer               insertInformeLegal(InformeLegalDTO informeLegal);

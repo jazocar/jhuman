@@ -1326,6 +1326,7 @@ public class ConfigJProcessDaoImpl extends MyBatisCommonDao implements IConfigJP
 		HashMap<String, Object> hash = new HashMap<String, Object>();
 		hash.put("valor", listaDTO.getValor());
 		hash.put("parametro", listaDTO.getIdParametro());
+		hash.put("codigo", listaDTO.getCodigoAdicional());
 		return genericInsert("mybatis.jselector.InsertLista", hash);
 	}
 
@@ -1336,6 +1337,7 @@ public class ConfigJProcessDaoImpl extends MyBatisCommonDao implements IConfigJP
 		hash.put("id", listaDTO.getId());
 		hash.put("valor", listaDTO.getValor());
 		hash.put("parametro", listaDTO.getIdParametro());
+		hash.put("codigo", listaDTO.getCodigoAdicional());
 		return genericUpdate("mybatis.jselector.UpdateLista", hash);
 	}
 
@@ -1346,6 +1348,7 @@ public class ConfigJProcessDaoImpl extends MyBatisCommonDao implements IConfigJP
 		hash.put("id", listaDTO.getId());
 		hash.put("valor", listaDTO.getValor());
 		hash.put("parametro", listaDTO.getIdParametro());
+		hash.put("codigo", listaDTO.getCodigoAdicional());
 		return genericDelete("mybatis.jselector.DeleteLista", hash);
 	}
 
@@ -1373,6 +1376,7 @@ public class ConfigJProcessDaoImpl extends MyBatisCommonDao implements IConfigJP
 		HashMap<String, Object> hash = new HashMap<String, Object>();
 		hash.put("valor", listaDTO.getValor());
 		hash.put("parametro", listaDTO.getIdParametro());
+		hash.put("codigo", listaDTO.getCodigoAdicional());
 		return genericSelect("mybatis.jselector.SearchLista", hash);
 	}
 

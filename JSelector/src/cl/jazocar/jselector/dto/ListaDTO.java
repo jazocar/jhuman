@@ -5,6 +5,7 @@ public class ListaDTO extends ResponseDTO{
 	private int    id;
 	private String valor;
 	private int    idParametro;
+	private String codigoAdicional;
 	
 	public ListaDTO() {
 	}
@@ -32,6 +33,15 @@ public class ListaDTO extends ResponseDTO{
 	public void setIdParametro(int idParametro) {
 		this.idParametro = idParametro;
 	}
+
+	public String getCodigoAdicional() {
+		return codigoAdicional;
+	}
+
+	public void setCodigoAdicional(String codigoAdicional) {
+		this.codigoAdicional = codigoAdicional;
+	}
+	
 	
 	
 }

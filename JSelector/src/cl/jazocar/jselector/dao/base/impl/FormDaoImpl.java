@@ -17,6 +17,7 @@ import cl.jazocar.jselector.front.form.dto.HipotecaCheckAdjuntosDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaCheckDTO;
 import cl.jazocar.jselector.front.form.dto.HipotecaDTO;
 import cl.jazocar.jselector.front.form.dto.InformeLegalDTO;
+import cl.jazocar.jselector.front.form.dto.RegistroBancarioDTO;
 import cl.jazocar.jselector.front.form.dto.VendedorGaranteDTO;
 import cl.jazocar.jselector.ibatis.dao.MyBatisCommonDao;
 
@@ -364,6 +365,7 @@ public class FormDaoImpl  extends MyBatisCommonDao  implements FormDaoInterface 
 	public Integer insertFichaPersonal(FichaPersonalDTO fichaPersonal) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> hash = new HashMap<String, Object>();
+		hash.put("id", fichaPersonal.getIdEmpleado());
 		hash.put("rut", fichaPersonal.getRut());
 		hash.put("ap_paterno", fichaPersonal.getApPaterno());
 		hash.put("ap_materno", fichaPersonal.getApMaterno());
@@ -441,6 +443,64 @@ public class FormDaoImpl  extends MyBatisCommonDao  implements FormDaoInterface 
 	public FichaPersonalDTO selectFichaPersonalByIdEmpleado(int id) {
 		// TODO Auto-generated method stub
 		return genericSelectOne("mybatis.form.SelectFichaPersonalByIdEmpleado", id);
+	}
+
+	@Override
+	public Integer selectNextIdFichaPersonal() {
+		// TODO Auto-generated method stub
+		return genericSelectOne("mybatis.form.SelectNextIdFichaPersonal");
+	}
+
+	@Override
+	public Integer insertRegistroBancario(RegistroBancarioDTO registroBancario) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> hash = new HashMap<String, Object>();
+		hash.put("empleado", registroBancario.getIdEmpleado());
+		hash.put("estado", registroBancario.getIdEstado());
+		hash.put("banco", registroBancario.getIdBanco());
+		hash.put("producto", registroBancario.getIdProductoBanco());
+		hash.put("numero", registroBancario.getNumeroCuenta());
+		hash.put("observaciones", registroBancario.getObservaciones());
+		return genericInsert("mybatis.form.InsertRegistroBancario", hash);
+	}
+
+	@Override
+	public Integer updateRegistroBancario(RegistroBancarioDTO registroBancario) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> hash = new HashMap<String, Object>();
+		hash.put("id", registroBancario.getIdEmpleado());
+		hash.put("estado", registroBancario.getIdEstado());
+		hash.put("banco", registroBancario.getIdBanco());
+		hash.put("producto", registroBancario.getIdProductoBanco());
+		hash.put("numero", registroBancario.getNumeroCuenta());
+		hash.put("observaciones", registroBancario.getObservaciones());
+		return genericUpdate("mybatis.form.UpdateRegistroBancario", hash);
+	}
+
+	@Override
+	public Integer deleteRegistroBancario(RegistroBancarioDTO registroBancario) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> hash = new HashMap<String, Object>();
+		hash.put("id", registroBancario.getIdEmpleado());
+		return genericDelete("mybatis.form.DeleteRegistroBancario", hash);
+	}
+
+	@Override
+	public List<RegistroBancarioDTO> selectRegistroBancario() {
+		// TODO Auto-generated method stub
+		return genericSelect("mybatis.form.SelectRegistroBancario");
+	}
+
+	@Override
+	public RegistroBancarioDTO selectRegistroBancarioById(int id) {
+		// TODO Auto-generated method stub
+		return genericSelectOne("mybatis.form.SelectRegistroBancarioById", id);
+	}
+
+	@Override
+	public RegistroBancarioDTO selectRegistroBancarioByIdEmpleado(int id) {
+		// TODO Auto-generated method stub
+		return genericSelectOne("mybatis.form.SelectRegistroBancarioByIdEmpleado", id);
 	}
 
 }

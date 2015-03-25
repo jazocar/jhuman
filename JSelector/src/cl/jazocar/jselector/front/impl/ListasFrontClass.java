@@ -25,6 +25,7 @@ public class ListasFrontClass extends AplicationAbstract {
 	private int id;
 	private String valor;
 	private String parametro;
+	private String codigoAdicional;
 	
 	private boolean selected;
 	
@@ -49,7 +50,7 @@ public class ListasFrontClass extends AplicationAbstract {
 		listaDto = new ListaDTO();
 		listaDto.setValor(valor.trim());
 		listaDto.setIdParametro(Integer.parseInt(parametro));
-		
+		listaDto.setCodigoAdicional(codigoAdicional.trim());
 		configJProcessService.insertLista(listaDto);
 		resetObject();
 		refreshList();
@@ -62,6 +63,7 @@ public class ListasFrontClass extends AplicationAbstract {
 		listaDto.setId(id);
 		listaDto.setValor(valor.trim());
 		listaDto.setIdParametro(Integer.parseInt(parametro));
+		listaDto.setCodigoAdicional(codigoAdicional.trim());
 		
 		configJProcessService.updateLista(listaDto);
 		resetObject();
@@ -91,6 +93,7 @@ public class ListasFrontClass extends AplicationAbstract {
 		listaDto = new ListaDTO();		
 		listaDto.setValor(valor.trim());
 		listaDto.setIdParametro(Integer.parseInt(parametro));
+		listaDto.setCodigoAdicional(codigoAdicional.trim());
 		listaListas = configJProcessService.searchLista(listaDto);
 	}
 
@@ -100,6 +103,7 @@ public class ListasFrontClass extends AplicationAbstract {
 		id = 0;
 		valor = "";
 		parametro = "-1";
+		codigoAdicional = "";
 		selected = false;
 		listaListas = configJProcessService.selectLista();
 	}
@@ -112,7 +116,7 @@ public class ListasFrontClass extends AplicationAbstract {
 		id = listaDto.getId();
 		valor = listaDto.getValor();
 		parametro = String.valueOf(listaDto.getIdParametro());
-		
+		codigoAdicional = listaDto.getCodigoAdicional();
 		selected = true;
 	}
 
@@ -171,4 +175,13 @@ public class ListasFrontClass extends AplicationAbstract {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
+
+	public String getCodigoAdicional() {
+		return codigoAdicional;
+	}
+
+	public void setCodigoAdicional(String codigoAdicional) {
+		this.codigoAdicional = codigoAdicional;
+	}
+	
 }

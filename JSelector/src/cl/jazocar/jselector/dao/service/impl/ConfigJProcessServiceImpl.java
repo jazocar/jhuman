@@ -1174,6 +1174,11 @@ public class ConfigJProcessServiceImpl extends MyBatisCommonDao implements IConf
 		else
 			listaDTO.setValor(listaDTO.getValor().toUpperCase());
 		
+		if(listaDTO.getCodigoAdicional().equals(""))
+			listaDTO.setCodigoAdicional(null);
+		else
+			listaDTO.setCodigoAdicional(listaDTO.getCodigoAdicional().toUpperCase());
+		
 		return configJProcessDao.searchLista(listaDTO);
 	}
 
