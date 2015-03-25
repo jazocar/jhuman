@@ -131,6 +131,16 @@
     	<result property="fonoEmergencia"  column="fono_emergencia" />
     </resultMap>
     
+    <resultMap type="registroBancarioModel" id="registroBancarioModel">
+    	<result property="id"              column="id" />
+    	<result property="idEmpleado"      column="empleado_id" />
+    	<result property="idEstado"        column="estado" />
+    	<result property="idBanco"         column="banco" />
+    	<result property="idProductoBanco" column="producto_banco" />
+    	<result property="numeroCuenta"    column="numero_cta" />
+    	<result property="observaciones"   column="observaciones" />
+    </resultMap>
+    
     
     <select id="SelectNextIdInformeLegal" resultType="integer" parameterType="integer">
     	SELECT nextval('formularios."SEQ_INFORME_LEGAL_ID"') 
@@ -375,8 +385,12 @@
     
     
     <!-- Ficha Personal -->
+    <select id="SelectNextIdFichaPersonal" resultType="integer">
+    	SELECT nextval('formularios."SEQ_FICHA_PERSONAL_ID"')
+    </select>
+    
     <select id="SelectFichaPersonal" resultMap="fichaPersonalModel" resultType="fichaPersonalModel">
-    	SELECT id_empleado, image_id, rut, ap_paterno, ap_materno, nombres, 
+    	SELECT id_empleado, ruta_imagen, rut, ap_paterno, ap_materno, nombres, 
        		   sexo, est_civil, discapacidad, fec_nac, ciudad_id, comuna_id, 
        		   region_id, pais_id, sit_militar, calle, numero, villa, calle_ref, 
        		   cod_postal, fono_movil, telefono_fijo, email_empresa, email_personal, 
@@ -401,7 +415,7 @@
             region_id, pais_id, sit_militar, calle, numero, villa, calle_ref, 
             cod_postal, fono_movil, telefono_fijo, email_empresa, email_personal, 
             fono_emergencia)
-    	VALUES (nextval('formularios."SEQ_FICHA_PERSONAL_ID"'), 
+    	VALUES (#{id}, 
 	            #{ruta_imagen}, 
 	            #{rut}, 
 	            #{ap_paterno}, 
@@ -460,5 +474,55 @@
     <delete id="DeleteFichaPersonal" parameterType="hashmap">
     	DELETE FROM formularios.ficha_personal
  		WHERE id = #{id}
+    </delete>
+    
+    <!-- Registro Bancario -->
+    
+    <select id="SelectRegistroBancario" resultMap="registroBancarioModel" resultType="registroBancarioModel">
+    	SELECT id, empleado_id, estado, banco_id, producto_banco, numero_cta, 
+       		observaciones
+  		FROM formularios.registro_bancario
+    </select>
+    
+    <select id="SelectRegistroBancarioById" resultMap="registroBancarioModel" resultType="registroBancarioModel" parameterType="integer">
+    	SELECT id, empleado_id, estado, banco_id, producto_banco, numero_cta, 
+       		observaciones
+  		FROM formularios.registro_bancario
+  		WHERE id = #{id}
+    </select>
+    
+    <select id="SelectRegistroBancarioByIdEmpleado" resultMap="registroBancarioModel" resultType="registroBancarioModel" parameterType="integer">
+    	SELECT id, empleado_id, estado, banco_id, producto_banco, numero_cta, 
+       		observaciones
+  		FROM formularios.registro_bancario
+  		WHERE empleado_id = #{id}
+    </select>
+    
+    <insert id="InsertRegistroBancario" parameterType="hashmap">    
+	    INSERT INTO formularios.registro_bancario(
+	            id, empleado_id, estado, banco_id, producto_banco, numero_cta, 
+	            observaciones)
+	    VALUES (nextval('formularios."SEQ_REGISTRO_BANCARIO"'), 
+	    		#{empleado}, 
+	    		#{estado}, 
+	    		#{banco}, 
+	    		#{producto}, 
+	    		#{numero}, 
+	    		#{observaciones})
+    </insert>
+    
+    <update id="UpdateRegistroBancario" parameterType="hashmap">
+    	UPDATE formularios.registro_bancario
+   		SET  estado         = #{estado}, 
+   		     banco_id       = #{banco}, 
+   		     producto_banco = #{producto}, 
+             numero_cta     = #{numero}, 
+             observaciones  = #{observaciones}
+ 		WHERE empleado_id= #{id}
+    </update>
+    
+    <delete id="DeleteRegistroBancario" parameterType="hashmap">
+    	DELETE FROM formularios.registro_bancario
+ 		WHERE empleado_id= #{id}    
     </delete>
 </mapper>

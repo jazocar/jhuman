@@ -1,0 +1,192 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:form>
+		<ace:submitMonitor for="fichaContratosPanel" idleLabel="Idle"
+			activeLabel="Ingresando Ficha Personal"
+			serverErrorLabel="Error de Servidor" networkErrorLabel="Error de Red"
+			sessionExpiredLabel="Sesión expirada" autoCenter="true"
+			blockUI="@source" rendered="true" />
+
+		<ace:tooltip id="tooltip" global="true" />
+		<ice:panelGroup styleClass="iceDatTblColHdr">
+			<div align="left">
+				<ice:outputText value="Estas aquí : " style="padding-right: 10px;" />
+				<ice:commandLink value="Inicio" style="padding-right:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="pantallaInicio" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Maestro de Contratos"
+					style="padding-left:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="pantallaInicio" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Contratos y Anexos"
+					style="padding-left:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="fichaContratoPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+				>
+				<ice:commandLink value="Ficha Contrato" style="padding-left:5px;"
+					actionListener="#{navigationBean.navigationStackChange}">
+					<ace:ajax event="activate" execute="@this">
+						<f:param name="stackName" value="fichaContratoPanel" />
+					</ace:ajax>
+				</ice:commandLink>
+			</div>
+		</ice:panelGroup>
+
+		<ice:panelGroup id="fichaContratosForm">
+			<ice:panelGroup
+				style="width: 1010px; background-color:white; padding-top: 5px;padding-right:20px;padding-left:20px;">
+				<ice:panelGroup styleClass="iceDatTblColHdr">
+					<div align="left">
+						<ice:outputText value="::Datos Personales"
+							style="font-size:medium; color:black;" />
+					</div>
+					<hr />
+					<br />
+					<table>
+						<tr>
+							<td align="right"><ice:outputText value="N° Céd. Identidad"
+									style="font-size:small; color:black;" /></td>
+							<td align="left" colspan="5"><ice:inputText immediate="true" /></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="Apellido Paterno"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText immediate="true" /></td>
+							<td align="right" style="padding-left: 20px;"><ice:outputText
+									value="Apellido Materno" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText immediate="true" /></td>
+							<td align="right" style="padding-left: 20px;"><ice:outputText
+									value="Nombres" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText immediate="true" /></td>
+
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="Cód.Contrato"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText immediate="true" /></td>
+							<td align="right" style="padding-left: 20px;"><ice:outputText
+									value="Estado" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione.." itemValue="-1" />
+								</ice:selectOneMenu></td>
+							<td align="right" style="padding-left: 20px;"><ice:outputText
+									value="Área de Asociación"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione.." itemValue="-1" />
+								</ice:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText
+									value="Cód.Programa (Orden CO)"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione.." itemValue="-1" />
+								</ice:selectOneMenu></td>
+							<td align="right"><ice:outputText value="Centro de Costo"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione.." itemValue="-1" />
+								</ice:selectOneMenu></td>
+							<td align="right" style="padding-left: 20px;"><ice:outputText
+									value="Desc. C.Costo" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:inputText immediate="true" /></td>
+						</tr>
+						<tr>
+
+							<td align="right"><ice:outputText value="Tipo Contrato"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione.." itemValue="-1" />
+								</ice:selectOneMenu></td>
+							<td align="right" style="padding-left: 20px;"><ice:outputText
+									value="Nivel Seguridad" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione.." itemValue="-1" />
+								</ice:selectOneMenu></td>
+							<td align="right" style="padding-left: 20px;"><ice:outputText
+									value="Jornada" style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione.." itemValue="-1" />
+								</ice:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="Cargo a Desempeñar"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione.." itemValue="-1" />
+								</ice:selectOneMenu></td>
+							<td align="right"><ice:outputText value="Causa del Contrato"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectOneMenu>
+									<f:selectItem itemLabel="Seleccione.." itemValue="-1" />
+								</ice:selectOneMenu></td>
+							<td colspan="2" />
+
+						</tr>
+						<tr>
+							<td align="right"><ice:outputText value="Inicio"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectInputDate renderAsPopup="true"
+									renderMonthAsDropdown="false" renderYearAsDropdown="false"
+									value="#{fichaPersonalFrontClass.fecNac}" immediate="true">
+									<f:convertDateTime pattern="dd-MM-yyyy" />
+								</ice:selectInputDate></td>
+							<td align="right"><ice:outputText value="Término"
+									style="font-size:small; color:black;" /></td>
+							<td align="left"><ice:selectInputDate renderAsPopup="true"
+									renderMonthAsDropdown="false" renderYearAsDropdown="false"
+									value="#{fichaPersonalFrontClass.fecNac}" immediate="true">
+									<f:convertDateTime pattern="dd-MM-yyyy" />
+								</ice:selectInputDate></td>
+							<td colspan="2" />
+
+						</tr>
+					</table>
+
+					<br />
+					<br />
+					<br />
+
+					<ace:dataTable id="idAtributos" >
+						<ace:column headerText="Cód.Atributo"
+							style="font-size:small; text-align:left; font-family: 'Times New Roman', Times, serif;">
+							<h:outputText style="font-size:small;" />
+						</ace:column>
+						<ace:column headerText="Nombre"
+							style="width:400px; font-size:small; text-align:left; font-family: 'Times New Roman', Times, serif;">
+							<h:outputText style="font-size:small;" />
+						</ace:column>
+						<ace:column headerText="Valor"
+							style="font-size:small; text-align:left; font-family: 'Times New Roman', Times, serif;">
+							<h:inputText style="font-size:small;" />
+						</ace:column>
+
+					</ace:dataTable>
+				</ice:panelGroup>
+			</ice:panelGroup>
+		</ice:panelGroup>
+
+
+
+
+
+	</h:form>
+</ui:composition>

@@ -223,6 +223,7 @@
 		<result property="id" 	              column="id" />
 		<result property="valor" 	          column="valor" />
 		<result property="idParametro"        column="id_parametro" />
+		<result property="codigoAdicional"        column="codigo_adicional" />		
 	</resultMap>
 	
 	<resultMap type="afpModel" id="afpModel">
@@ -1563,36 +1564,47 @@
     
     
     <select id="SelectLista" resultMap="listaModel" resultType="listaModel">
-    	SELECT id, valor, id_parametro
+    	SELECT id, valor, id_parametro, codigo_adicional
   		FROM sys_listas
   		ORDER BY valor ASC
     </select>
     
     <select id="SelectListaById" resultMap="listaModel" resultType="listaModel" parameterType="integer">
-    	SELECT id, valor, id_parametro
+    	SELECT id, valor, id_parametro, codigo_adicional
   		FROM sys_listas
   		WHERE id = #{id}
     </select>
     
     <select id="SelectListaByIdParametro" resultMap="listaModel" resultType="listaModel" parameterType="integer">
-    	SELECT id, valor, id_parametro
+    	SELECT id, valor, id_parametro, codigo_adicional
   		FROM sys_listas
   		WHERE id_parametro = #{id}
   		ORDER BY valor ASC
     </select>    
     
     <select id="SearchLista" resultMap="listaModel" resultType="listaModel" parameterType="hashmap">
-    	SELECT id, valor, id_parametro
+    	SELECT id, valor, id_parametro, codigo_adicional
   		FROM sys_listas
   		<if test="valor != null">
   			WHERE upper(valor) LIKE '%'||#{valor}||'%'
   			<if test="parametro != -1">
   				AND id_parametro = #{parametro}
   			</if>
+  			<if test="codigo != null">
+  				AND upper(codigo_adicional) LIKE '%'||#{codigo}||'%'
+  			</if>
   		</if>
   		<if test="valor == null">
   			<if test="parametro != -1">
   				WHERE id_parametro = #{parametro}
+  				<if test="codigo != null">
+  					AND upper(codigo_adicional) LIKE '%'||#{codigo}||'%'
+  				</if>
+  			</if>
+  			<if test="parametro == -1">
+  				<if test="codigo != null">
+  					WHERE upper(codigo_adicional) LIKE '%'||#{codigo}||'%'
+  				</if>
   			</if>
   		</if>
     </select>  
@@ -1601,14 +1613,15 @@
     
     <insert id="InsertLista" parameterType="hashmap">
     	INSERT INTO sys_listas(
-            id, valor, id_parametro)
-    	VALUES ( nextval('"SEQ_ID_LISTA"'), #{valor}, #{parametro})
+            id, valor, id_parametro, codigo_adicional)
+    	VALUES ( nextval('"SEQ_ID_LISTA"'), #{valor}, #{parametro}, #{codigo})
     </insert>    
     
     <update id="UpdateLista" parameterType="hashmap">
     	UPDATE sys_listas
-   		SET  valor        =#{valor}, 
-   		     id_parametro =#{parametro}
+   		SET  valor        = #{valor}, 
+   		     id_parametro = #{parametro},
+   		     codigo_adicional       = #{codigo}
  		WHERE id= #{id}
     </update>
     

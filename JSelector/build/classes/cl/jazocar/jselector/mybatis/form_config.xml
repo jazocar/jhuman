@@ -18,6 +18,8 @@
       <typeAlias alias="hipotecaCheckAdjuntoModel"  type="cl.jazocar.jselector.front.form.dto.HipotecaCheckAdjuntosDTO"/>
       <typeAlias alias="calendar"                   type="java.util.Calendar"/>	
       <typeAlias alias="fichaPersonalModel"         type="cl.jazocar.jselector.front.form.dto.FichaPersonalDTO"/>
+      <typeAlias alias="registroBancarioModel"         type="cl.jazocar.jselector.front.form.dto.RegistroBancarioDTO"/>
+      
      
       
   </typeAliases>  
